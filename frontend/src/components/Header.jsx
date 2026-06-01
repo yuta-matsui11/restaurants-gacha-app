@@ -6,7 +6,7 @@ function Header({isAuthenticated, onLogout}){
     const navigate = useNavigate();
     const handleLogout = () => {
         onLogout();
-        navigate('/login')
+        navigate('/login');
     };
 
     return (

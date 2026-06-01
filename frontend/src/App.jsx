@@ -11,17 +11,20 @@ import Header from './components/Header.jsx';
 import Footer from './components/Footer.jsx'
 function App() {
   //ログイン状態であるかどうか
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const handleLogout = () => {
     setIsAuthenticated(false);
+  }
+  const handleLogin = () => {
+    setIsAuthenticated(true);
   }
   return (
     <Router>
       <Header isAuthenticated={isAuthenticated} onLogout={handleLogout}/>
       <Routes>
         {/*未ログインでアクセス可能な画面*/ }
-        <Route path="/login" element={<Login/>}/>
+        <Route path="/login" element={<Login onLogin={handleLogin}/>}/>
         <Route path="/register" element={<Register/>}/>
 
         {/*ログイン済みならアクセス可能、未ログインの場合はログイン画面に遷移させる*/ }
