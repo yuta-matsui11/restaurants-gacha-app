@@ -8,7 +8,8 @@ function Login({onLogin}){
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleLogin = () => {
+    const handleLogin = (e) => {
+        e.preventDefault();
         onLogin();
         navigate('/home');
     };
@@ -18,8 +19,8 @@ function Login({onLogin}){
             <h2>ログイン</h2>
             <form onSubmit={handleLogin}>
                 <label>メールアドレス</label><input type="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
-                <label>パスワード</label><input type="password" value={password} onChange={(e) => setEmail(e.target.value)}/>
-                <button>ログイン</button>
+                <label>パスワード</label><input type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+                <button type="submit">ログイン</button>
             </form>
             <div>
 
