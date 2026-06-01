@@ -1,122 +1,40 @@
+//画面遷移ルールの定義、URLごとのルーティング
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
-
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import Login from './pages/Login.jsx';
+import Register from './pages/Register.jsx';
+import Home from './pages/Home.jsx';
+import Result from './pages/Result.jsx';
+import History from './pages/History.jsx';
+import Favorite from './pages/Favorite.jsx';
+import Header from './components/Header.jsx';
+import Footer from './components/Footer.jsx'
 function App() {
-  const [count, setCount] = useState(0)
+  //ログイン状態であるかどうか
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
 
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+  }
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <Router>
+      <Header isAuthenticated={isAuthenticated} onLogout={handleLogout}/>
+      <Routes>
+        {/*未ログインでアクセス可能な画面*/ }
+        <Route path="/login" element={<Login/>}/>
+        <Route path="/register" element={<Register/>}/>
 
-      <div className="ticks"></div>
+        {/*ログイン済みならアクセス可能、未ログインの場合はログイン画面に遷移させる*/ }
+        <Route path="/home" element={isAuthenticated ? <><Home/><Footer/></> : <Navigate to="/login" />} />
+        <Route path="/result" element={isAuthenticated ? <><Result/><Footer/></> : <Navigate to="/login" />} />
+        <Route path="/history" element={isAuthenticated ? <><History/><Footer/></> : <Navigate to="/login" />} />
+        <Route path="/favorite" element={isAuthenticated ? <><Favorite/><Footer/></> : <Navigate to="/login" />} />
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+        {/*"/"にアクセスした場合はログイン状況によりログイン画面かホーム画面に遷移する*/ }
+        <Route path="/" element={<Navigate to={isAuthenticated ? "/home" : "/login"}/>}/>
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;
