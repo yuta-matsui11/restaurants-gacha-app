@@ -16,10 +16,10 @@ public class GachaHistory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long historyId;
+    private Long history_id;
 
     @Column(nullable = false)
-    private Long userId;
+    private Long user_id;
 
     @Column(nullable = false, length = 100)
     private String station_name;
