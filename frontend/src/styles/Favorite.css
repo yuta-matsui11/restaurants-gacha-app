@@ -3,7 +3,8 @@
   padding: 20px 40px;
   box-sizing: border-box;
 }
-
+/
+* 반응형 디자인 */
 .favorite-description {
   color: #666;
   margin-top: 30px;
