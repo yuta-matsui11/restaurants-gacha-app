@@ -1,4 +1,6 @@
 //ヘッダーコンポーネント　アプリタイトルと、ログイン、ログアウトなどの表示
+import "../styles/Header.css";
+
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
