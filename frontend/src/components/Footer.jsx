@@ -10,7 +10,7 @@ function Footer(){
             <Link to="/home">ホーム</Link>
             <Link to="/history">履歴</Link>
             <Link to="/favorite">お気に入り</Link>
-            <Link to="/profile">プロフィール</Link>
+            <Link to="/profile">マイページ</Link>
         </footer>
     )
 }
