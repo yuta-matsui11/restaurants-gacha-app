@@ -31,4 +31,5 @@ public class Dtos {
         public String restaurant_name;
         public String address;
     }
+
 }
