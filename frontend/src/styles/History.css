@@ -1,0 +1,88 @@
+.history-container {
+  width: 100%;
+  padding: 20px 40px;
+  box-sizing: border-box;
+}
+// 画面幅が600px以下の場合のスタイル
+
+.history-description {
+  color: #666;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.history-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  background: white;
+}
+
+.history-info h2 {
+  margin-top: 0;
+  margin-bottom: 40px;
+}
+
+.history-date {
+  width: 80px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.history-image {
+  width: 140px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.history-info {
+  flex: 1;
+}
+
+.info-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.label {
+    font-weight: bold;
+    color: #666;
+}
+
+.star {
+  color: gold;
+}
+
+.history-info h2 {
+  margin-bottom: 10px;
+}
+
+.history-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.detail-btn {
+  background: #003a8c;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.favorite-btn {
+  background: white;
+  color: #ff6b6b;
+  border: 1px solid #ff6b6b;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
