@@ -1,7 +1,7 @@
 package com.example.backend.service;
 
 import com.example.backend.entity.GachaHistory;
-import com.example.backend.external.HearRailsStationService;
+import com.example.backend.external.HeartRailsStationService;
 import com.example.backend.external.RestaurantInfo;
 import com.example.backend.external.RestaurantService;
 import com.example.backend.repository.GachaHistoryRepository;
@@ -21,13 +21,13 @@ public class GachaService {
     private static final int MAX_HISTORY = 10;
 
     private final RestaurantService restaurantService;
-    private final HearRailsStationService hearRailsStationService;
+    private final HeartRailsStationService heartRailsStationService;
     private final GachaHistoryRepository historyRepository;
 
     @Transactional
     public RestaurantInfo execute(Long userId, String stationName) {
         // 1. 駅名 → 緯度経度変換
-        double[] coords = hearRailsStationService.getCoordinates(stationName);
+        double[] coords = heartRailsStationService.getCoordinates(stationName);
 
         // 2. HotPepper APIで店舗一覧取得
         List<RestaurantInfo> restaurants = restaurantService.search(coords[0], coords[1], "");
