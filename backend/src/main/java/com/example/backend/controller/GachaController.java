@@ -1,6 +1,6 @@
 package com.example.backend.controller;
 
-import com.example.backend.external.HearRailsStationService;
+import com.example.backend.external.HeartRailsStationService;
 import com.example.backend.external.RestaurantInfo;
 import com.example.backend.service.GachaService;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +12,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/gacha")
 @RequiredArgsConstructor
-// ガチャのAPIエンドポイント
+// ガチャのAPIエンドポイント.
 public class GachaController {
     private final GachaService gachaService;
 
@@ -21,7 +21,7 @@ public class GachaController {
         try {
             RestaurantInfo result = gachaService.execute(req.userId, req.stationName);
             return ResponseEntity.ok(result);
-        } catch (HearRailsStationService.StationNotFoundException e) {
+        } catch (HeartRailsStationService.StationNotFoundException e) {
             return ResponseEntity.badRequest().body(Map.of("message", e.getMessage()));
         } catch (GachaService.NoRestaurantException e) {
             return ResponseEntity.status(404).body(Map.of("message", e.getMessage()));
