@@ -34,12 +34,12 @@ public class HistoryService {
         GachaHistory history = new GachaHistory();
 
         // 1. GachaHistoryエンティティのフィールド定義に合わせてデータをセット
-        history.setUser_id(user_id);
-        history.setStation_name(station_name);
-        history.setRestaurant_id(gachaResult.restaurant_id);
+        history.setUserId(user_id);
+        history.setStationName(station_name);
+        history.setRestaurantId(gachaResult.restaurant_id);
         // ※Dtos.GachaResponseにgenre_nameが含まれていないため、
         // 必要に応じてnullをセットするか、将来の拡張用としてここではいったんnull（または省略）として扱います
-        history.setGenre_name(null);
+        history.setGenreName(null);
 
         // gacha_at は GachaHistory.java 側で @Builder.Default により
         // LocalDateTime.now() が自動セットされるため、ここではセット不要です
@@ -58,6 +58,6 @@ public class HistoryService {
     @Transactional(readOnly = true)
     public List<GachaHistory> getHistoryByUserId(Long user_id) {
         // GachaHistoryRepositoryに定義されている正しいメソッド「findByUser_id」を呼び出します
-        return gachaHistoryRepository.findByUser_id(user_id);
+        return gachaHistoryRepository.findByUserId(user_id);
     }
 }
