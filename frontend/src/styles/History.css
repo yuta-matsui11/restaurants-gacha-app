@@ -3,6 +3,7 @@
   padding: 20px 40px;
   box-sizing: border-box;
 }
+// 画面幅が600px以下の場合のスタイル
 
 .history-description {
   color: #666;
