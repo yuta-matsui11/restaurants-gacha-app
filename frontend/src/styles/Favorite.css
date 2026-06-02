@@ -1,20 +1,21 @@
-.history-container {
+.favorite-container {
   width: 100%;
   padding: 20px 40px;
   box-sizing: border-box;
 }
-
-
-.history-description {
-  /* color: #666;
-  margin-top: 30px;
-  margin-bottom: 30px; */
-   display: block;
+/
+* 반응형 디자인 */
+.favorite-description {
   color: #666;
-  margin: 30px 0;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
-.history-card {
+.heart {
+  color: #ff4d4f;
+}
+
+.favorite-card {
   display: flex;
   align-items: center;
   gap: 20px;
@@ -25,48 +26,38 @@
   background: white;
 }
 
-.history-info h2 {
-  margin-top: 0;
-  margin-bottom: 40px;
-}
-
-.history-date {
-  width: 80px;
-  text-align: center;
-  font-size: 14px;
-}
-
-.history-image {
+.favorite-image {
   width: 140px;
   height: 100px;
   object-fit: cover;
   border-radius: 8px;
 }
 
-.history-info {
+.favorite-info {
   flex: 1;
 }
 
+.favorite-info h2 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
 .info-row {
-    display: flex;
-    align-items: center;
-    gap: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .label {
-    font-weight: bold;
-    color: #666;
+  font-weight: bold;
+  color: #666;
 }
 
 .star {
   color: gold;
 }
 
-.history-info h2 {
-  margin-bottom: 10px;
-}
-
-.history-buttons {
+.favorite-buttons {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -81,10 +72,10 @@
   cursor: pointer;
 }
 
-.favorite-btn {
+.remove-btn {
   background: white;
-  color: #ff6b6b;
-  border: 1px solid #ff6b6b;
+  color: #ff4d4f;
+  border: 1px solid #ff4d4f;
   padding: 8px 12px;
   border-radius: 5px;
   cursor: pointer;
