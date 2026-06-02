@@ -1,0 +1,103 @@
+.result-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.result-title {
+    text-align: center;
+    font-size: 32px;
+    color: #ff7a18;
+    margin-bottom: 30px;
+}
+
+.result-card {
+    background: white;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.result-image {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+}
+
+.result-info {
+    padding: 25px;
+}
+
+.result-tags {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.genre-tag {
+    background: #1677ff;
+    color: white;
+
+    padding: 6px 12px;
+    border-radius: 20px;
+
+    font-size: 14px;
+}
+
+.station-tag {
+    background: #f0f0f0;
+
+    padding: 6px 12px;
+    border-radius: 20px;
+
+    font-size: 14px;
+}
+
+.restaurant-name {
+    font-size: 28px;
+    margin: 0;
+    color: #333;
+}
+
+.result-buttons {
+    margin-top: 30px;
+
+    display: flex;
+    gap: 15px;
+
+    justify-content: center;
+}
+
+.detail-btn {
+    background: #1677ff;
+    color: white;
+
+    border: none;
+    border-radius: 10px;
+
+    padding: 12px 24px;
+    font-size: 16px;
+
+    cursor: pointer;
+}
+
+.retry-btn {
+    background: linear-gradient(
+        135deg,
+        #ff7a18,
+        #ff4d4f
+    );
+
+    color: white;
+
+    border: none;
+    border-radius: 10px;
+
+    padding: 12px 24px;
+    font-size: 16px;
+
+    cursor: pointer;
+}
