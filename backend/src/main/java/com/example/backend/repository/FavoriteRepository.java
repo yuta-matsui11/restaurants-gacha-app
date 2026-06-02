@@ -1,17 +1,22 @@
 package com.example.backend.repository;
 
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.backend.entity.Favorite;
-import java.util.List;
-import java.util.Optional;
+
 
 public interface FavoriteRepository extends JpaRepository<Favorite, Long> {
 
-    List<Favorite> findByUser_id(Long user_id);
+    List<Favorite> findByUserId(Long userId);
 
-    Optional<Favorite> findByUser_idAndRestaurant_id(Long user_id, String restaurant_id);
+    boolean existsByUserIdAndRestaurantId(
+            Long userId,
+            String restaurantId
+    );
 
-    boolean existsByUser_idAndRestaurant_id(Long user_id, String restaurant_id);
+    void deleteByUserIdAndRestaurantId(
+            Long userId,
+            String restaurantId
+    );
 
-    void deleteByUser_idAndRestaurant_id(Long user_id, String restaurant_id);
 }

@@ -15,11 +15,12 @@ import lombok.*;
 public class Favorite {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long favorite_id;
+    @Column(name = "favorite_id")
+    private Long favoriteId;
 
-    @Column(nullable = false)
-    private Long user_id;
+    @Column(name = "user_id", nullable = false)
+    private Long userId;
 
-    @Column(nullable = false, length = 50)
-    private String restaurant_id;
+    @Column(name = "restaurant_id", nullable = false, length = 50)
+    private String restaurantId;
 }
