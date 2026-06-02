@@ -17,7 +17,7 @@
 
 .register-card h2 {
     text-align: center;
-    color: #2563EB;
+    color: #FF6B35;
     margin-bottom: px;
 }
 
@@ -55,7 +55,7 @@
 .register-submit-btn {
     margin-top: 10px;
 
-    background: #2563EB;
+    background: #FF6B35;
     color: white;
 
     border: none;
