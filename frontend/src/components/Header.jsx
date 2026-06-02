@@ -2,22 +2,50 @@
 import "../styles/Header.css";
 
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
-function Header({isAuthenticated, onLogout}){
+function Header({ isAuthenticated, onLogout }) {
     const navigate = useNavigate();
+    const location = useLocation(); // 現在のURLを取得    
+
     const handleLogout = () => {
         onLogout();
         navigate('/login');
     };
 
     return (
-        <header>
-            <h1>一期一会グルメガチャ</h1>
-            {isAuthenticated && (
-                <button onClick={handleLogout}>ログアウト</button>
-            )}
+        <header className="header">
+            <h1>🍽️ 一期一会グルメガチャ</h1>
+
+            <div>
+                {location.pathname === '/login' && (
+                    <button
+                        className="header-btn"
+                        onClick={() => navigate('/register')}
+                    >
+                        新規登録
+                    </button>
+                )}
+
+                {location.pathname === '/register' && (
+                    <button
+                        className="header-btn"
+                        onClick={() => navigate('/login')}
+                    >
+                        ログインはこちら
+                    </button>
+                )}
+
+                {isAuthenticated && (
+                    <button
+                        className="header-btn"
+                        onClick={handleLogout}
+                    >
+                        ログアウト
+                    </button>
+                )}
+            </div>
         </header>
-    )
+    );
 }
 export default Header;
