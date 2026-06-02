@@ -1,39 +1,40 @@
 //店舗の詳細情報を表示する画面です。
-import React, {useState, useEffect} from 'react';
-import {useLocation, useNavigate} from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import "../styles/RestaurantDetail.css";
 
-function RestaurantDetail(){
+function RestaurantDetail() {
     const location = useLocation();
     const navigate = useNavigate();
 
     const restaurantId = location.state?.restaurantId;
 
-    const[detail, setDetail] = useState(null);
-    const[isLoading, setIsLoading] = useState(true);
-    const[error, setError] = useState('');
+    const [detail, setDetail] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState('');
 
-    const[isFavorite, setIsfavorite] = useState(false);
+    const [isFavorite, setIsfavorite] = useState(false);
 
-    useEffect(() =>{
-        if(!restaurantId){
+    useEffect(() => {
+        if (!restaurantId) {
             setError('不正なアクセス');
             setIsLoading(false);
             return;
         }
 
         const fetchDetail = async () => {
-            try{
+            try {
                 //実際はここでAPIから詳細データを取得させます。
 
-                await new Promise(resolve => setTimeout(resolve,1000));
+                await new Promise(resolve => setTimeout(resolve, 1000));
 
                 //テストデータ
                 const testDeta = {
                     id: restaurantId,
                     name: "サンプルダイニング",
-                    images:[
-                        "https://via.placeholder.com/600x400?text=Main+Image",
-                        "https://via.placeholder.com/600x400?text=Sub+Image"
+                    images: [
+                        "https://picsum.photos/120/80?1",
+                        "https://picsum.photos/120/80?2"
                     ],
                     genre: "洋食",
                     address: "東京都品川区大崎",
@@ -48,72 +49,132 @@ function RestaurantDetail(){
 
                 setDetail(testDeta);
             }
-            catch(err){
+            catch (err) {
                 setError('店舗が見つかりません');
             }
-            finally{
+            finally {
                 setIsLoading(false);
             }
         };
         fetchDetail();
     }, [restaurantId]);
 
-    const handleFevorite = () =>{
+    const handleFevorite = () => {
         //ここにデータベース登録とかの処理を行うものとする
         setIsfavorite(!isFavorite);
 
-        if(!isFavorite){
+        if (!isFavorite) {
             alert('お気に入り登録しました！');
         }
-        else{
+        else {
             alert('お気に入り解除しました！');
         }
     };
 
-    if(isLoading) return <div>店舗情報を読み込み中...</div>
-    if(error) return <div>{error}</div>
+    if (isLoading) return <div>店舗情報を読み込み中...</div>
+    if (error) return <div>{error}</div>
     if (!detail) return null;
-    
+
     return (
-        <div>
-            <button onClick={()=> navigate(-1)}>戻る</button>
-            
-            <div>
-                {detail.images.map((img,index) => (
-                <img key={index} sec={img} alt={`店舗画像${index+1}`} />))}
-            </div>
-            <div>
-                <div>
-                    <span>{detail.genre}</span>
-                    <h2>{detail.name}</h2>
-                    <p>{detail.description}</p>
+        <div className="shop-detail-container">
+
+            <div className="shop-detail-card">
+
+                {/* 左：画像 */}
+                <div className="shop-image-area">
+                    <img
+                        src={detail.images[0]}
+                        alt={detail.name}
+                        className="shop-main-image"
+                    />
                 </div>
 
-                <button onClick={handleFevorite}>{isFavorite ? '♥' : '♡'}</button>
+                {/* 右：店舗情報 */}
+                <div className="shop-info-area">
+
+                    <h2>{detail.name}</h2>
+
+                    <div className="info-line">
+                        <span className="label">ジャンル：</span>
+                        <span>{detail.genre}</span>
+                    </div>
+
+                    <div className="info-line">
+                        <span className="label">評価：</span>
+                        <span className="star">★</span>
+                        <span>4.2</span>
+                    </div>
+
+                    <div className="info-line">
+                        <span className="label">住所：</span>
+                        <span>{detail.address}</span>
+                    </div>
+
+                    <div className="info-line">
+                        <span className="label">営業時間：</span>
+                        <span>{detail.hours}</span>
+                    </div>
+
+                    <div className="info-line">
+                        <span className="label">予算：</span>
+                        <span>{detail.budget}</span>
+                    </div>
+
+                    <div className="info-line">
+                        <span className="label">アクセス：</span>
+                        <span>{detail.station}駅から徒歩3分</span>
+                    </div>
+
+                    <div className="info-line">
+                        <span className="label">電話番号：</span>
+                        <span>{detail.phone}</span>
+                    </div>
+
+                    <div className="info-line">
+                        <span className="label">定休日：</span>
+                        <span>{detail.closedDays}</span>
+                    </div>
+
+                    <div className="info-line">
+                        <span className="label">公式サイト：</span>
+                        <a
+                            href={detail.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            {detail.url}
+                        </a>
+                    </div>
+
+                </div>
+
             </div>
 
-            <table>
-                <tbody>
-                    {[
-                        {label: '最寄り駅', value:detail.station},
-                        {label: '住所', value:detail.address},
-                        {label: '営業時間', value:detail.hours},
-                        {label: '定休日', value:detail.closedDays},
-                        {label: '予算', value:detail.budget},
-                        {label: '電話番号', value:detail.phone},
-                    ].map((item, index) => (
-                        <tr key={index}>
-                            <th>{item.label}</th>
-                            <td>{item.value}</td>
-                        </tr>
-                    ))}
-                    <tr><th>店舗HP</th>
-                    <td>
-                        <a href={detail.url} target="_blank" rel="noopener noreferrer">公式サイトを見る</a>
-                    </td>
-                    </tr>
-                </tbody>
-            </table>
+            {/* 説明文 */}
+            <div className="shop-description">
+                {detail.description}
+            </div>
+
+            {/* ボタン */}
+            <div className="shop-buttons">
+
+                <button className="map-btn">
+                    📍 地図で見る
+                </button>
+
+                <button className="site-btn">
+                    🍴 ホットペッパーで見る
+                </button>
+
+                <button
+                    className="favorite-btn"
+                    onClick={handleFevorite}
+                >
+                    {isFavorite ? "♥ お気に入り済み" : "♡ お気に入り追加"}
+                </button>
+
+            </div>
+
         </div>
     );
 
