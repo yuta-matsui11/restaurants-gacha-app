@@ -41,7 +41,7 @@ public class GachaService {
         RestaurantInfo selected = restaurants.get(0);
 
         // 4. 履歴保存（10件超えたら最古を削除）
-        List<GachaHistory> histories = historyRepository.findByUserId(userId);
+        List<GachaHistory> histories = historyRepository.findByUser_id(userId);
         if (histories.size() >= MAX_HISTORY) {
             histories.stream()
                     .min((a, b) -> a.getGacha_at().compareTo(b.getGacha_at()))
@@ -53,6 +53,8 @@ public class GachaService {
                 .station_name(stationName)
                 .restaurant_id(selected.getId())
                 .genre_name(selected.getGenreName())
+                .restaurant_name(selected.getName())
+                .image_url(selected.getImageUrl())
                 .build());
 
         log.info("Gacha executed: userId={}, station={}, restaurant={}", userId, stationName, selected.getName());
