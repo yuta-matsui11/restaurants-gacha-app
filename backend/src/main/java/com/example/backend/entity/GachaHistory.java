@@ -16,28 +16,29 @@ public class GachaHistory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long history_id;
+    @Column(name = "history_id")
+    private Long historyId;
 
-    @Column(nullable = false)
-    private Long user_id;
+    @Column(name = "user_id", nullable = false)
+    private Long userId;
 
-    @Column(nullable = false, length = 100)
-    private String station_name;
+    @Column(name = "station_name", nullable = false, length = 100)
+    private String stationName;
 
-    @Column(nullable = false, length = 50)
-    private String restaurant_id;
+    @Column(name = "restaurant_id", nullable = false, length = 50)
+    private String restaurantId;
 
-    @Column(length = 100)
-    private String genre_name;
+    @Column(name = "genre_name", length = 100)
+    private String genreName;
 
-    @Column(nullable = false)
+    @Column(name = "gacha_at", nullable = false)
     @Builder.Default
-    private LocalDateTime gacha_at = LocalDateTime.now();
+    private LocalDateTime gachaAt = LocalDateTime.now();
 
-    @Column(length = 200)
-    private String restaurant_name;
+    @Column(name = "restaurant_name", length = 200)
+    private String restaurantName;
 
-    @Column(length = 500)
-    private String image_url;
+    @Column(name = "image_url", length = 500)
+    private String imageUrl;
 
 }

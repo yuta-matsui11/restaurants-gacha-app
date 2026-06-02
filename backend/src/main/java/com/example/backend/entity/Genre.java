@@ -14,8 +14,8 @@ import lombok.*;
 public class Genre {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long genre_id;
+    @Column(length = 20)
+    private String genre_id;
 
     @Column(nullable = false, length = 50)
     private String genre_name;
