@@ -10,6 +10,8 @@ import Favorite from './pages/Favorite.jsx';
 import GachaExecute from './pages/GachaExecute.jsx'
 import Header from './components/Header.jsx';
 import Footer from './components/Footer.jsx'
+import RestaurantDetail from './pages/RestaurantDetail.jsx';
+
 function App() {
   //ログイン状態であるかどうか
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -34,6 +36,7 @@ function App() {
         <Route path="/history" element={isAuthenticated ? <><History/><Footer/></> : <Navigate to="/login" />} />
         <Route path="/favorite" element={isAuthenticated ? <><Favorite/><Footer/></> : <Navigate to="/login" />} />
         <Route path="/gachaexecute" element={isAuthenticated ? <><GachaExecute/></> : <Navigate to="/login"/>}/>
+        <Route path="/restaurantdetail" element={isAuthenticated ? <><RestaurantDetail/><Footer/></> : <Navigate to="/login"/>}/>
 
         {/*"/"にアクセスした場合はログイン状況によりログイン画面かホーム画面に遷移する*/ }
         <Route path="/" element={<Navigate to={isAuthenticated ? "/home" : "/login"}/>}/>
