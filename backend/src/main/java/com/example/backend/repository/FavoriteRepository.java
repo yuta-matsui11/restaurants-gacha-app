@@ -10,4 +10,3 @@ public interface FavoriteRepository extends JpaRepository<Favorite, Long> {
 
     void deleteByUserIdAndShopId(Long user_id, Long restaurant_id);
 }
-// お気に入りのテーブルへのアクセスを担当するリポジトリです
