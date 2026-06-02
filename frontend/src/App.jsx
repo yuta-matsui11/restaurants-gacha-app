@@ -7,6 +7,7 @@ import Home from './pages/Home.jsx';
 import Result from './pages/Result.jsx';
 import History from './pages/History.jsx';
 import Favorite from './pages/Favorite.jsx';
+import GachaExecute from './pages/GachaExecute.jsx'
 import Header from './components/Header.jsx';
 import Footer from './components/Footer.jsx'
 function App() {
@@ -32,6 +33,7 @@ function App() {
         <Route path="/result" element={isAuthenticated ? <><Result/><Footer/></> : <Navigate to="/login" />} />
         <Route path="/history" element={isAuthenticated ? <><History/><Footer/></> : <Navigate to="/login" />} />
         <Route path="/favorite" element={isAuthenticated ? <><Favorite/><Footer/></> : <Navigate to="/login" />} />
+        <Route path="/gachaexecute" element={isAuthenticated ? <><GachaExecute/></> : <Navigate to="/login"/>}/>
 
         {/*"/"にアクセスした場合はログイン状況によりログイン画面かホーム画面に遷移する*/ }
         <Route path="/" element={<Navigate to={isAuthenticated ? "/home" : "/login"}/>}/>
