@@ -26,7 +26,7 @@ public class GachaService {
 
     @Transactional
     public RestaurantInfo execute(Long userId, String stationName) {
-        // 1. 駅名 → 緯度経度変換
+        // 1. 駅名 → 緯度経度変換.
         double[] coords = heartRailsStationService.getCoordinates(stationName);
 
         // 2. HotPepper APIで店舗一覧取得
