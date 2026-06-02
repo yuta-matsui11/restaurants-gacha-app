@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface GachaHistoryRepository extends JpaRepository<GachaHistory, Long> {
 
-    List<GachaHistory> findByUserId(Long user_id);
+    List<GachaHistory> findByUser_id(Long user_id);
 
 }

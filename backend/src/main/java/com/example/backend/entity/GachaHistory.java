@@ -34,4 +34,10 @@ public class GachaHistory {
     @Builder.Default
     private LocalDateTime gacha_at = LocalDateTime.now();
 
+    @Column(length = 200)
+    private String restaurant_name;
+
+    @Column(length = 500)
+    private String image_url;
+
 }
