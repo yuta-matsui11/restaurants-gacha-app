@@ -23,7 +23,7 @@ function Login({onLogin}){
                 <button type="submit">ログイン</button>
             </form>
             <div>
-
+                <button onClick={() => navigate('/register')}>新規ユーザー登録</button>
             </div>
         </div>
     )
