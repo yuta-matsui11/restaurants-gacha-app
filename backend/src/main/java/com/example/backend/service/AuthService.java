@@ -70,7 +70,7 @@ public class AuthService {
 
         // 2. 入力された生パスワードとDBのハッシュ化パスワードを照合（UserのLombokメソッド名に合わせました）
         if (!passwordEncoder.matches(request.password_hash, user.getPassword_hash())) {
-            throw new IllegalArgumentException("メールアドレスまたはパスワードが正しくありません。");
+            throw new IllegalArgumentException("メールアドレスまたはパスワードが正しくありません");
         }
 
         // 3. 認証成功。呼び出し元のControllerにユーザー情報を返却
