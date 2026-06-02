@@ -98,10 +98,10 @@ public class HotPepperRestaurantService implements RestaurantService {
             RestaurantInfo info = RestaurantInfo.builder()
                     .id(shop.path("id").asText(""))
                     .name(shop.path("name").asText(""))
-                    // genre.name → genreName にマッピング
-                    .genreName(shop.path("genre").path("name").asText(""))
-                    // station_name → nearestStation にマッピング
-                    .nearestStation(shop.path("station_name").asText(""))
+                    // genre.name → genre_name にマッピング
+                    .genre_name(shop.path("genre").path("name").asText(""))
+                    // station_name → nearest_station にマッピング
+                    .nearest_station(shop.path("station_name").asText(""))
                     .imageUrl(imageUrl)
                     .images(images)
                     .address(shop.path("address").asText(""))

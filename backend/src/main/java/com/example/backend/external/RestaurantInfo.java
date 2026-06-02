@@ -12,8 +12,8 @@ public class RestaurantInfo {
 
     private String id;
     private String name;
-    private String genreName;
-    private String nearestStation;
+    private String genre_name;
+    private String nearest_station;
     private String imageUrl;
     private List<String> images;
     private String address;

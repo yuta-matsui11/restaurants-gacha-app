@@ -29,7 +29,7 @@ CREATE TABLE histories (
 
     CONSTRAINT fk_histories_user
         FOREIGN KEY (user_id)
-        REFERENCES users(user_id)
+        REFERENCES users(user_id),
     CONSTRAINT fk_histories_genre
         FOREIGN KEY (genre_id)
         REFERENCES genres(genre_id)
