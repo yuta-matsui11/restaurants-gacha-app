@@ -22,7 +22,7 @@ public class HeartRailsStationService {
                 .build()
                 .toUriString();
 
-        log.info("HeartRails API call: stationName={}", station_name);
+        log.info("HeartRails API call: station_name={}", station_name);
 
         try {
             String response = restTemplate.getForObject(url, String.class);
