@@ -68,7 +68,7 @@
 
     cursor: pointer;
 }
-
+/* 登録ボタンのホバー効果 */
 .register-submit-btn:hover {
     background: #1D4ED8;
 }
