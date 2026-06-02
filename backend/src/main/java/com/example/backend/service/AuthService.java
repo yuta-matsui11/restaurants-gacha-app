@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * ログイン・登録 of 処理を担当するサービス・クラス
+ * ログイン・登録の処理を担当するサービス・クラス
  */
 @Service
 public class AuthService {
@@ -26,26 +26,33 @@ public class AuthService {
      * API-003: ユーザー登録処理
      * @param request 登録リクエストデータ (Dtos.UserRequest)
      * @return 登録されたユーザー情報
-     * @throws IllegalArgumentException メールアドレスが既に存在する場合
+     * @throws IllegalArgumentException パスワード要件を満たさない場合、またはメールアドレスが既に存在する場合
      */
     @Transactional
     public User registerUser(Dtos.UserRequest request) {
-        // 1. メールアドレスの重複チェック
+        // 1. パスワードのバリデーションチェック（★新しく追加！）
+        // 要件：8文字以上32文字以下、半角英字1字以上含む、半角数字1字以上含む
+        String passwordPattern = "^(?=.*[a-zA-Z])(?=.*\\d)[a-zA-Z\\d]{8,32}$";
+        if (request.password_hash == null || !request.password_hash.matches(passwordPattern)) {
+            throw new IllegalArgumentException("パスワードは8文字以上32文字以下で、半角英字と半角数字をそれぞれ1文字以上含めてください。");
+        }
+
+        // 2. メールアドレスの重複チェック
         if (userRepository.existsByEmail(request.email)) {
             throw new IllegalArgumentException("指定されたメールアドレスは既に登録されています。");
         }
 
-        // 2. パスワードのハッシュ化
+        // 3. パスワードのハッシュ化
         String encodedPassword = passwordEncoder.encode(request.password_hash);
 
-        // 3. データの詰め替えとエンティティの生成（UserのLombokメソッド名に合わせました）
+        // 4. データの詰め替えとエンティティの生成（UserのLombokメソッド名に合わせました）
         User user = new User();
         user.setUser_name(request.user_name);
         user.setEmail(request.email);
         user.setPassword_hash(encodedPassword);
         // created_at は User.java 側で @Builder.Default もしくは初期値として入るため、ここではセットしなくても自動で現在時刻になります
 
-        // 4. リポジトリ経由でDBへ保存
+        // 5. リポジトリ経由でDBへ保存
         return userRepository.save(user);
     }
 
