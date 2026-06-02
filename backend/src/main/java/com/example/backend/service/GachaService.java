@@ -52,7 +52,7 @@ public class GachaService {
                 .user_id(userId)
                 .station_name(stationName)
                 .restaurant_id(selected.getId())
-                .genre_name(selected.getGenreName())
+                .genre_name(selected.getGenre_name())
                 .restaurant_name(selected.getName())
                 .image_url(selected.getImageUrl())
                 .build());
