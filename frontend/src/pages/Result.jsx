@@ -6,6 +6,8 @@ import '../styles/Result.css';
 function Result() {
     const location = useLocation();
     const navigate = useNavigate();
+
+   
     const { restaurant, conditions } = location.state || {};
     if (!restaurant) {
         navigate('/home');
@@ -17,7 +19,7 @@ function Result() {
     };
 
     const handleViewdetail = () => {
-        navigate('/restaurantdetail', { state: { restaurantId: restaurant.id } });
+        navigate('/restaurantdetail', { state: { restaurant: restaurant } });
     };
 
     return (

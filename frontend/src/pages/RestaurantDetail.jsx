@@ -7,15 +7,15 @@ function RestaurantDetail() {
     const location = useLocation();
     const navigate = useNavigate();
 
-    const restaurantId = location.state?.restaurantId;
+    const detail = location.state?.restaurant;
 
-    const [detail, setDetail] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState('');
 
     const [isFavorite, setIsfavorite] = useState(false);
 
-    useEffect(() => {
+    if(!detail){
+        return <div style={{textAlign: 'center', marginTop: '50px'}}>店舗情報が見つかりません</div>
+    }
+    /*useEffect(() => {
         if (!restaurantId) {
             setError('不正なアクセス');
             setIsLoading(false);
@@ -57,7 +57,7 @@ function RestaurantDetail() {
             }
         };
         fetchDetail();
-    }, [restaurantId]);
+    }, [restaurantId]);*/
 
     const handleFevorite = () => {
         //ここにデータベース登録とかの処理を行うものとする
@@ -71,10 +71,6 @@ function RestaurantDetail() {
         }
     };
 
-    if (isLoading) return <div>店舗情報を読み込み中...</div>
-    if (error) return <div>{error}</div>
-    if (!detail) return null;
-
     return (
         <div className="shop-detail-container">
 
@@ -83,7 +79,7 @@ function RestaurantDetail() {
                 {/* 左：画像 */}
                 <div className="shop-image-area">
                     <img
-                        src={detail.images[0]}
+                        src={detail.images}
                         alt={detail.name}
                         className="shop-main-image"
                     />
@@ -100,12 +96,6 @@ function RestaurantDetail() {
                     </div>
 
                     <div className="info-line">
-                        <span className="label">評価：</span>
-                        <span className="star">★</span>
-                        <span>4.2</span>
-                    </div>
-
-                    <div className="info-line">
                         <span className="label">住所：</span>
                         <span>{detail.address}</span>
                     </div>
@@ -118,11 +108,6 @@ function RestaurantDetail() {
                     <div className="info-line">
                         <span className="label">予算：</span>
                         <span>{detail.budget}</span>
-                    </div>
-
-                    <div className="info-line">
-                        <span className="label">アクセス：</span>
-                        <span>{detail.station}駅から徒歩3分</span>
                     </div>
 
                     <div className="info-line">

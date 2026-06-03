@@ -1,7 +1,7 @@
 //ガチャの実行中表示を行う画面です
 import React, { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-
+import axiosClient from '../api/axiosClient.jsx';
 import '../styles/GachaExecute.css';
 
 function GachaExecute() {
@@ -22,8 +22,32 @@ function GachaExecute() {
                 //タイマー設定
                 const animationPromise = new Promise((resolve) => setTimeout(resolve, 2500));
 
+                const requestData = {
+                    user_id: 1,
+                    station_name: searchConditions.station
+                };
+
+                const apiResponse = await axiosClient.post('/gacha/execute', requestData).then(response => response.data);
+
+                const formattedRestaurant = {
+                    id: apiResponse.id,
+                    name: apiResponse.name,
+                    genre: apiResponse.genre_name,
+                    station: searchConditions.station,
+                    image: apiResponse.imageUrl,
+                    address: apiResponse.address,
+                    hours: apiResponse.open,
+                    closedDays: apiResponse.close,
+                    budget: apiResponse.budget,
+                    phone: apiResponse.phone,
+                    url: apiResponse.urls
+                };
+
+                await Promise.all([animationPromise]);
+
+                navigate('/result', {state: {restaurant: formattedRestaurant, conditions: searchConditions}});
                 //ダミーデータを0.8秒で受信したことにします。
-                const apiPromise = new Promise((resolve) => {
+                /*const apiPromise = new Promise((resolve) => {
                     setTimeout(() => {
                         resolve({
                             id: "sampleID",
@@ -33,13 +57,7 @@ function GachaExecute() {
                             image: "https://via.placeholder.com/300x200?text=Restaurant+Image"
                         });
                     }, 800);
-                });
-
-                //並行処理
-                const [_, apiResponse] = await Promise.all([animationPromise, apiPromise]);
-
-                //結果画面への遷移
-                navigate('/result', { state: { restaurant: apiResponse, conditions: searchConditions } });
+                });*/
             }
             catch (error) {
                 console.error("ガチャの実行に失敗しました", error);
