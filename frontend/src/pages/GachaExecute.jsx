@@ -24,7 +24,8 @@ function GachaExecute() {
 
                 const requestData = {
                     user_id: 1,
-                    station_name: searchConditions.station
+                    station_name: searchConditions.station,
+                    genre: searchConditions.genre
                 };
 
                 const apiResponse = await axiosClient.post('/gacha/execute', requestData).then(response => response.data);
