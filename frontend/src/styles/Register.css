@@ -72,3 +72,10 @@
 .register-submit-btn:hover {
     background: #1D4ED8;
 }
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 4px;
+    margin-bottom: 8px;
+}
