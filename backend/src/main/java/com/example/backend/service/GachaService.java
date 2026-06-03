@@ -25,7 +25,7 @@ public class GachaService {
     private final GachaHistoryRepository historyRepository;
 
     @Transactional
-    public RestaurantInfo execute(Long userId, String stationName) {
+    public RestaurantInfo execute(Long userId, String stationName, String genre) {
         // 1. 駅名 → 緯度経度変換.
         double[] coords = heartRailsStationService.getCoordinates(stationName);
 

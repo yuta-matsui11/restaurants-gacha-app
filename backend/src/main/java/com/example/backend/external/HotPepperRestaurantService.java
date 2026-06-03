@@ -14,6 +14,7 @@ import java.util.List;
 @Service
 @Slf4j
 public class HotPepperRestaurantService implements RestaurantService {
+
     @Value("${hotpepper.api.key}")
     private String apiKey;
 
@@ -24,24 +25,29 @@ public class HotPepperRestaurantService implements RestaurantService {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     /**
-     * 緯度経度・範囲で飲食店一覧を検索する
-     * 
+     * 緯度経度・ジャンルで飲食店一覧を検索する
+     *
      * @param lat   緯度
      * @param lng   経度
      * @param genre ジャンルコード（空文字の場合は全ジャンル）
      */
     @Override
     public List<RestaurantInfo> search(double lat, double lng, String genre) {
-        String url = UriComponentsBuilder.fromHttpUrl(apiUrl)
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(apiUrl)
                 .queryParam("key", apiKey)
                 .queryParam("lat", lat)
                 .queryParam("lng", lng)
                 .queryParam("range", 3) // 1000m固定（1=300m,2=500m,3=1000m,4=2000m,5=3000m）
                 .queryParam("count", 100)
-                .queryParam("format", "json")
-                .toUriString();
+                .queryParam("format", "json");
 
-        log.info("HotPepper API search: lat={}, lng={}", lat, lng);
+        // ジャンルコードが指定されていれば絞り込む
+        if (genre != null && !genre.isBlank()) {
+            builder.queryParam("genre", genre);
+        }
+
+        String url = builder.toUriString();
+        log.info("HotPepper API search: lat={}, lng={}, genre={}", lat, lng, genre);
 
         try {
             String response = restTemplate.getForObject(url, String.class);
@@ -89,28 +95,23 @@ public class HotPepperRestaurantService implements RestaurantService {
         JsonNode shops = root.path("results").path("shop");
 
         for (JsonNode shop : shops) {
-            // 画像URLリスト
-            List<String> images = new ArrayList<>();
             String imageUrl = shop.path("photo").path("pc").path("l").asText("");
+            List<String> images = new ArrayList<>();
             if (!imageUrl.isEmpty())
                 images.add(imageUrl);
 
             RestaurantInfo info = RestaurantInfo.builder()
                     .id(shop.path("id").asText(""))
                     .name(shop.path("name").asText(""))
-                    // genre.name → genre_name にマッピング
                     .genre_name(shop.path("genre").path("name").asText(""))
-                    // station_name → nearest_station にマッピング
                     .nearest_station(shop.path("station_name").asText(""))
                     .imageUrl(imageUrl)
                     .images(images)
                     .address(shop.path("address").asText(""))
                     .open(shop.path("open").asText(""))
                     .close(shop.path("close").asText(""))
-                    // budget.average → budget にマッピング
                     .budget(shop.path("budget").path("average").asText(""))
                     .tel(shop.path("tel").asText(""))
-                    // urls.pc → url にマッピング
                     .url(shop.path("urls").path("pc").asText(""))
                     .build();
 
@@ -120,5 +121,4 @@ public class HotPepperRestaurantService implements RestaurantService {
         log.info("HotPepper API result: {} shops", result.size());
         return result;
     }
-
 }
