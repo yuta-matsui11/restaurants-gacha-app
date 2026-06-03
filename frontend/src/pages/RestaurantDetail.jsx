@@ -79,7 +79,7 @@ function RestaurantDetail() {
                 {/* 左：画像 */}
                 <div className="shop-image-area">
                     <img
-                        src={detail.images}
+                        src={detail.image}
                         alt={detail.name}
                         className="shop-main-image"
                     />
