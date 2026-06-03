@@ -30,7 +30,7 @@ public class GachaService {
         double[] coords = heartRailsStationService.getCoordinates(stationName);
 
         // 2. HotPepper APIで店舗一覧取得
-        List<RestaurantInfo> restaurants = restaurantService.search(coords[0], coords[1], "");
+        List<RestaurantInfo> restaurants = restaurantService.search(coords[0], coords[1], genre);
 
         if (restaurants.isEmpty()) {
             throw new NoRestaurantException("条件に一致するお店が見つかりませんでした");
