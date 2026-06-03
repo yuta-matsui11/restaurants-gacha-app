@@ -9,10 +9,87 @@ function Register() {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [uname, setUname] = useState('');
     const [station, setStation] = useState('');
     const [genre, setGenre] = useState('');
-    const handleRegister = () => {
+
+    const [unameError, setUnameError] = useState('');
+    const [emailError, setEmailError] = useState('');
+    const [passwordError, setPasswordError] = useState('');
+    const [confirmPasswordError, setConfirmPasswordError] = useState('');
+    const [stationError, setStationError] = useState('');
+    const [genreError, setGenreError] = useState('');
+    
+    const handleRegister = (e) => {
+
+        e.preventDefault();
+        let isValid = true;
+
+        setUnameError('');
+        setEmailError('');
+        setPasswordError('');
+        setConfirmPasswordError('');
+        setStationError('');
+        setGenreError('');
+
+        // ユーザーネーム
+        if (!uname.trim()) {
+            setUnameError('ユーザーネームを入力してください');
+            isValid = false;
+        } else if (uname.length > 20) {
+            setUnameError('ユーザーネームは20文字以下で入力してください');
+            isValid = false;
+        }
+
+    // メールアドレス
+        if (!email.trim()) {
+            setEmailError('メールアドレスを入力してください');
+            isValid = false;
+        } else if (
+            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email)
+        ) {
+            setEmailError('メールアドレスの形式が正しくありません');
+            isValid = false;
+        }
+
+    // パスワード
+        if (!password) {
+            setPasswordError('パスワードを入力してください');
+            isValid = false;
+        } else if (
+            !/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,32}$/.test(password)
+        ) {
+            setPasswordError('パスワードは8～32文字で半角英字と数字をそれぞれ1文字以上含めてください');
+            isValid = false;
+        }
+
+        // パスワード確認
+        if (!confirmPassword) {
+            setConfirmPasswordError('確認用パスワードを入力してください');
+            isValid = false;
+        } else if (password !== confirmPassword) {
+            setConfirmPasswordError('パスワードと確認用パスワードが一致しません');
+            isValid = false;
+        }
+
+
+    // 最寄り駅
+        if (!station.trim()) {
+            setStationError('最寄り駅を入力してください');
+            isValid = false;
+        }
+
+    // ジャンル
+        if (!genre) {
+            setGenreError('ジャンルを選択してください');
+            isValid = false;
+        }
+
+        if (!isValid) {
+            return;
+        }
+
         navigate('/login');
     };
 
@@ -22,13 +99,20 @@ function Register() {
                 <h2>ユーザー登録</h2>
                 <form onSubmit={handleRegister}>
                     <label>ユーザーネーム</label><input type="text" placeholder="いとうたいが" value={uname} onChange={(e) => setUname(e.target.value)} />
+                    {unameError && <p className="error-message">{unameError}</p>}
                     
                     <label>メールアドレス</label><input type="email" placeholder="ito@example.com" value={email} onChange={(e) => setEmail(e.target.value)} />
-                    
+                    {emailError && <p className="error-message">{emailError}</p>}
+
                     <label>パスワード</label><input type="password" placeholder="ito110" value={password} onChange={(e) => setPassword(e.target.value)} />
-                    
+                    {passwordError && <p className="error-message">{passwordError}</p>}
+
+                    <label>パスワード（確認）</label><input type="password" placeholder="もう一度入力してください" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}/>
+                    {confirmPasswordError && ( <p className="error-message">{confirmPasswordError}</p>)}
+
                     <label>最寄り駅</label><input type="text" placeholder="大崎" value={station} onChange={(e) => setStation(e.target.value)} />
-                    
+                    {stationError && <p className="error-message">{stationError}</p>}
+
                     <label>最も好きな飲食店ジャンル</label>
                     <select value={genre} onChange={(e) => setGenre(e.target.value)}>
                         <option value="">選択してください</option>
@@ -50,7 +134,9 @@ function Register() {
                         <option value="G016">お好み焼き・もんじゃ</option>
                         <option value="G017">韓国料理</option>
                     </select>
-                    
+                    {genreError && <p className="error-message">{genreError}</p>}
+
+
                     <button type="submit" className="register-submit-btn">
                         登録
                     </button>

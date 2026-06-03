@@ -33,6 +33,7 @@ function Home() {
     const [selectGenre, setSelectGenre] = useState("");
 
     const [error, setError] = useState('');
+    const [stationError, setStationError] = useState('');
 
     const handleGenreChange = (genreId) => {
         setSelectGenre((prev) => {
@@ -48,6 +49,13 @@ function Home() {
 
     const handleGacha = (e) => {
         e.preventDefault();
+        setStationError('');
+
+        if (!station) {
+            setStationError('駅名を入力してください');
+            isValid = false;
+        } 
+
         const searchConditions = {
             station: station,
             genres: selectGenre
@@ -64,6 +72,7 @@ function Home() {
 
                     <label className="input-label">駅名 <span className="required">*</span></label>
                     <input type="text" value={station} onChange={(e) => setStation(e.target.value)} placeholder="例：新宿"  className="station-input" />
+                    {stationError && <p className="error-message">{stationError}</p>}
 
                     <label className="genre-title">ジャンル</label>
                     <p className="genre-note">　※未選択の場合はすべてのジャンルから抽選されます</p>
