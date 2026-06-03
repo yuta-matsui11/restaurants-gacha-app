@@ -96,12 +96,6 @@ function RestaurantDetail() {
                     </div>
 
                     <div className="info-line">
-                        <span className="label">評価：</span>
-                        <span className="star">★</span>
-                        <span>4.2</span>
-                    </div>
-
-                    <div className="info-line">
                         <span className="label">住所：</span>
                         <span>{detail.address}</span>
                     </div>
@@ -114,11 +108,6 @@ function RestaurantDetail() {
                     <div className="info-line">
                         <span className="label">予算：</span>
                         <span>{detail.budget}</span>
-                    </div>
-
-                    <div className="info-line">
-                        <span className="label">アクセス：</span>
-                        <span>{detail.station}駅から徒歩3分</span>
                     </div>
 
                     <div className="info-line">

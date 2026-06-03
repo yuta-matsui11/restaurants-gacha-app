@@ -1,7 +1,7 @@
 //ガチャの実行中表示を行う画面です
 import React, { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-
+import axiosClient from '../api/axiosClient.jsx';
 import '../styles/GachaExecute.css';
 
 function GachaExecute() {
