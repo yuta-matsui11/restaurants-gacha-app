@@ -23,6 +23,7 @@ CREATE TABLE histories (
     history_id BIGSERIAL PRIMARY KEY,
     user_id BIGINT NOT NULL,
     station_name VARCHAR(100) NOT NULL,
+    genre_id VARCHAR(50),
     genre_name VARCHAR(50),
     restaurant_id VARCHAR(50) NOT NULL,
     gacha_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

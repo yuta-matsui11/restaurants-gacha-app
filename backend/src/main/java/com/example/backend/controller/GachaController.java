@@ -19,7 +19,7 @@ public class GachaController {
     @PostMapping("/execute")
     public ResponseEntity<?> execute(@RequestBody GachaRequest req) {
         try {
-            RestaurantInfo result = gachaService.execute(req.user_id, req.station_name);
+            RestaurantInfo result = gachaService.execute(req.user_id, req.station_name, req.genre);
             return ResponseEntity.ok(result);
         } catch (HeartRailsStationService.StationNotFoundException e) {
             return ResponseEntity.badRequest().body(Map.of("message", e.getMessage()));
@@ -33,5 +33,6 @@ public class GachaController {
     static class GachaRequest {
         public Long user_id;
         public String station_name;
+        public String genre; // 追加: ジャンルコード（例: "G001"）
     }
 }

@@ -50,9 +50,9 @@ public class FavoriteController {
     // DELETE /api/favorites/J001234567?userId=1
     @DeleteMapping("/{restaurantId}")
     public ResponseEntity<?> remove(
-            @PathVariable String restaurant_id,
+            @PathVariable String restaurantId,
             @RequestParam Long user_id) {
-        favoriteService.remove(user_id, restaurant_id);
+        favoriteService.remove(user_id, restaurantId);
         return ResponseEntity.ok(Map.of("message", "お気に入りを解除しました"));
     }
 
