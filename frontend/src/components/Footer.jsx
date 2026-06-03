@@ -6,12 +6,27 @@ import { Link } from 'react-router-dom';
 
 function Footer(){
     return (
-        <footer>
-            <Link to="/home">ホーム</Link>
-            <Link to="/history">履歴</Link>
-            <Link to="/favorite">お気に入り</Link>
-            <Link to="/profile">マイページ</Link>
-        </footer>
+        <footer className="footer">
+    <Link to="/home" className="footer-item">
+        <span>🏠</span>
+        <p>ホーム</p>
+    </Link>
+
+    <Link to="/history" className="footer-item">
+        <span>🕒</span>
+        <p>ガチャ履歴</p>
+    </Link>
+
+    <Link to="/favorite" className="footer-item">
+        <span>❤️</span>
+        <p>お気に入り</p>
+    </Link>
+
+    <Link to="/profile" className="footer-item">
+        <span>👤</span>
+        <p>マイページ</p>
+    </Link>
+</footer>
     )
 }
 export default Footer;

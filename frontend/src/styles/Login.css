@@ -19,7 +19,7 @@
 .login-card h2 {
     text-align: center;
     margin-bottom: 30px;
-    color: #FF6B35;
+    color: #FF3B1F;
 }
 
 .login-card form {
@@ -45,11 +45,11 @@
 
 .login-card input:focus {
     outline: none;
-    border-color: #2563EB;
+    border-color: #FF3B1F;
 }
 
 .login-btn {
-    background: #FF6B35;
+    background: #FF3B1F;
     color: white;
 
     border: none;
@@ -62,16 +62,16 @@
 }
 
 .login-btn:hover {
-    background: #1D4ED8;
+    background: #f07a05;
 }
 
 .register-btn {
     margin-top: 15px;
 
     background: white;
-    color: #2563EB;
+    color: #FF3B1F;
 
-    border: 1px solid #2563EB;
+    border: 1px solid #FF3B1F;
     border-radius: 6px;
 
     padding: 12px;
