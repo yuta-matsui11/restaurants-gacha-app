@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import "../styles/Profile.css";
 import { Link, useNavigate } from "react-router-dom";
-
 const GENRE_LIST = [
     { id: 'G001', name: '居酒屋' },
     { id: 'G002', name: 'ダイニングバー・バル' },
@@ -70,10 +69,12 @@ function Profile() {
         return genre ? genre.name : "未設定";
     };
 
-    // ★ お問い合わせボタンを押したときの処理（開発用に仮置き）
+    const navigate = useNavigate();
+
+    
     const handleContactClick = () => {
-        // 【佐藤へ】ここにお問い合わせ画面への遷移処理
-        alert('お問い合わせボタンが押されました（実装待ち）');
+        
+        navigate('/contact');
     };
 
     return (

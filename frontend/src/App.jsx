@@ -14,7 +14,7 @@ import RestaurantDetail from './pages/RestaurantDetail.jsx';
 import Profile from './pages/Profile.jsx'
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
-
+import Contact from "./pages/Contact";
 function App() {
   //ログイン状態であるかどうか
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -43,6 +43,7 @@ function App() {
         <Route path="/profile" element={isAuthenticated ? <><Profile/><Footer/></> : <Navigate to="/login"/>}/>
         <Route path="/terms" element={<Terms />} />
         <Route path="/privacy" element={<Privacy />} />
+        <Route path="/contact" element={isAuthenticated ? <><Contact/><Footer/></> : <Navigate to="/login"/>}/>
         {/*"/"にアクセスした場合はログイン状況によりログイン画面かホーム画面に遷移する*/ }
         <Route path="/" element={<Navigate to={isAuthenticated ? "/home" : "/login"}/>}/>
       </Routes>
