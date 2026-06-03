@@ -12,6 +12,8 @@ import Header from './components/Header.jsx';
 import Footer from './components/Footer.jsx'
 import RestaurantDetail from './pages/RestaurantDetail.jsx';
 import Profile from './pages/Profile.jsx'
+import Terms from "./pages/Terms";
+import Privacy from "./pages/Privacy";
 
 function App() {
   //ログイン状態であるかどうか
@@ -39,6 +41,8 @@ function App() {
         <Route path="/gachaexecute" element={isAuthenticated ? <><GachaExecute/></> : <Navigate to="/login"/>}/>
         <Route path="/restaurantdetail" element={isAuthenticated ? <><RestaurantDetail/><Footer/></> : <Navigate to="/login"/>}/>
         <Route path="/profile" element={isAuthenticated ? <><Profile/><Footer/></> : <Navigate to="/login"/>}/>
+        <Route path="/terms" element={<Terms />} />
+        <Route path="/privacy" element={<Privacy />} />
         {/*"/"にアクセスした場合はログイン状況によりログイン画面かホーム画面に遷移する*/ }
         <Route path="/" element={<Navigate to={isAuthenticated ? "/home" : "/login"}/>}/>
       </Routes>
