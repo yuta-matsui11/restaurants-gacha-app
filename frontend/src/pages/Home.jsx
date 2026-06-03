@@ -58,7 +58,7 @@ function Home() {
 
         const searchConditions = {
             station: station,
-            genres: selectGenre
+            genre: selectGenre
         };
 
         navigate('/gachaexecute', { state: searchConditions });
