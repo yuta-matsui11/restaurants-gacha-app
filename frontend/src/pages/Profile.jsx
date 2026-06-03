@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import "../styles/Profile.css";
-
+import { Link, useNavigate } from "react-router-dom";
 const GENRE_LIST = [
     { id: 'G001', name: '居酒屋' },
     { id: 'G002', name: 'ダイニングバー・バル' },
@@ -69,6 +69,14 @@ function Profile() {
         return genre ? genre.name : "未設定";
     };
 
+    const navigate = useNavigate();
+
+    
+    const handleContactClick = () => {
+        
+        navigate('/contact');
+    };
+
     return (
         <div className="profile-page">
             <h2 className="profile-title">マイページ</h2>
@@ -98,6 +106,28 @@ function Profile() {
                     <button className="btn primary" onClick={handleEditClick}>
                         プロフィールを編集する
                     </button>
+
+                    <div style={{ display: "flex", flexDirection: "column", gap: "12px", marginTop: "30px", alignItems: "center" }}>
+                        <Link to="/terms" style={{ color: "#7755ff", marginRight: "15px", textDecoration: "underline" }}>利用規約</Link>
+                        <Link to="/privacy" style={{ color: "#7755ff", textDecoration: "underline" }}>プライバシーポリシー</Link>
+
+                        <button 
+                            onClick={handleContactClick} 
+                            style={{
+                                marginTop: "10px",
+                                padding: "8px 20px",
+                                fontSize: "0.9rem",
+                                backgroundColor: "transparent",
+                                color: "#7755ff",
+                                border: "1px solid #7755ff",
+                                borderRadius: "20px",
+                                cursor: "pointer",
+                                fontWeight: "bold"
+                            }}
+                        >
+                            お問い合わせ
+                        </button>
+                    </div>
                 </div>
             ) : (
                 <form className="profile-card" onSubmit={handleSave}>
@@ -139,3 +169,5 @@ function Profile() {
 }
 
 export default Profile;
+                    
+                
