@@ -36,7 +36,7 @@ function Favorite() {
 
     const handleViewDetail = (restaurantId) => {
         // 詳細ページへ遷移（例: /restaurant/123）
-        navigate(`/restaurant`, { state: { restaurantId } });
+        navigate(`/restaurantdetail`, { state: { restaurantId } });
     };
     if (isLoading) {
         return (<div className="favorite-container">読み込み中...</div>);
@@ -121,7 +121,7 @@ function Favorite() {
                     </div>
 
                     <div className="favorite-buttons">
-                        <button className="detail-btn">
+                        <button className="detail-btn" onClick={() => handleViewDetail(favorite.restaurantId)}>
                             詳細を見る
                         </button>
 
