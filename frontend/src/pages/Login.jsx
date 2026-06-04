@@ -21,13 +21,13 @@ function Login({ onLogin }) {
         setEmailError('');
         setPasswordError('');
 
-        if(!email){
+        if (!email) {
             setEmailError('メールアドレスを入力してください')
-            isValid=false
+            isValid = false
         }
-        if(!password){
+        if (!password) {
             setPasswordError('パスワードを入力してください')
-            isValid=false
+            isValid = false
         }
         if (!isValid) {
             return;
@@ -64,7 +64,7 @@ function Login({ onLogin }) {
                     </button>
                 </form>
 
-                
+
             </div>
         </div>
     )

@@ -20,8 +20,8 @@ function Register() {
     const [confirmPasswordError, setConfirmPasswordError] = useState('');
     const [stationError, setStationError] = useState('');
     const [genreError, setGenreError] = useState('');
-    
-    const handleRegister = (e) => {
+
+    const handleRegister = async (e) => {
 
         e.preventDefault();
         let isValid = true;
@@ -42,7 +42,7 @@ function Register() {
             isValid = false;
         }
 
-    // メールアドレス
+        // メールアドレス
         if (!email.trim()) {
             setEmailError('メールアドレスを入力してください');
             isValid = false;
@@ -53,7 +53,7 @@ function Register() {
             isValid = false;
         }
 
-    // パスワード
+        // パスワード
         if (!password) {
             setPasswordError('パスワードを入力してください');
             isValid = false;
@@ -74,13 +74,13 @@ function Register() {
         }
 
 
-    // 最寄り駅
+        // 最寄り駅
         if (!station.trim()) {
             setStationError('最寄り駅を入力してください');
             isValid = false;
         }
 
-    // ジャンル
+        // ジャンル
         if (!genre) {
             setGenreError('ジャンルを選択してください');
             isValid = false;
@@ -89,10 +89,38 @@ function Register() {
         if (!isValid) {
             return;
         }
+        try {
+            const response = await fetch(
+                "http://localhost:8080/api/auth/register",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        user_name: uname,
+                        email: email,
+                        password_hash: password,
+                        nearest_station: station,
+                        favorite_genre_id: genre,
+                    }),
+                }
+            );
 
-        navigate('/login');
+            const data = await response.json();
+
+            if (!response.ok) {
+                alert(data.message);
+                return;
+            }
+
+            alert("登録成功");
+            navigate('/login');
+        } catch (error) {
+            console.error(error);
+            alert("サーバー接続失敗");
+        }
     };
-
     return (
         <div className="register-container">
             <div className="register-card">
@@ -100,15 +128,15 @@ function Register() {
                 <form onSubmit={handleRegister}>
                     <label>ユーザーネーム</label><input type="text" placeholder="いとうたいが" value={uname} onChange={(e) => setUname(e.target.value)} />
                     {unameError && <p className="error-message">{unameError}</p>}
-                    
+
                     <label>メールアドレス</label><input type="email" placeholder="ito@example.com" value={email} onChange={(e) => setEmail(e.target.value)} />
                     {emailError && <p className="error-message">{emailError}</p>}
 
                     <label>パスワード</label><input type="password" placeholder="ito110" value={password} onChange={(e) => setPassword(e.target.value)} />
                     {passwordError && <p className="error-message">{passwordError}</p>}
 
-                    <label>パスワード（確認）</label><input type="password" placeholder="もう一度入力してください" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}/>
-                    {confirmPasswordError && ( <p className="error-message">{confirmPasswordError}</p>)}
+                    <label>パスワード（確認）</label><input type="password" placeholder="もう一度入力してください" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+                    {confirmPasswordError && (<p className="error-message">{confirmPasswordError}</p>)}
 
                     <label>最寄り駅</label><input type="text" placeholder="大崎" value={station} onChange={(e) => setStation(e.target.value)} />
                     {stationError && <p className="error-message">{stationError}</p>}
