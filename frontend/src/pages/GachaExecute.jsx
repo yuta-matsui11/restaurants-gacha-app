@@ -33,9 +33,9 @@ function GachaExecute() {
                 const formattedRestaurant = {
                     id: apiResponse.id,
                     name: apiResponse.name,
-                    genre: apiResponse.genre_name,
-                    station: searchConditions.station,
-                    image: apiResponse.imageUrl,
+                    genre_name: apiResponse.genre_name,
+                    nearest_station: searchConditions.station,
+                    imageUrl: apiResponse.imageUrl,
                     address: apiResponse.address,
                     hours: apiResponse.open,
                     closedDays: apiResponse.close,

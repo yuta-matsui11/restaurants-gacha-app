@@ -7,7 +7,7 @@ function Result() {
     const location = useLocation();
     const navigate = useNavigate();
 
-   
+
     const { restaurant, conditions } = location.state || {};
     if (!restaurant) {
         navigate('/home');
@@ -29,15 +29,15 @@ function Result() {
             <div className="result-card">
 
                 {/*店舗画像*/}
-                <img src={restaurant.image} alt={restaurant.name} className="result-image" />
+                <img src={restaurant.imageUrl} alt={restaurant.name} className="result-image" />
 
                 {/*ジャンルと最寄り駅*/}
                 <div className="result-info">
                     <div className="result-tags">
-                        <span className="genre-tag">{restaurant.genre}</span>
+                        <span className="genre-tag">{restaurant.genre_name}</span>
 
 
-                        <span className="station-tag">{restaurant.station}駅周辺</span>
+                        <span className="station-tag">{restaurant.nearest_station}駅周辺</span>
                     </div>
                     {/*店舗名*/}
                     <h3 className="restaurant-name">{restaurant.name}</h3>
