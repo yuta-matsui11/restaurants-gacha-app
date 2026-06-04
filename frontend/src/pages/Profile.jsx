@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "../styles/Profile.css";
 import { Link, useNavigate } from "react-router-dom";
 const GENRE_LIST = [
@@ -26,14 +26,48 @@ function Profile() {
 
     //実際はユーザーデータをバックエンドから取得します。
     const [userInfo, setUserInfo] = useState({
-        uname: "aiueo",
-        email: "aiueo@example.com",
-        password: "pass1234",
-        station: "大崎",
-        genre: "G005"
+        uname: "",
+        email: "",
+        password: "",
+        station: "",
+        genre: ""
     });
 
     const [editData, setEditData] = useState({ ...userInfo });
+
+    useEffect(() => {
+        const fetchProfile = async () => {
+            try {
+                const response = await fetch(
+                    "http://localhost:8080/api/users/me",
+                    {
+                        credentials: "include"
+                    }
+                );
+
+                if (!response.ok) {
+                    throw new Error("プロフィール取得失敗");
+                }
+
+                const data = await response.json();
+
+                const profile = {
+                    uname: data.user_name,
+                    email: data.email,
+                    station: data.nearest_station,
+                    genre: data.favorite_genre_id
+                };
+
+                setUserInfo(profile);
+                setEditData(profile);
+
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        fetchProfile();
+    }, []);
 
     const handleEditClick = () => {
         setEditData({ ...userInfo });
@@ -71,9 +105,9 @@ function Profile() {
 
     const navigate = useNavigate();
 
-    
+
     const handleContactClick = () => {
-        
+
         navigate('/contact');
     };
 
@@ -111,8 +145,8 @@ function Profile() {
                         <Link to="/terms" style={{ color: "#7755ff", marginRight: "15px", textDecoration: "underline" }}>利用規約</Link>
                         <Link to="/privacy" style={{ color: "#7755ff", textDecoration: "underline" }}>プライバシーポリシー</Link>
 
-                        <button 
-                            onClick={handleContactClick} 
+                        <button
+                            onClick={handleContactClick}
                             style={{
                                 marginTop: "10px",
                                 padding: "8px 20px",
@@ -169,5 +203,4 @@ function Profile() {
 }
 
 export default Profile;
-                    
-                
+

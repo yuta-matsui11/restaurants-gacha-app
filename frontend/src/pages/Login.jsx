@@ -13,7 +13,7 @@ function Login({ onLogin }) {
     const [emailError, setEmailError] = useState('');
     const [passwordError, setPasswordError] = useState('');
 
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
 
         let isValid = true;
@@ -33,8 +33,36 @@ function Login({ onLogin }) {
             return;
         }
 
-        onLogin();
-        navigate('/home');
+        try {
+            const response = await fetch(
+                "http://localhost:8080/api/auth/login",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    credentials: "include",
+                    body: JSON.stringify({
+                        email: email,
+                        password_hash: password
+                    })
+                }
+            );
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                alert(data.message);
+                return;
+            }
+
+            onLogin();
+            navigate('/home');
+
+        } catch (error) {
+            console.error(error);
+            alert("サーバー接続エラー");
+        }
     };
 
     return (
