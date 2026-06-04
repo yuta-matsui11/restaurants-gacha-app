@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
+
 @RestController
 @RequestMapping("/api/gacha")
 @RequiredArgsConstructor
@@ -29,6 +30,19 @@ public class GachaController {
             return ResponseEntity.status(500).body(Map.of("message", "エラーが発生しました"));
         }
     }
+
+    @GetMapping("/restaurant/{restaurantId}")
+    public ResponseEntity<?> getRestaurantdetail(@PathVariable("restaurantId") String restaurantId) {
+       try{
+        RestaurantInfo restaurant = gachaService.getRestDetailbyId(restaurantId);
+        return ResponseEntity.ok(restaurant);
+       }
+       catch (Exception e){
+        return ResponseEntity.status(404).body(Map.of("message", "店舗情報が見つかりませんでした"));
+       }
+    
+    }
+    
 
     static class GachaRequest {
         public Long user_id;

@@ -8,6 +8,8 @@ public class Dtos {
         public String user_name;
         public String email;
         public String password_hash;
+        public String nearest_station;
+        public String favorite_genre_id;
     }
 
     public static class UserResponse {

@@ -13,7 +13,7 @@ function Login({ onLogin }) {
     const [emailError, setEmailError] = useState('');
     const [passwordError, setPasswordError] = useState('');
 
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
 
         let isValid = true;
@@ -21,20 +21,48 @@ function Login({ onLogin }) {
         setEmailError('');
         setPasswordError('');
 
-        if(!email){
+        if (!email) {
             setEmailError('メールアドレスを入力してください')
-            isValid=false
+            isValid = false
         }
-        if(!password){
+        if (!password) {
             setPasswordError('パスワードを入力してください')
-            isValid=false
+            isValid = false
         }
         if (!isValid) {
             return;
         }
 
-        onLogin();
-        navigate('/home');
+        try {
+            const response = await fetch(
+                "http://localhost:8080/api/auth/login",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    credentials: "include",
+                    body: JSON.stringify({
+                        email: email,
+                        password_hash: password
+                    })
+                }
+            );
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                alert(data.message);
+                return;
+            }
+
+            onLogin();
+            navigate('/home');
+
+        } catch (error) {
+            console.error(error);
+            alert("サーバー接続エラー");
+        }
     };
 
     return (
@@ -64,7 +92,7 @@ function Login({ onLogin }) {
                     </button>
                 </form>
 
-                
+
             </div>
         </div>
     )

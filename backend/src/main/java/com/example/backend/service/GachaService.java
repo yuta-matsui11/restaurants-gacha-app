@@ -5,6 +5,8 @@ import com.example.backend.external.HeartRailsStationService;
 import com.example.backend.external.RestaurantInfo;
 import com.example.backend.external.RestaurantService;
 import com.example.backend.repository.GachaHistoryRepository;
+
+import jakarta.validation.constraints.Null;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -59,6 +61,13 @@ public class GachaService {
 
         log.info("Gacha executed: userId={}, station={}, restaurant={}", userId, stationName, selected.getName());
         return selected;
+    }
+
+    @Transactional
+    public RestaurantInfo getRestDetailbyId(String restaurantId){
+        RestaurantInfo restaurant = restaurantService.getDetail(restaurantId);
+
+        return restaurant;
     }
 
     public static class NoRestaurantException extends RuntimeException {

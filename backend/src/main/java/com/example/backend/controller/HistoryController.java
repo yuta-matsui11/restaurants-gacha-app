@@ -3,6 +3,7 @@ package com.example.backend.controller;
 //履歴のAPIエンドポイント
 
 import com.example.backend.entity.GachaHistory;
+import com.example.backend.external.RestaurantInfo;
 import com.example.backend.service.HistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

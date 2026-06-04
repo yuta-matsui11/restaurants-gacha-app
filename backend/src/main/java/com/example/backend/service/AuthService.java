@@ -24,6 +24,7 @@ public class AuthService {
 
     /**
      * API-003: ユーザー登録処理
+     * 
      * @param request 登録リクエストデータ (Dtos.UserRequest)
      * @return 登録されたユーザー情報
      * @throws IllegalArgumentException パスワード要件を満たさない場合、またはメールアドレスが既に存在する場合
@@ -32,9 +33,13 @@ public class AuthService {
     public User registerUser(Dtos.UserRequest request) {
         // 1. パスワードのバリデーションチェック（★新しく追加！）
         // 要件：8文字以上32文字以下、半角英字1字以上含む、半角数字1字以上含む
-        String passwordPattern = "^(?=.*[a-zA-Z])(?=.*\\d)[a-zA-Z\\d]{8,32}$";
-        if (request.password_hash == null || !request.password_hash.matches(passwordPattern)) {
-            throw new IllegalArgumentException("パスワードは8文字以上32文字以下で、半角英字と半角数字をそれぞれ1文字以上含めてください。");
+        String passwordPattern = "^(?=.*[a-zA-Z])(?=.*\\d).{8,32}$";
+
+        if (request.password_hash == null ||
+                !request.password_hash.matches(passwordPattern)) {
+
+            throw new IllegalArgumentException(
+                    "パスワードは8文字以上32文字以下で、半角英字と半角数字をそれぞれ1文字以上含めてください。");
         }
 
         // 2. メールアドレスの重複チェック
@@ -50,7 +55,10 @@ public class AuthService {
         user.setUser_name(request.user_name);
         user.setEmail(request.email);
         user.setPassword_hash(encodedPassword);
-        // created_at は User.java 側で @Builder.Default もしくは初期値として入るため、ここではセットしなくても自動で現在時刻になります
+        user.setNearest_station(request.nearest_station);
+        user.setFavorite_genre_id(request.favorite_genre_id);
+        // created_at は User.java 側で @Builder.Default
+        // もしくは初期値として入るため、ここではセットしなくても自動で現在時刻になります
 
         // 5. リポジトリ経由でDBへ保存
         return userRepository.save(user);
@@ -58,6 +66,7 @@ public class AuthService {
 
     /**
      * API-004: ログイン認証処理
+     * 
      * @param request ログインリクエストデータ (Dtos.LoginRequest)
      * @return 認証に成功したユーザー情報
      * @throws IllegalArgumentException メールアドレスが存在しない、またはパスワードが不一致の場合
