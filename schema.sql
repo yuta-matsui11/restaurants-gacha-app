@@ -48,3 +48,17 @@ CREATE TABLE favorites (
         FOREIGN KEY (user_id)
         REFERENCES users(user_id)
 );
+
+
+//↓新しいカラムを追加するためのALTER TABLE文打ってください 佐藤
+ALTER TABLE favorites
+ADD COLUMN station_name VARCHAR(100);
+
+ALTER TABLE favorites
+ADD COLUMN genre_name VARCHAR(100);
+
+ALTER TABLE favorites
+ADD COLUMN restaurant_name VARCHAR(200);
+
+ALTER TABLE favorites
+ADD COLUMN image_url VARCHAR(500);

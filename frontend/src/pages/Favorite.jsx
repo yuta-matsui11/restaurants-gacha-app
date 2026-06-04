@@ -1,32 +1,93 @@
 import "../styles/Favorite.css";
 
+import React, { useState, useEffect } from 'react';
+import axiosClient from '../api/axiosClient.jsx';
+import { useNavigate } from 'react-router-dom';
+
 function Favorite() {
-    const favorites = [
-        {
-            id: 1,
-            image: "https://picsum.photos/120/80?11",
-            name: "炭火焼き鳥 ○○",
-            genre: "居酒屋・焼き鳥",
-            area: "渋谷駅周辺",
-            rating: 4.2,
-        },
-        {
-            id: 2,
-            image: "https://picsum.photos/120/80?12",
-            name: "イタリアンバル ○○",
-            genre: "イタリアン",
-            area: "恵比寿駅周辺",
-            rating: 4.5,
-        },
-        {
-            id: 3,
-            image: "https://picsum.photos/120/80?13",
-            name: "海鮮居酒屋 ○○",
-            genre: "海鮮・寿司",
-            area: "新宿駅周辺",
-            rating: 4.1,
-        },
-    ];
+    const [favorites, setFavorites] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState('');
+    const navigate = useNavigate();
+    useEffect(() => {
+        const fetchFavorites = async () => {
+            try {
+                const userId = 1; // 仮のユーザーID
+                const response = await axiosClient.get(`/favorites?userId=${userId}`);
+                setFavorites(response.data);
+            } catch (err) {
+                console.error("お気に入りの取得に失敗しました", err);
+                setError("お気に入りデータを取得できませんでした。");
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        fetchFavorites();
+    }, []);
+    if (isLoading)
+        return <div>⏳ お気に入りを読み込み中...</div>;
+
+    if (error)
+        return <div>{error}</div>;
+
+    if (favorites.length === 0)
+        return <div>お気に入りはありません</div>;
+
+    const handleViewDetail = (restaurantId) => {
+        // 詳細ページへ遷移（例: /restaurant/123）
+        navigate(`/restaurant`, { state: { restaurantId } });
+    };
+    if (isLoading) {
+        return (<div className="favorite-container">読み込み中...</div>);
+    }
+
+    const handleRemoveFavorite = async (restaurantId) => {
+        try {
+            const userId = 1;
+
+            await axiosClient.delete(
+                `/favorites/${restaurantId}?userId=${userId}`
+            );
+
+            setFavorites(
+                favorites.filter(
+                    favorite => favorite.restaurantId !== restaurantId
+                )
+            );
+
+            alert("お気に入りを解除しました");
+        } catch (err) {
+            console.error("お気に入り解除失敗", err);
+            alert("お気に入り解除に失敗しました");
+        }
+    };
+    // const favorites = [
+    //     {
+    //         id: 1,
+    //         image: "https://picsum.photos/120/80?11",
+    //         name: "炭火焼き鳥 ○○",
+    //         genre: "居酒屋・焼き鳥",
+    //         area: "渋谷駅周辺",
+    //         rating: 4.2,
+    //     },
+    //     {
+    //         id: 2,
+    //         image: "https://picsum.photos/120/80?12",
+    //         name: "イタリアンバル ○○",
+    //         genre: "イタリアン",
+    //         area: "恵比寿駅周辺",
+    //         rating: 4.5,
+    //     },
+    //     {
+    //         id: 3,
+    //         image: "https://picsum.photos/120/80?13",
+    //         name: "海鮮居酒屋 ○○",
+    //         genre: "海鮮・寿司",
+    //         area: "新宿駅周辺",
+    //         rating: 4.1,
+    //     },
+    // ];
 
     return (
         <div className="favorite-container">
@@ -36,34 +97,27 @@ function Favorite() {
             </p>
 
             {favorites.map((favorite) => (
-                <div key={favorite.id} className="favorite-card">
+                <div key={favorite.favoriteId} className="favorite-card">
 
                     <img
-                        src={favorite.image}
-                        alt={favorite.name}
+                        src={favorite.imageUrl}
+                        alt={favorite.restaurantName}
                         className="favorite-image"
                     />
 
                     <div className="favorite-info">
-                        <h2>{favorite.name}</h2>
+                        <h2>{favorite.restaurantName}</h2>
 
                         <div className="info-row">
                             <span className="label">ジャンル：</span>
-                            <span>{favorite.genre}</span>
+                            <span>{favorite.genreName}</span>
                         </div>
 
                         <div className="info-row">
                             <span className="label">エリア：</span>
-                            <span>{favorite.area}</span>
+                            <span>{favorite.stationName}</span>
                         </div>
 
-                        <div className="info-row">
-                            <span className="label">評価：</span>
-                            <span>
-                                <span className="star">★</span>
-                                {favorite.rating}
-                            </span>
-                        </div>
                     </div>
 
                     <div className="favorite-buttons">
@@ -71,7 +125,7 @@ function Favorite() {
                             詳細を見る
                         </button>
 
-                        <button className="remove-btn">
+                        <button className="remove-btn" onClick={() => handleRemoveFavorite(favorite.restaurantId)}  >
                             お気に入り解除
                         </button>
                     </div>

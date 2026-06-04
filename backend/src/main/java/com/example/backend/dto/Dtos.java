@@ -32,4 +32,13 @@ public class Dtos {
         public String address;
     }
 
+    public static class FavoriteRequest {
+    public Long userId;
+    public String restaurantId;
+    public String stationName;
+    public String genreName;
+    public String restaurantName;
+    public String imageUrl;
+}
+
 }
