@@ -17,27 +17,27 @@ function RestaurantDetail() {
     const [detail, setDetail] = useState(passedRestaurant || null);
     const [isFavorite, setIsfavorite] = useState(false);
 
-    
-    useEffect(()=>{
+
+    useEffect(() => {
         //詳細をそのままもらっている場合は何もしません。
-        if(detail){
+        if (detail) {
             return;
         }
 
-        if(!passedRestaurantId){
+        if (!passedRestaurantId) {
             setError('店舗情報が見つかりません');
             setIsLoading(false);
             return;
         }
         const fetchDetail = async () => {
-            try{
+            try {
                 const response = await axiosClient.get(`/gacha/restaurant/${passedRestaurantId}`);
                 setDetail(response.data);
             }
-            catch(err){
+            catch (err) {
                 setError('店舗が見つかりません');
             }
-            finally{
+            finally {
                 setIsLoading(false);
             }
         };
