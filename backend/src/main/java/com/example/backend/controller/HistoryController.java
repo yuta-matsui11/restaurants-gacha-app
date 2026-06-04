@@ -38,8 +38,8 @@ public class HistoryController {
      * @param user_id 履歴を取得したいユーザーのID
      * @return ガチャ履歴のリスト (HTTP 200 OK)
      */
-    @GetMapping
-    public ResponseEntity<List<GachaHistory>> getHistoryByUserId(@PathVariable Long userId) {
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<GachaHistory>> getHistoryByUserId(@PathVariable("userId") Long userId) {
         List<GachaHistory> historyList = historyService.getHistoryByUserId(userId);
         return ResponseEntity.ok(historyList);
     }
