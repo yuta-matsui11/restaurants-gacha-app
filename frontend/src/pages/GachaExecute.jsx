@@ -1,5 +1,5 @@
 //ガチャの実行中表示を行う画面です
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef} from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axiosClient from '../api/axiosClient.jsx';
 import '../styles/GachaExecute.css';
@@ -10,12 +10,18 @@ function GachaExecute() {
 
     const searchConditions = location.state;
 
+    const isFetched = useRef(false);
+
     useEffect(() => {
         //直接アクセスの場合はホームに遷移させる
         if (!searchConditions) {
             navigate('/home');
             return;
         }
+        if(isFetched.current){
+            return;
+        }
+        isFetched.current=true;
 
         const executeGacha = async () => {
             try {
