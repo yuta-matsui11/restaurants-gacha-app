@@ -1,0 +1,39 @@
+.welcome-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: orange;
+    color: white;
+}
+.welcome-title {
+    font-size: 4rem;
+    margin-bottom: 60px;
+
+}
+.welcome-subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 60px;
+}
+.welcome-buttons {
+    display: flex;
+    gap: 60px;
+}
+.welcome-button {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 1.2rem;
+    transition: background-color 0.3s ease;
+}
+.welcome-button:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+.welcome-button {
+    margin: 10px;
+    padding: 18px 30px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    background-color: rgb(220, 224, 7);
+}
