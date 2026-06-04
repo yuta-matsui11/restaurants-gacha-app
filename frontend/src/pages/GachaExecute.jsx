@@ -40,13 +40,13 @@ function GachaExecute() {
                     hours: apiResponse.open,
                     closedDays: apiResponse.close,
                     budget: apiResponse.budget,
-                    phone: apiResponse.phone,
-                    url: apiResponse.urls
+                    phone: apiResponse.tel,
+                    url: apiResponse.url
                 };
 
                 await Promise.all([animationPromise]);
 
-                navigate('/result', {state: {restaurant: formattedRestaurant, conditions: searchConditions}});
+                navigate('/result', { state: { restaurant: formattedRestaurant, conditions: searchConditions } });
                 //ダミーデータを0.8秒で受信したことにします。
                 /*const apiPromise = new Promise((resolve) => {
                     setTimeout(() => {

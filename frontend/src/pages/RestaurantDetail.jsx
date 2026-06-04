@@ -12,8 +12,8 @@ function RestaurantDetail() {
 
     const [isFavorite, setIsfavorite] = useState(false);
 
-    if(!detail){
-        return <div style={{textAlign: 'center', marginTop: '50px'}}>店舗情報が見つかりません</div>
+    if (!detail) {
+        return <div style={{ textAlign: 'center', marginTop: '50px' }}>店舗情報が見つかりません</div>
     }
     /*useEffect(() => {
         if (!restaurantId) {
@@ -79,7 +79,7 @@ function RestaurantDetail() {
                 {/* 左：画像 */}
                 <div className="shop-image-area">
                     <img
-                        src={detail.image}
+                        src={detail.imageUrl}
                         alt={detail.name}
                         className="shop-main-image"
                     />
@@ -92,7 +92,7 @@ function RestaurantDetail() {
 
                     <div className="info-line">
                         <span className="label">ジャンル：</span>
-                        <span>{detail.genre}</span>
+                        <span>{detail.genre_name}</span>
                     </div>
 
                     <div className="info-line">
@@ -112,12 +112,12 @@ function RestaurantDetail() {
 
                     <div className="info-line">
                         <span className="label">電話番号：</span>
-                        <span>{detail.phone}</span>
+                        <span>{detail.tel ? detail.tel : '非公開'}</span>
                     </div>
 
                     <div className="info-line">
                         <span className="label">定休日：</span>
-                        <span>{detail.closedDays}</span>
+                        <span>{detail.close}</span>
                     </div>
 
                     <div className="info-line">
