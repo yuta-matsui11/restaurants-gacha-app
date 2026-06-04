@@ -32,6 +32,7 @@ function RestaurantDetail() {
         const fetchDetail = async () => {
             try{
                 const response = await axiosClient.get(`/gacha/restaurant/${passedRestaurantId}`);
+                
                 setDetail(response.data);
             }
             catch(err){
@@ -135,7 +136,7 @@ function RestaurantDetail() {
 
                     <div className="info-line">
                         <span className="label">営業時間：</span>
-                        <span>{detail.hours}</span>
+                        <span>{detail.open}</span>
                     </div>
 
                     <div className="info-line">
