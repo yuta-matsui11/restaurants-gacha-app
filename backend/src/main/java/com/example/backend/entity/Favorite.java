@@ -23,4 +23,16 @@ public class Favorite {
 
     @Column(name = "restaurant_id", nullable = false, length = 50)
     private String restaurantId;
+
+    @Column(name = "station_name", length = 100)
+    private String stationName;
+
+    @Column(name = "genre_name", length = 100)
+    private String genreName;
+
+    @Column(name = "restaurant_name", length = 200)
+    private String restaurantName;
+
+    @Column(name = "image_url", length = 500)
+    private String imageUrl;
 }

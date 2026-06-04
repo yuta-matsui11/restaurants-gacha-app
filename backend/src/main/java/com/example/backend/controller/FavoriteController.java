@@ -1,5 +1,6 @@
 package com.example.backend.controller;
 
+import com.example.backend.dto.Dtos;
 import com.example.backend.entity.Favorite;
 import com.example.backend.service.Favoriteservice;
 import lombok.RequiredArgsConstructor;
@@ -38,11 +39,15 @@ public class FavoriteController {
     // POST /api/favorites
     // リクエスト: { "userId": 1, "restaurantId": "J001234567" }
     @PostMapping
-    public ResponseEntity<?> add(@RequestBody FavoriteRequest req) {
+    public ResponseEntity<?> add(
+            @RequestBody Dtos.FavoriteRequest req) {
+
         try {
-            return ResponseEntity.ok(favoriteService.add(req.userId, req.restaurantId));
+            return ResponseEntity.ok(
+                    favoriteService.add(req));
         } catch (IllegalStateException e) {
-            return ResponseEntity.badRequest().body(Map.of("message", e.getMessage()));
+            return ResponseEntity.badRequest()
+                    .body(Map.of("message", e.getMessage()));
         }
     }
 
@@ -56,9 +61,14 @@ public class FavoriteController {
         return ResponseEntity.ok(Map.of("message", "お気に入りを解除しました"));
     }
 
-    static class FavoriteRequest {
-        public Long userId;
-        public String restaurantId;
-    }
+    // static class FavoriteRequest {
+    //     public Long userId;
+    //     public String restaurantId;
+
+    //     public String stationName;
+    //     public String genreName;
+    //     public String restaurantName;
+    //     public String imageUrl;
+    // }
 
 }
