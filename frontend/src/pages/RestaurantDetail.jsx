@@ -54,15 +54,15 @@ function RestaurantDetail() {
             return;
         }
         const fetchDetail = async () => {
-            try{
+            try {
                 const response = await axiosClient.get(`/gacha/restaurant/${passedRestaurantId}`);
                 
                 setDetail(response.data);
             }
-            catch(err){
+            catch (err) {
                 setError('店舗が見つかりません');
             }
-            finally{
+            finally {
                 setIsLoading(false);
             }
         };

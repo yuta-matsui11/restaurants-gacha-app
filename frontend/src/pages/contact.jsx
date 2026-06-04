@@ -1,79 +1,39 @@
-import {useState} from 'react';
 import "../styles/Contact.css";
+import { useNavigate } from 'react-router-dom';
 
 function Contact(){
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
-    });
-
-    const handleChange = (e) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value
-        });
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-         consle.log(formData);
-        alert('お問い合わせ内容が送信されました。');
-        setFormData({
-            name: '',
-            email: '',
-            subject: '',
-            message: ''
-        });
-    };
+  const navigate = useNavigate();
 
    return (
     <div className="contact-container">
       <h2>お問い合わせ</h2>
-      <p>ご意見・ご要望などお気軽にお問い合わせください。</p>
+      <p>ご意見・ご要望はお気軽にご連絡ください。</p>
 
-      <form onSubmit={handleSubmit} className="contact-form">
-        <label>お名前</label>
-        <input
-          type="text"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          required
-        />
+      <div className="contact-info">
+        <div className="contact-item">
+          <span className="contact-label">📞 電話番号</span>
+          <span className="contact-value">03-XXXX-XXXX</span>
+        </div>
+        <div className="contact-item">
+          <span className="contact-label">🕐 受付時間</span>
+          <span className="contact-value">平日 10:00 〜 18:00</span>
+        </div>
+        <div className="contact-item">
+          <span className="contact-label">📧 メール</span>
+          <span className="contact-value">support@example.com</span>
+        </div>
+      </div>
 
-        <label>メールアドレス</label>
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
+      <p className="contact-note">※ お問い合わせ内容によっては、回答までにお時間をいただく場合があります。</p>
 
-        <label>件名</label>
-        <input
-          type="text"
-          name="subject"
-          value={formData.subject}
-          onChange={handleChange}
-          required
-        />
-
-        <label>お問い合わせ内容</label>
-        <textarea
-          name="message"
-          rows="6"
-          value={formData.message}
-          onChange={handleChange}
-          required
-        />
-
-        <button type="submit" className="submit-btn">
-          送信する
+      <div style={{ marginTop: "40px", textAlign: "center" }}>
+        <button
+          onClick={() => navigate(-1)}
+          className="back-btn"
+        >
+          マイページに戻る
         </button>
-      </form>
+      </div>
     </div>
   );
 }

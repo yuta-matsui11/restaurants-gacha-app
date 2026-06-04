@@ -70,15 +70,11 @@
     height: 100px;
     margin-top: 20px;
 
-    animation: pulse 1.5s infinite;
-
-    background: linear-gradient(135deg,
-            #ff7a18,
-            #ff4d4f);
+    /* 通常はシンプル */
+    background: linear-gradient(135deg, #ff7a18, #ff4d4f);
 
     color: white;
-    text-shadow:
-        2px 2px 4px rgba(0,0,0,0.8);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
     border: none;
 
     padding: 14px;
@@ -88,35 +84,35 @@
     border-radius: 10px;
     cursor: pointer;
 
-    transition: 0.2s;
+    transition: 0.3s;
 }
 
+/* hoverで虹に変化 */
 .gacha-btn:hover {
-    background: linear-gradient(90deg,
-            #ff0000,
-            #ff7f00,
-            #ffff00,
-            #00ff00,
-            #0000ff,
-            #4b0082,
-            #9400d3);
-    background-size: 400% 400%;
+    background: linear-gradient(
+        90deg,
+        #ff0000,
+        #ff7f00,
+        #ffff00,
+        #00ff00,
+        #0000ff,
+        #4b0082,
+        #9400d3,
+        #ff0000
+    );
 
-    animation:
-        rainbow 0.8s linear infinite,
-        pulse 0.8s infinite;
+    background-size: 400% 400%;
+    animation: rainbow 3s linear infinite, pulse 1.5s infinite;
+
+    transform: translateY(-2px);
+    opacity: 0.95;
 }
 
 @keyframes rainbow {
-    from {
+    0% {
         background-position: 0% 50%;
     }
-    to {
+    100% {
         background-position: 100% 50%;
     }
-}
-
-.gacha-btn:hover {
-    transform: translateY(-2px);
-    opacity: 0.95;
 }
