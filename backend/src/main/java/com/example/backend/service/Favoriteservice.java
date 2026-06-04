@@ -1,5 +1,6 @@
 package com.example.backend.service;
 
+import com.example.backend.dto.Dtos;
 import com.example.backend.entity.Favorite;
 import com.example.backend.repository.FavoriteRepository;
 import lombok.RequiredArgsConstructor;
@@ -27,13 +28,17 @@ public class Favoriteservice {
 
     // お気に入り登録
     @Transactional
-    public Favorite add(Long userId, String restaurantId) {
-        if (favoriteRepository.existsByUserIdAndRestaurantId(userId, restaurantId)) {
+    public Favorite add(Dtos.FavoriteRequest req) {
+        if (favoriteRepository.existsByUserIdAndRestaurantId(req.userId, req.restaurantId)) {
             throw new IllegalStateException("既にお気に入りに登録されています");
         }
         return favoriteRepository.save(Favorite.builder()
-                .userId(userId)
-                .restaurantId(restaurantId)
+                .userId(req.userId)
+                .restaurantId(req.restaurantId)
+                .stationName(req.stationName)
+                .genreName(req.genreName)
+                .restaurantName(req.restaurantName)
+                .imageUrl(req.imageUrl)
                 .build());
     }
 
