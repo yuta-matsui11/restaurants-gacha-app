@@ -43,10 +43,10 @@ function GachaExecute() {
                     nearest_station: searchConditions.station,
                     imageUrl: apiResponse.imageUrl,
                     address: apiResponse.address,
-                    hours: apiResponse.open,
-                    closedDays: apiResponse.close,
+                    open: apiResponse.open,
+                    close: apiResponse.close,
                     budget: apiResponse.budget,
-                    phone: apiResponse.tel,
+                    tel: apiResponse.tel,
                     url: apiResponse.url
                 };
 
