@@ -2,19 +2,48 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import "../styles/RestaurantDetail.css";
+import axiosClient from '../api/axiosClient';
 
 function RestaurantDetail() {
     const location = useLocation();
     const navigate = useNavigate();
 
-    const detail = location.state?.restaurant;
+    //店舗情報がそのまま送られてくるか、店舗IDのみが送られてくるかで処理を分岐させるようにします。
+    const passedRestaurant = location.state?.restaurant;
+    const passedRestaurantId = location.state?.restaurantId;
 
-
+    const [isLoading, setIsLoading] = useState(!passedRestaurant);
+    const [error, setError] = useState('');
+    const [detail, setDetail] = useState(passedRestaurant || null);
     const [isFavorite, setIsfavorite] = useState(false);
 
-    if (!detail) {
-        return <div style={{ textAlign: 'center', marginTop: '50px' }}>店舗情報が見つかりません</div>
-    }
+    
+    useEffect(()=>{
+        //詳細をそのままもらっている場合は何もしません。
+        if(detail){
+            return;
+        }
+
+        if(!passedRestaurantId){
+            setError('店舗情報が見つかりません');
+            setIsLoading(false);
+            return;
+        }
+        const fetchDetail = async () => {
+            try{
+                const response = await axiosClient.get(`/gacha/restaurant/${passedRestaurantId}`);
+                setDetail(response.data);
+            }
+            catch(err){
+                setError('店舗が見つかりません');
+            }
+            finally{
+                setIsLoading(false);
+            }
+        };
+        fetchDetail();
+    }, [detail, passedRestaurantId]);
+
     /*useEffect(() => {
         if (!restaurantId) {
             setError('不正なアクセス');
@@ -70,6 +99,10 @@ function RestaurantDetail() {
             alert('お気に入り解除しました！');
         }
     };
+
+    if (isLoading) return <div style={{ textAlign: 'center', marginTop: '50px' }}>⏳ 店舗情報を読み込み中...</div>;
+    if (error) return <div style={{ textAlign: 'center', marginTop: '50px', color: 'red' }}>{error}</div>;
+    if (!detail) return null;
 
     return (
         <div className="shop-detail-container">
