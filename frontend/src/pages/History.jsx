@@ -105,7 +105,7 @@ function History() {
                     <img src={history.imageUrl || "https://via.placeholder.com/120x80?text=No+Image"} alt={history.restaurantName} className="history-image" />
 
                     <div className="history-info">
-                        <h2>{history.name}</h2>
+                        <h2>{history.restaurantName}</h2>
 
                         <div className="info-row">
                             <span className="label">ジャンル：</span>
