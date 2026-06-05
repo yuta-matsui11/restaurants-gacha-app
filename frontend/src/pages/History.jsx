@@ -111,7 +111,7 @@ function History() {
         try {
 
             await axiosClient.post("/favorites", {
-                userId: 1,
+                userId: userId,
                 restaurantId: history.restaurantId,
 
                 stationName: history.stationName,
