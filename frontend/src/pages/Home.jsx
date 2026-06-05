@@ -54,7 +54,7 @@ function Home() {
         if (!station) {
             setStationError('駅名を入力してください');
             isValid = false;
-        } 
+        }
 
         const searchConditions = {
             station: station,
@@ -71,12 +71,12 @@ function Home() {
                 <form onSubmit={handleGacha} className="gacha-form">
 
                     <label className="input-label">駅名 <span className="required">*</span></label>
-                    <input type="text" value={station} onChange={(e) => setStation(e.target.value)} placeholder="例：新宿"  className="station-input" />
+                    <input type="text" value={station} onChange={(e) => setStation(e.target.value)} placeholder="例：新宿" className="station-input" />
                     {stationError && <p className="error-message">{stationError}</p>}
 
-                    <label className="genre-title">ジャンル</label>
-                    <p className="genre-note">　※未選択の場合はすべてのジャンルから抽選されます</p>
-
+                        <label className="genre-title">ジャンル</label>
+                        <p className="genre-note">　※未選択の場合はすべてのジャンルから抽選されます</p>
+                    
                     <select
                         value={selectGenre}
                         onChange={(e) => setSelectGenre(e.target.value)}
