@@ -87,15 +87,33 @@ function Profile() {
         }));
     };
 
-    const handleSave = (e) => {
+    const handleSave = async(e) => {
         e.preventDefault();
 
-        //ここにデータベースの編集リクエストを送る
-        setUserInfo({ ...editData });
+        try {
+            // バックエンドへ更新リクエスト(PUT)を送信
+            const response = await fetch("http://localhost:8080/api/users/me", {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                credentials: "include", // セッションCookieを含めるために必須
+                body: JSON.stringify(editData), // フォームの入力内容をJSONに変換して送信
+            });
 
-        setIsediting(false);
+            if (!response.ok) {
+                throw new Error("プロフィールの更新に失敗しました");
+            }
 
-        alert('プロフィールを更新しました');
+            // 成功した場合、画面の表示用データを更新して編集モードを終了する
+            setUserInfo({ ...editData });
+            setIsediting(false);
+            alert('プロフィールを更新しました');
+
+        } catch (error) {
+            console.error("更新エラー:", error);
+            alert("プロフィールの更新に失敗しました。");
+        }
     };
 
     const getGenreName = (genreId) => {

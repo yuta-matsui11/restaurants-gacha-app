@@ -43,11 +43,37 @@ function History() {
     const [histories, setHistories] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState('');
+    const [userId, setUserId] = useState(0);
+
+
+    useEffect(() => {
+                const fetchProfile = async () => {
+                    try {
+                        const response = await fetch(
+                            "http://localhost:8080/api/users/me",
+                            {
+                                credentials: "include"
+                            }
+                        );
+        
+                        if (!response.ok) {
+                            throw new Error("プロフィール取得失敗");
+                        }
+        
+                        const data = await response.json();
+    
+                        setUserId(data.user_id);
+        
+                    } catch (error) {
+                        console.error(error);
+                    }
+                };
+                fetchProfile();
+        }, []);
 
     useEffect(() => {
         const fetchHistories = async () => {
             try {
-                const userId = 1;
 
                 const response = await axiosClient.get(`/history/user/${userId}`);
 
@@ -83,7 +109,6 @@ function History() {
 
     const handleFavorite = async (history) => {
         try {
-            const userId = 1;
 
             await axiosClient.post("/favorites", {
                 userId: 1,

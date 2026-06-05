@@ -9,10 +9,36 @@ function Favorite() {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState('');
     const navigate = useNavigate();
+    const [userId, setUserId] = useState(0);
+
+    useEffect(() => {
+                const fetchProfile = async () => {
+                    try {
+                        const response = await fetch(
+                            "http://localhost:8080/api/users/me",
+                            {
+                                credentials: "include"
+                            }
+                        );
+        
+                        if (!response.ok) {
+                            throw new Error("プロフィール取得失敗");
+                        }
+        
+                        const data = await response.json();
+    
+                        setUserId(data.user_id);
+        
+                    } catch (error) {
+                        console.error(error);
+                    }
+                };
+                fetchProfile();
+        }, []);
+
     useEffect(() => {
         const fetchFavorites = async () => {
             try {
-                const userId = 1; // 仮のユーザーID
                 const response = await axiosClient.get(`/favorites?userId=${userId}`);
                 setFavorites(response.data);
             } catch (err) {
@@ -44,8 +70,6 @@ function Favorite() {
 
     const handleRemoveFavorite = async (restaurantId) => {
         try {
-            const userId = 1;
-
             await axiosClient.delete(
                 `/favorites/${restaurantId}?userId=${userId}`
             );
