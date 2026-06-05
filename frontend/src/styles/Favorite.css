@@ -59,6 +59,8 @@ p.favorite-description {
 .label {
   font-weight: bold;
   color: #666;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .star {
