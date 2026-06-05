@@ -2,6 +2,7 @@
     max-width: 800px;
     margin: 40px auto;
     padding: 20px;
+    margin-bottom: 80px;
 }
 
 .result-title {
@@ -18,7 +19,7 @@
 
     overflow: hidden;
 
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 .result-image {
@@ -85,11 +86,9 @@
 }
 
 .retry-btn {
-    background: linear-gradient(
-        135deg,
-        #ff7a18,
-        #ff4d4f
-    );
+    background: linear-gradient(135deg,
+            #ff7a18,
+            #ff4d4f);
 
     color: white;
 
