@@ -16,7 +16,33 @@ function RestaurantDetail() {
     const [error, setError] = useState('');
     const [detail, setDetail] = useState(passedRestaurant || null);
     const [isFavorite, setIsfavorite] = useState(false);
+    const [userId, setUserId] = useState(0);
 
+
+    useEffect(() => {
+            const fetchProfile = async () => {
+                try {
+                    const response = await fetch(
+                        "http://localhost:8080/api/users/me",
+                        {
+                            credentials: "include"
+                        }
+                    );
+    
+                    if (!response.ok) {
+                        throw new Error("プロフィール取得失敗");
+                    }
+    
+                    const data = await response.json();
+
+                    setUserId(data.user_id);
+    
+                } catch (error) {
+                    console.error(error);
+                }
+            };
+            fetchProfile();
+    }, []);
     
     useEffect(()=>{
         const targetId = passedRestaurantId || passedRestaurant?.id || passedRestaurant?.restaurantId;
@@ -25,7 +51,6 @@ function RestaurantDetail() {
 
         const checkFavoriteStatus = async () => {
             try{
-                const userId=1;
 
                 const response = await axiosClient.get(`/favorites?userId=${userId}`);
 
@@ -127,7 +152,6 @@ function RestaurantDetail() {
 
     // お気に入り登録・解除の切り替え処理
     const handleFavorite = async (restaurantDetail) => {
-        const userId = 1; // 仮のユーザーID
         const targetRestaurantId = restaurantDetail.id || restaurantDetail.restaurantId;
 
         // すでにお気に入り済み（isFavorite が true）の場合は「解除処理」を実行

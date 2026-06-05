@@ -1,5 +1,5 @@
 //ガチャの実行中表示を行う画面です
-import React, { useEffect, useRef} from 'react';
+import React, { useState, useEffect, useRef} from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axiosClient from '../api/axiosClient.jsx';
 import '../styles/GachaExecute.css';
@@ -11,6 +11,33 @@ function GachaExecute() {
     const searchConditions = location.state;
 
     const isFetched = useRef(false);
+
+    const [userId, setUserId] = useState(0);
+
+    useEffect(() => {
+                const fetchProfile = async () => {
+                    try {
+                        const response = await fetch(
+                            "http://localhost:8080/api/users/me",
+                            {
+                                credentials: "include"
+                            }
+                        );
+        
+                        if (!response.ok) {
+                            throw new Error("プロフィール取得失敗");
+                        }
+        
+                        const data = await response.json();
+    
+                        setUserId(data.user_id);
+        
+                    } catch (error) {
+                        console.error(error);
+                    }
+                };
+                fetchProfile();
+        }, []);
 
     useEffect(() => {
         //直接アクセスの場合はホームに遷移させる
@@ -29,7 +56,7 @@ function GachaExecute() {
                 const animationPromise = new Promise((resolve) => setTimeout(resolve, 2500));
 
                 const requestData = {
-                    user_id: 1,
+                    user_id: userId,
                     station_name: searchConditions.station,
                     genre: searchConditions.genre
                 };
