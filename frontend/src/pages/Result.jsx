@@ -24,7 +24,6 @@ function Result() {
 
     return (
         <div className="result-container">
-            <h2 className="result-title">ガチャ結果</h2>
 
             <div className="result-card">
 
