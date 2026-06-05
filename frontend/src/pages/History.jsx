@@ -72,6 +72,7 @@ function History() {
         }, []);
 
     useEffect(() => {
+        if(userId===0)return;
         const fetchHistories = async () => {
             try {
 
@@ -89,7 +90,7 @@ function History() {
             }
         };
         fetchHistories();
-    }, []);
+    }, [userId]);
 
     const formatDateTime = (dateTimeString) => {
         if (!dateTimeString) return { date: '', time: '' };
@@ -111,7 +112,7 @@ function History() {
         try {
 
             await axiosClient.post("/favorites", {
-                userId: 1,
+                userId: userId,
                 restaurantId: history.restaurantId,
 
                 stationName: history.stationName,

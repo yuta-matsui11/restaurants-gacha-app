@@ -45,6 +45,7 @@ function RestaurantDetail() {
     }, []);
     
     useEffect(()=>{
+        if(userId === 0)return;
         const targetId = passedRestaurantId || passedRestaurant?.id || passedRestaurant?.restaurantId;
 
         if(!targetId) return;
@@ -63,7 +64,7 @@ function RestaurantDetail() {
             }
         };
         checkFavoriteStatus();
-    },[]);
+    },[userId]);
 
     useEffect(() => {
 
