@@ -1,5 +1,8 @@
 .login-container {
-    min-height: 80vh;
+    background-image: url('../assets/gohan.avif');
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -10,16 +13,18 @@
     background: white;
     padding: 40px;
     border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-
+    box-shadow:0 0 30px rgba(255,255,255,0.2),
+                0 4px 32px rgba(0,0,0,0.1);
     display: flex;
     flex-direction: column;
+
 }
 
 .login-card h2 {
     text-align: center;
     margin-bottom: 30px;
-    color: #FF3B1F;
+    color: #5c3b1e;
+    font-family: "Georgia", serif;
 }
 
 .login-card form {
@@ -30,6 +35,7 @@
 .login-card label {
     margin-bottom: 6px;
     font-weight: bold;
+    font-family: "Georgia", serif;
     color: #555;
 }
 
@@ -39,19 +45,20 @@
 
     border: 1px solid #ccc;
     border-radius: 6px;
+    font-family: "Georgia", serif;
 
     font-size: 16px;
 }
 
 .login-card input:focus {
     outline: none;
-    border-color: #FF3B1F;
+    border-color: #5c3b1e;
 }
 
 .login-btn {
-    background: #FF3B1F;
+    background: #5c3b1e;
     color: white;
-
+    margin-top: 30px;
     border: none;
     border-radius: 6px;
 
@@ -59,24 +66,26 @@
     cursor: pointer;
     font-size: 16px;
     font-weight: bold;
+    font-family: "Georgia", serif;
 }
 
 .login-btn:hover {
-    background: #f07a05;
+    background: #4a2c1e;
 }
 
 .register-btn {
     margin-top: 15px;
 
     background: white;
-    color: #FF3B1F;
+    color: #5c3b1e;
 
-    border: 1px solid #FF3B1F;
+    border: 1px solid #5c3b1e;
     border-radius: 6px;
 
     padding: 12px;
     cursor: pointer;
     font-size: 16px;
+    font-family: "Georgia", serif;
 }
 
 .register-btn:hover {
@@ -84,8 +93,9 @@
 }
 
 .error-message {
-    color: red;
+    color: #ff4d4f;
     font-size: 14px;
+    font-family: "Georgia", serif;
     margin-top: 4px;
     margin-bottom: 8px;
 }
