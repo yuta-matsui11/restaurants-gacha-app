@@ -3,15 +3,17 @@
     bottom: 0;
 
     width: 100%;
-    height: 70px;
+    height: 75px;
 
-    background: #f07706;
+    background: #e8dece;
 
     display: flex;
     justify-content: space-around;
     align-items: center;
 
-    box-shadow: 0 -3px 10px rgba(0,0,0,0.15);
+    border-top: 1px solid #d8c8b5;
+
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
 
     z-index: 1000;
 }
@@ -25,20 +27,25 @@
 
     text-decoration: none;
 
-    color: white;
+    color: #8a6742;
 
-    transition: 0.2s;
+    transition: all 0.2s ease;
 }
 
 .footer-item span {
+    font-family: "Georgia", serif;
     font-size: 24px;
 }
 
 .footer-item p {
-    margin: 2px 0 0;
+    font-family: "Georgia", serif;
+    margin-top: 4px;
     font-size: 12px;
+    font-weight: 500;
 }
 
 .footer-item:hover {
-    transform: translateY(-3px);
+    font-family: "Georgia", serif;
+    color: #5c3b1e;
+    transform: translateY(-2px);
 }
