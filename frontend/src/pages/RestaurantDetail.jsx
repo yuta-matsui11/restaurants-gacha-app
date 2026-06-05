@@ -195,6 +195,27 @@ function RestaurantDetail() {
         }
     };
 
+    //店舗の地図を開く機能
+    const handleOpenMap = () => {
+        if (!detail.address) {
+            alert("住所情報がありません");
+            return;
+        }
+
+        // 店舗の「住所」と「店舗名」を組み合わせて検索キーワードにする（精度を上げるため）
+        const searchQuery = `${detail.address} ${detail.name}`;
+        
+        // URLエンコード（日本語をURLで使える形式に変換）
+        const encodedQuery = encodeURIComponent(searchQuery);
+        
+        // Googleマップの検索URLを作成
+        const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodedQuery}`;
+        
+        // 新しいタブで開く
+        window.open(googleMapsUrl, '_blank', 'noopener,noreferrer');
+    };
+
+
 
     if (isLoading) return <div style={{ textAlign: 'center', marginTop: '50px' }}>⏳ 店舗情報を読み込み中...</div>;
     if (error) return <div style={{ textAlign: 'center', marginTop: '50px', color: 'red' }}>{error}</div>;
@@ -272,11 +293,11 @@ function RestaurantDetail() {
             {/* ボタン */}
             <div className="shop-buttons">
 
-                <button className="map-btn">
+                <button className="map-btn" onClick={() => handleOpenMap()}>
                     📍 地図で見る
                 </button>
 
-                <button className="site-btn">
+                <button className="site-btn" onClick={() => window.open(detail.url, '_blank', 'noopener,noreferrer')}>
                     🍴 ホットペッパーで見る
                 </button>
 
