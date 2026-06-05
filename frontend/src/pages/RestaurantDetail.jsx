@@ -286,9 +286,9 @@ function RestaurantDetail() {
             </div>
 
             {/* 説明文 */}
-            <div className="shop-description">
+            {/*<div className="shop-description">
                 {detail.description}
-            </div>
+            </div>*/}
 
             {/* ボタン */}
             <div className="shop-buttons">

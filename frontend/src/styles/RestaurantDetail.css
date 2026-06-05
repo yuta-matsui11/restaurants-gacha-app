@@ -1,7 +1,7 @@
 .shop-detail-container {
     max-width: 1000px;
-    margin: 30px auto;
-    padding: 20px;
+    margin: 5px auto;
+    padding: 0px;
 }
 
 .shop-detail-card {
@@ -11,7 +11,7 @@
     background: white;
     border-radius: 12px;
 
-    padding: 20px;
+    padding: 10px;
 
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
@@ -60,7 +60,7 @@
 }
 
 .shop-description {
-    margin-top: 20px;
+    margin-top: 0px;
 
     padding: 15px;
 
@@ -73,10 +73,8 @@
 
 .shop-buttons {
     display: flex;
-
     gap: 15px;
-
-    margin-top: 20px;
+    margin-top: 10px;
 
     margin-bottom: 100px;
 }
