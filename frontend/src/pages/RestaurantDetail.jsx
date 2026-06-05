@@ -147,10 +147,8 @@ function RestaurantDetail() {
             return;
         }
 
-        // 店舗の「住所」と「店舗名」を組み合わせて検索キーワードにする（精度を上げるため）
         const searchQuery = `${detail.address} ${detail.name}`;
 
-        // URLエンコード（日本語をURLで使える形式に変換）
         const encodedQuery = encodeURIComponent(searchQuery);
 
         // Googleマップの検索URLを作成
