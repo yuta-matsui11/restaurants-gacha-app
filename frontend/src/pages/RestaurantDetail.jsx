@@ -19,26 +19,50 @@ function RestaurantDetail() {
 
     
     useEffect(()=>{
-        //詳細をそのままもらっている場合は何もしません。
+        const targetId = passedRestaurantId || passedRestaurant?.id || passedRestaurant?.restaurantId;
+
+        if(!targetId) return;
+
+        const checkFavoriteStatus = async () => {
+            try{
+                const userId=1;
+
+                const response = await axiosClient.get(`/favorites?userId=${userId}`);
+
+                const isAlreadyFavorited = response.data.some((fav) => fav.restaurantId === targetId);
+
+                setIsfavorite(isAlreadyFavorited);
+            }
+            catch(err){
+                console.error("お気に入り状態の確認に失敗しました", err);
+            }
+        };
+        checkFavoriteStatus();
+    },[]);
+
+    useEffect(() => {
+
+        //店舗情報がそのまま送られてきた場合は何もしない
         if(detail){
             return;
         }
 
+        //店舗IDから店舗詳細を取得します。
         if(!passedRestaurantId){
             setError('店舗情報が見つかりません');
             setIsLoading(false);
             return;
         }
         const fetchDetail = async () => {
-            try{
+            try {
                 const response = await axiosClient.get(`/gacha/restaurant/${passedRestaurantId}`);
                 
                 setDetail(response.data);
             }
-            catch(err){
+            catch (err) {
                 setError('店舗が見つかりません');
             }
-            finally{
+            finally {
                 setIsLoading(false);
             }
         };
@@ -89,7 +113,7 @@ function RestaurantDetail() {
         fetchDetail();
     }, [restaurantId]);*/
 
-    const handleFevorite = () => {
+    /*const handleFevorite = () => {
         //ここにデータベース登録とかの処理を行うものとする
         setIsfavorite(!isFavorite);
 
@@ -99,7 +123,53 @@ function RestaurantDetail() {
         else {
             alert('お気に入り解除しました！');
         }
+    };*/
+
+    // お気に入り登録・解除の切り替え処理
+    const handleFavorite = async (restaurantDetail) => {
+        const userId = 1; // 仮のユーザーID
+        const targetRestaurantId = restaurantDetail.id || restaurantDetail.restaurantId;
+
+        // すでにお気に入り済み（isFavorite が true）の場合は「解除処理」を実行
+        if (isFavorite) {
+            try {
+                // Favorite.jsx と同じ DELETE リクエスト
+                await axiosClient.delete(`/favorites/${targetRestaurantId}?userId=${userId}`);
+
+                setIsfavorite(false); // ハートを「♡」に戻す
+                alert("お気に入りを解除しました");
+            } catch (err) {
+                console.error("お気に入り解除エラー:", err);
+                alert("お気に入り解除に失敗しました。");
+            }
+        } 
+        // まだお気に入りしていない（isFavorite が false）場合は「登録処理」を実行
+        else {
+            try {
+                const requestData = {
+                    userId: userId,
+                    restaurantId: targetRestaurantId,
+                    stationName: restaurantDetail.nearest_station || "未設定",
+                    genreName: restaurantDetail.genre_name || restaurantDetail.genre || "未取得",
+                    restaurantName: restaurantDetail.name || restaurantDetail.restaurantName,
+                    imageUrl: restaurantDetail.imageUrl || restaurantDetail.image || "https://via.placeholder.com/300x200"
+                };
+                await axiosClient.post("/favorites", requestData);
+
+                setIsfavorite(true); // ハートを「♥」にする
+                alert("お気に入り登録しました");
+            } catch (err) {
+                console.error("お気に入り登録エラー:", err);
+                if (err.response && err.response.status === 409) {
+                    alert("この店舗はすでにお気に入り登録されています。");
+                    setIsfavorite(true); // 実際は登録されていたのでハートを赤くしておく
+                } else {
+                    alert("お気に入り登録に失敗しました。");
+                }
+            }
+        }
     };
+
 
     if (isLoading) return <div style={{ textAlign: 'center', marginTop: '50px' }}>⏳ 店舗情報を読み込み中...</div>;
     if (error) return <div style={{ textAlign: 'center', marginTop: '50px', color: 'red' }}>{error}</div>;
@@ -187,7 +257,7 @@ function RestaurantDetail() {
 
                 <button
                     className="favorite-btn"
-                    onClick={handleFevorite}
+                    onClick={() => handleFavorite(detail)}
                 >
                     {isFavorite ? "♥ お気に入り済み" : "♡ お気に入り追加"}
                 </button>

@@ -14,7 +14,7 @@ import RestaurantDetail from './pages/RestaurantDetail.jsx';
 import Profile from './pages/Profile.jsx'
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
-import Contact from "./pages/Contact";
+import Contact from "./pages/Contact.jsx";
 import Welcome from './pages/Welcome.jsx';
 function App() {
   //ログイン状態であるかどうか
