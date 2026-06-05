@@ -1,34 +1,45 @@
 header {
-  height: 70px;
-  background:#f07706;
+  height: 72px;
+
+  background: #e8dece;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
 
-  padding: 0 30px;
+  padding: 0 40px;
 
-  color: white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  box-shadow:
+    0 2px 12px rgba(0, 0, 0, 0.08);
 }
 
 header h1 {
-  margin: 0;
-  font-size: 24px;
-}
+  font-family: "Georgia", serif;
 
-header button {
-  background: white;
-  color: #FF6B35;
-
-  border: none;
-  border-radius: 6px;
-
-  padding: 8px 16px;
-  cursor: pointer;
-
+  font-size: 30px;
   font-weight: bold;
+
+  color: #5c3b1e;
+
+  letter-spacing: 2px;
 }
 
-header button:hover {
-  opacity: 0.8;
+.header-btn {
+  background: #faf8f4;
+
+  color: #6b4a2c;
+
+  border: 1px solid #a48764;
+
+  border-radius: 12px;
+
+  padding: 10px 24px;
+
+  font-weight: 600;
+
+  transition: 0.2s;
+}
+
+.header-btn:hover {
+  background: #f3ece3;
 }
