@@ -44,6 +44,7 @@ function History() {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState('');
     const [userId, setUserId] = useState(0);
+    const [favoriteIds, setFavoriteIds] = useState([]);
 
 
     useEffect(() => {
@@ -72,16 +73,22 @@ function History() {
     }, []);
 
     useEffect(() => {
-        if (userId === 0) return;
-        const fetchHistories = async () => {
+        if(userId===0)return;
+        const fetchData = async () => {
             try {
 
-                const response = await axiosClient.get(`/history/user/${userId}`);
+                //履歴とお気に入りの取得
+                const historyRes = await axiosClient.get(`/history/user/${userId}`);
+                // 2. 履歴の取得が終わったら、次にお気に入りを取得する
+                const favoriteRes = await axiosClient.get(`/favorites?userId=${userId}`);
 
-                const sortedData = response.data.sort((a, b) => {
+                const sortedData = historyRes.data.sort((a, b) => {
                     return new Date(b.gachaAt) - new Date(a.gachaAt);
                 });
                 setHistories(sortedData);
+
+                const favIds = favoriteRes.data.map(fav => fav.restaurantId);
+                setFavoriteIds(favIds);
             } catch (err) {
                 console.error("履歴の取得に失敗しました", err);
                 setError("履歴データを取得できませんでした。");
@@ -89,7 +96,7 @@ function History() {
                 setIsLoading(false);
             }
         };
-        fetchHistories();
+        fetchData();
     }, [userId]);
 
     const formatDateTime = (dateTimeString) => {
@@ -105,28 +112,56 @@ function History() {
         navigate('/restaurantdetail', { state: { restaurantId } })
     };
 
+    
+    const handleFavoriteToggle = async (history) => {
+
+        const targetRestaurantId = history.restaurantId;
+        const isFav = favoriteIds.includes(targetRestaurantId);
+
+        //もしお気に入り済みの店舗なら削除処理を行います。
+        if(isFav){
+            try{
+                await axiosClient.delete(`/favorites/${targetRestaurantId}?userId=${userId}`);
+
+                setFavoriteIds((prev) => prev.filter((id) => id !== targetRestaurantId));
+                alert("お気に入りを解除しました");
+            }
+            catch(err){
+                console.error("お気に入り解除エラー", err);
+                alert("お気に入り解除に失敗しました");
+            }
+        }
+        //お気に入り登録済みではないなら登録処理を行います
+        else{
+            try{
+                await axiosClient.post("/favorites", {
+                    userId: userId,
+                    restaurantId: targetRestaurantId,
+                    stationName: history.stationName || "未設定",
+                    genreName: history.genreName || "未取得",
+                    restaurantName: history.restaurantName,
+                    imageUrl: history.imageUrl || "https://via.placeholder.com/120x80?text=No+Image"
+                });
+
+                setFavoriteIds((prev) => [...prev, targetRestaurantId]);
+                alert("お気に入り登録しました");
+            }
+            catch(err){
+                console.error("お気に入り登録エラー", err);
+                if(err.response && err. response.status === 409){
+                    alert("すでにお気に入り登録されています。");
+                    setFavoriteIds((prev) => [...prev, targetRestaurantId]);
+                }
+                else{
+                    alert("お気に入り登録に失敗しました")
+                }
+            }
+        }
+    };
+
     if (isLoading) return <div style={{ textAlign: 'center', marginTop: '50px' }}>⏳ 履歴を読み込み中...</div>;
     if (error) return <div style={{ textAlign: 'center', marginTop: '50px', color: '#dc3545' }}>{error}</div>;
 
-    const handleFavorite = async (history) => {
-        try {
-
-            await axiosClient.post("/favorites", {
-                userId: userId,
-                restaurantId: history.restaurantId,
-
-                stationName: history.stationName,
-                genreName: history.genreName,
-                restaurantName: history.restaurantName,
-                imageUrl: history.imageUrl,
-            });
-
-            alert("お気に入り登録しました");
-        } catch (err) {
-            console.error(err);
-            alert("お気に入り登録に失敗しました");
-        }
-    };
 
     return (
         <div className="history-container">
@@ -167,7 +202,7 @@ function History() {
 
                             <div className="history-buttons">
                                 <button className="detail-btn" onClick={() => handleViewDetail(history.restaurantId)}>詳細を見る</button>
-                                <button className="favorite-btn" onClick={() => handleFavorite(history)}>お気に入り登録</button>
+                                <button className="favorite-btn" onClick={() => handleFavoriteToggle(history)}>{favoriteIds.includes(history.restaurantId) ? "♥お気に入り解除" : "♡お気に入り登録"}</button>
                             </div>
                         </div>
                     )
