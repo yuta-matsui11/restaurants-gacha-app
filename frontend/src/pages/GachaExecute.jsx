@@ -40,6 +40,7 @@ function GachaExecute() {
         }, []);
 
     useEffect(() => {
+        if(userId===0)return;
         //直接アクセスの場合はホームに遷移させる
         if (!searchConditions) {
             navigate('/home');
@@ -100,7 +101,7 @@ function GachaExecute() {
             }
         };
         executeGacha();
-    }, [location, navigate, searchConditions]);
+    }, [userId, location, navigate, searchConditions]);
 
     return (
         <div className="loading-container">

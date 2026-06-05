@@ -37,6 +37,7 @@ function Favorite() {
         }, []);
 
     useEffect(() => {
+        if(userId === 0)return;
         const fetchFavorites = async () => {
             try {
                 const response = await axiosClient.get(`/favorites?userId=${userId}`);
@@ -50,7 +51,8 @@ function Favorite() {
         };
 
         fetchFavorites();
-    }, []);
+    }, [userId]);
+
     if (isLoading)
         return <div>⏳ お気に入りを読み込み中...</div>;
 
