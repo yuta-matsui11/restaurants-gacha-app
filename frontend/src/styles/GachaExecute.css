@@ -9,6 +9,7 @@
     background: #fff;
     position: relative;
     overflow: hidden;
+    background-color: #f7f5f0;
 }
 
 .loading-container::before {
