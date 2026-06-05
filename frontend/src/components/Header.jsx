@@ -15,7 +15,7 @@ function Header({ isAuthenticated, onLogout }) {
 
     return (
         <header className="header">
-            <h1>🍽️ 一期一会グルメガチャ</h1>
+            <h1>🍽️ イチゴグルメ</h1>
 
             <div>
                 {location.pathname === '/login' && (
