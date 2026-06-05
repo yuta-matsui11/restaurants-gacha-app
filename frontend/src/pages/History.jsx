@@ -47,32 +47,32 @@ function History() {
 
 
     useEffect(() => {
-                const fetchProfile = async () => {
-                    try {
-                        const response = await fetch(
-                            "http://localhost:8080/api/users/me",
-                            {
-                                credentials: "include"
-                            }
-                        );
-        
-                        if (!response.ok) {
-                            throw new Error("プロフィール取得失敗");
-                        }
-        
-                        const data = await response.json();
-    
-                        setUserId(data.user_id);
-        
-                    } catch (error) {
-                        console.error(error);
+        const fetchProfile = async () => {
+            try {
+                const response = await fetch(
+                    "http://localhost:8080/api/users/me",
+                    {
+                        credentials: "include"
                     }
-                };
-                fetchProfile();
-        }, []);
+                );
+
+                if (!response.ok) {
+                    throw new Error("プロフィール取得失敗");
+                }
+
+                const data = await response.json();
+
+                setUserId(data.user_id);
+
+            } catch (error) {
+                console.error(error);
+            }
+        };
+        fetchProfile();
+    }, []);
 
     useEffect(() => {
-        if(userId===0)return;
+        if (userId === 0) return;
         const fetchHistories = async () => {
             try {
 
@@ -130,7 +130,7 @@ function History() {
 
     return (
         <div className="history-container">
-            <h1>ガチャ履歴</h1>
+            <h1 className="history-title">ガチャ履歴</h1>
             <p className="history-description">これまでにガチャで出会ったお店の一覧です</p>
 
             {histories.length === 0 ? (

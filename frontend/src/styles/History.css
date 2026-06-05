@@ -4,12 +4,17 @@
   box-sizing: border-box;
 }
 
+.history-title {
+  font-size: 24px;
+  /* お好みで調整 */
+  margin-bottom: 10px;
+}
 
 .history-description {
   /* color: #666;
   margin-top: 30px;
   margin-bottom: 30px; */
-   display: block;
+  display: block;
   color: #666;
   margin: 30px 0;
 }
@@ -48,14 +53,14 @@
 }
 
 .info-row {
-    display: flex;
-    align-items: center;
-    gap: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .label {
-    font-weight: bold;
-    color: #666;
+  font-weight: bold;
+  color: #666;
 }
 
 .star {
