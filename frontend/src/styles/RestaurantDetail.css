@@ -1,8 +1,15 @@
+.big-container {
+     background-color: #f7f5f0;
+}
+
+
+
+
+
 .shop-detail-container {
     max-width: 1000px;
     margin: 5px auto;
     padding: 0px;
-    background-color: #f7f5f0;
 }
 
 .shop-detail-card {
