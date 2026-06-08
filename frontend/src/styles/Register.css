@@ -23,7 +23,7 @@
     text-align: center;
     color: #5c3b1e;
     margin-bottom: 15px;
-    font-family: "Georgia", serif;
+    font-family:"Fredoka One";
 }
 
 .register-card form {
@@ -38,13 +38,13 @@
     margin-bottom: 6px;
     font-weight: bold;
     color: #555;
-    font-family: "Georgia", serif;
+    font-family:"Fredoka One";
 }
 
 .register-card input,
 .register-card select {
     padding: 10px;
-    font-family: "Georgia", serif;
+    font-family:"Fredoka One";
     margin-bottom: 4px;
 
     border: 1px solid #ccc;
@@ -72,7 +72,7 @@
 
     font-size: 16px;
     font-weight: bold;
-    font-family: "Georgia", serif;
+    font-family:"Fredoka One";
     cursor: pointer;
 }
 /* 登録ボタンのホバー効果 */
