@@ -7,6 +7,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import jakarta.servlet.http.HttpSession;
+import org.springframework.http.HttpStatus;
+
 import java.util.List;
 import java.util.Map;
 
@@ -21,18 +24,51 @@ public class FavoriteController {
     // お気に入り一覧取得
     // GET /api/favorites?userId=1
     @GetMapping
-    public ResponseEntity<List<Favorite>> getList(@RequestParam Long userId) {
-        return ResponseEntity.ok(favoriteService.getList(userId));
+    public ResponseEntity<?> getList(
+            @RequestParam Long userId,
+            HttpSession session) {
+
+        Long loginUserId = (Long) session.getAttribute("LOGIN_USER_ID");
+
+        if (loginUserId == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body("ログインしてください");
+        }
+
+        if (!loginUserId.equals(userId)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                    .body("アクセス権限がありません");
+        }
+
+        return ResponseEntity.ok(
+                favoriteService.getList(userId));
     }
 
     // 登録済み確認
     // GET /api/favorites/check?userId=1&restaurantId=J001234567
     @GetMapping("/check")
-    public ResponseEntity<Map<String, Boolean>> check(
+    public ResponseEntity<?> check(
             @RequestParam Long userId,
-            @RequestParam String restaurantId) {
-        return ResponseEntity.ok(Map.of("registered",
-                favoriteService.isRegistered(userId, restaurantId)));
+            @RequestParam String restaurantId,
+            HttpSession session) {
+
+        Long loginUserId = (Long) session.getAttribute("LOGIN_USER_ID");
+
+        if (loginUserId == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body("ログインしてください");
+        }
+
+        if (!loginUserId.equals(userId)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                    .body("アクセス権限がありません");
+        }
+
+        return ResponseEntity.ok(
+                Map.of("registered",
+                        favoriteService.isRegistered(
+                                userId,
+                                restaurantId)));
     }
 
     // お気に入り登録
@@ -40,7 +76,20 @@ public class FavoriteController {
     // リクエスト: { "userId": 1, "restaurantId": "J001234567" }
     @PostMapping
     public ResponseEntity<?> add(
-            @RequestBody Dtos.FavoriteRequest req) {
+            @RequestBody Dtos.FavoriteRequest req,
+            HttpSession session) {
+
+        Long loginUserId = (Long) session.getAttribute("LOGIN_USER_ID");
+
+        if (loginUserId == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body("ログインしてください");
+        }
+
+        if (!loginUserId.equals(req.userId)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                    .body("アクセス権限がありません");
+        }
 
         try {
             return ResponseEntity.ok(
@@ -56,19 +105,34 @@ public class FavoriteController {
     @DeleteMapping("/{restaurantId}")
     public ResponseEntity<?> remove(
             @PathVariable String restaurantId,
-            @RequestParam Long userId) {
+            @RequestParam Long userId,
+            HttpSession session) {
+
+        Long loginUserId = (Long) session.getAttribute("LOGIN_USER_ID");
+
+        if (loginUserId == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body("ログインしてください");
+        }
+
+        if (!loginUserId.equals(userId)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                    .body("アクセス権限がありません");
+        }
+
         favoriteService.remove(userId, restaurantId);
-        return ResponseEntity.ok(Map.of("message", "お気に入りを解除しました"));
+
+        return ResponseEntity.ok(
+                Map.of("message", "お気に入りを解除しました"));
     }
-
     // static class FavoriteRequest {
-    //     public Long userId;
-    //     public String restaurantId;
+    // public Long userId;
+    // public String restaurantId;
 
-    //     public String stationName;
-    //     public String genreName;
-    //     public String restaurantName;
-    //     public String imageUrl;
+    // public String stationName;
+    // public String genreName;
+    // public String restaurantName;
+    // public String imageUrl;
     // }
 
 }

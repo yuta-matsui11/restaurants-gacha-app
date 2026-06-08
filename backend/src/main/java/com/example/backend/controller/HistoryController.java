@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import jakarta.servlet.http.HttpSession;
+import org.springframework.http.HttpStatus;
+
 import java.util.List;
 
 /**
@@ -40,8 +43,27 @@ public class HistoryController {
      * @return ガチャ履歴のリスト (HTTP 200 OK)
      */
     @GetMapping("/user/{userId}")
-    public ResponseEntity<List<GachaHistory>> getHistoryByUserId(@PathVariable("userId") Long userId) {
-        List<GachaHistory> historyList = historyService.getHistoryByUserId(userId);
-        return ResponseEntity.ok(historyList);
+    public ResponseEntity<?> getHistoryByUserId(
+        @PathVariable("userId") Long userId,
+        HttpSession session) {
+
+    Long loginUserId = (Long) session.getAttribute("LOGIN_USER_ID");
+
+    // 未ログイン
+    if (loginUserId == null) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                .body("ログインしてください");
+    }
+
+    // 他人の履歴取得を禁止
+    if (!loginUserId.equals(userId)) {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                .body("アクセス権限がありません");
+    }
+
+    List<GachaHistory> historyList =
+            historyService.getHistoryByUserId(userId);
+
+    return ResponseEntity.ok(historyList);
     }
 }

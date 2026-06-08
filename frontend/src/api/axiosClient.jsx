@@ -3,6 +3,7 @@ import axios from 'axios';
 // Spring BootのサーバーURL（ローカル環境）をベースに設定
 const axiosClient = axios.create({
   baseURL: 'http://localhost:8080/api', 
+   withCredentials: true, //追加した
   headers: {
     'Content-Type': 'application/json',
   },
