@@ -1,5 +1,6 @@
 .profile-page {
-  background-color: #f7f5f0;;
+  background-image: url('../assets/bg-food.png');
+  background-size: cover;
   min-height: 100vh;
   padding: 40px 0;
   padding-bottom: 100px;
