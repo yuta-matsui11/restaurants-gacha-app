@@ -1,18 +1,19 @@
 .register-container {
-    background-image: url('../assets/gohan.avif');
+    background-image: url('../assets/kawaii.png');
     background-size: cover;
     background-position: center;
-    min-height: calc(100vh - 130px);
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 30px;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .register-card {
     width: 500px;
     background: white;
-    padding: 40px;
+    padding: 20px 40px;
 
     border-radius: 12px;
     box-shadow:0 0 30px rgba(255,255,255,0.2),
