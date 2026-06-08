@@ -33,19 +33,19 @@
 }
 
 .footer-item span {
-    font-family: "Georgia", serif;
+    font-family:"Fredoka One";
     font-size: 24px;
 }
 
 .footer-item p {
-    font-family: "Georgia", serif;
+    font-family:"Fredoka One";
     margin-top: 4px;
     font-size: 12px;
     font-weight: 500;
 }
 
 .footer-item:hover {
-    font-family: "Georgia", serif;
+    font-family:"Fredoka One";
     color: #fff8e1;
     transform: translateY(-2px);
 }

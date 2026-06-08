@@ -10,7 +10,7 @@
   font-size: 24px;
   /* お好みで調整 */
   margin-bottom: 10px;
-  font-family: "Georgia", serif;
+  font-family:"Fredoka One";
 }
 
 .history-description {
@@ -18,7 +18,7 @@
   display: block;
   color: #666;
   margin: 30px 0;
-  font-family: "Georgia", serif;
+  font-family:"Fredoka One";
 }
 
 .history-card {
@@ -52,7 +52,7 @@
 
 .history-info {
   flex: 1;
-  font-family: "Georgia", serif;
+  font-family:"Fredoka One";
 }
 
 .info-row {
@@ -74,7 +74,7 @@
 
 .history-info h2 {
   margin-bottom: 10px;
-  font-family: "Georgia", serif;
+  font-family:"Fredoka One";
 }
 
 .history-buttons {
