@@ -67,9 +67,21 @@ function GachaExecute() {
                     navigate('/result', { state: { restaurant: formattedRestaurant, conditions: searchConditions } });
                 }, 2800);
 
-            } catch (error) {
+            } 
+            catch (error) {
                 console.error("ガチャの実行に失敗しました", error);
-                alert("飲食店情報の取得に失敗しました。");
+                
+                // バックエンドから送られてきたエラーメッセージを取得
+                const errorMessage = error.response?.data?.message || error.response?.data || "";
+
+                // 0件エラー（NoRestaurantException）かどうかをメッセージ内容やステータスで判定
+                if (error.response?.status === 404 || (typeof errorMessage === 'string' && errorMessage.includes("見つかりませんでした"))) {
+                    alert("条件に一致するお店が見つかりませんでした💦\nエリアやジャンルを変更して、もう一度回してみてください！");
+                } else {
+                    // それ以外の通信エラーやサーバーエラーの場合
+                    alert("飲食店情報の取得に失敗しました。");
+                }
+                
                 navigate('/home');
             }
         };
