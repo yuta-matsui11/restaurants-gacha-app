@@ -2,7 +2,8 @@
     display: flex;
     justify-content: center;
     padding: 20px 20px;
-    background-color: #f7f5f0;
+    background-image: url('../assets/bg');
+    background-size: cover;
 }
 
 .gacha-card {
@@ -84,7 +85,7 @@
     height: 100px;
     margin-top: 20px;
 
-    background: #b7662c;
+    background: #e7b973;
     color: white;
 
     border: none;
