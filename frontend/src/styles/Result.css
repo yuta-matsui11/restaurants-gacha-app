@@ -18,11 +18,8 @@
 
 .result-card {
     background: white;
-
     border-radius: 20px;
-
     overflow: hidden;
-
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
@@ -45,19 +42,15 @@
 .genre-tag {
     background: #1677ff;
     color: white;
-
     padding: 6px 12px;
     border-radius: 20px;
-
     font-size: 14px;
 }
 
 .station-tag {
     background: #f0f0f0;
-
     padding: 6px 12px;
     border-radius: 20px;
-
     font-size: 14px;
 }
 
@@ -69,38 +62,31 @@
 
 .result-buttons {
     margin-top: 6px;
-
     display: flex;
     gap: 15px;
-
     justify-content: center;
 }
 
-.detail-btn {
-    background: #1677ff;
+/* もう一度ガチャる（左・小さめ） */
+.retry-btn {
+    background: linear-gradient(135deg, #ff7a18, #ff4d4f);
     color: white;
-
     border: none;
     border-radius: 10px;
-
-    padding: 12px 24px;
-    font-size: 16px;
-
+    padding: 12px 20px;
+    font-size: 14px;
     cursor: pointer;
 }
 
-.retry-btn {
-    background: linear-gradient(135deg,
-            #ff7a18,
-            #ff4d4f);
-
+/* 詳細を見る（右・大きめ・目立つ） */
+.detail-btn {
+    background: #1677ff;
     color: white;
-
     border: none;
     border-radius: 10px;
-
-    padding: 12px 24px;
-    font-size: 16px;
-
+    padding: 14px 40px;
+    font-size: 18px;
+    font-weight: bold;
     cursor: pointer;
+    box-shadow: 0 4px 12px rgba(22, 119, 255, 0.4);
 }
