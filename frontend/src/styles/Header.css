@@ -1,7 +1,7 @@
 header {
   height: 72px;
 
-  background: #e8dece;
+  background: #3e2723;
 
   display: flex;
   justify-content: space-between;
@@ -19,18 +19,17 @@ header h1 {
   font-size: 30px;
   font-weight: bold;
 
-  color: #5c3b1e;
+  color: #fff8e1;
 
   letter-spacing: 2px;
 }
 
 .header-btn {
-  background: #faf8f4;
+  background: #3e2723;
 
-  color: #6b4a2c;
+  color: #fff8e1;
 
-  border: 1px solid #a48764;
-
+  border: 1px solid #ffca28;
   border-radius: 12px;
 
   padding: 10px 24px;

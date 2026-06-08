@@ -43,7 +43,7 @@
     width: 100%;
     padding: 12px;
     font-size: 15px;
-     font-family: "Georgia", serif;
+    font-family: "Georgia", serif;
     border: 1px solid #d9d9d9;
     border-radius: 8px;
 
@@ -84,7 +84,7 @@
     height: 100px;
     margin-top: 20px;
 
-    background: #582a08;
+    background: #b7662c;
     color: white;
 
     border: none;
@@ -100,17 +100,15 @@
 }
 
 .gacha-btn:hover {
-    background: linear-gradient(
-        90deg,
-        #ff0000,
-        #ff7f00,
-        #ffff00,
-        #00ff00,
-        #0000ff,
-        #4b0082,
-        #9400d3,
-        #ff0000
-    );
+    background: linear-gradient(90deg,
+            #ff0000,
+            #ff7f00,
+            #ffff00,
+            #00ff00,
+            #0000ff,
+            #4b0082,
+            #9400d3,
+            #ff0000);
 
     background-size: 400% 400%;
     animation: rainbow 3s linear infinite;
