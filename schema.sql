@@ -1,3 +1,9 @@
+CREATE USER hoshimiyaichigo
+WITH PASSWORD 'ito';
+
+GRANT ALL PRIVILEGES ON DATABASE restaurant_gacha_db TO hoshimiyaichigo;
+
+
 CREATE DATABASE restaurant_gacha_db;
 
 CREATE TABLE genres (
