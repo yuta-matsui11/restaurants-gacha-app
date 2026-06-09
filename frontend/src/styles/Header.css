@@ -1,7 +1,13 @@
 header {
   height: 72px;
 
-  background: #c3a77f;
+  background: linear-gradient(
+    135deg,
+  #ee9494,
+  #f1aaaa
+  );
+
+
 
   display: flex;
   justify-content: space-between;
@@ -10,7 +16,7 @@ header {
   padding: 0 40px;
 
   box-shadow:
-    0 2px 12px rgba(0, 0, 0, 0.08);
+    0 2px 12px rgba(24, 24, 24, 0.107);
 }
 
 header h1 {
@@ -19,17 +25,17 @@ header h1 {
   font-size: 30px;
   font-weight: bold;
 
-  color: #473f3f;
+  color: #514f4d;
 
   letter-spacing: 2px;
 }
 
 .header-btn {
-  background: #3e2723;
+  background: #fafafa;
 
-  color: #fff8e1;
+  color: #f18888;
 
-  border: 1px solid #544311;
+  border: 1px solid #74bee1;
   border-radius: 12px;
 
   padding: 10px 24px;
@@ -40,5 +46,5 @@ header h1 {
 }
 
 .header-btn:hover {
-  background: #b5956a;
+  background: #d3dce1;
 }
