@@ -40,7 +40,7 @@
 }
 
 .genre-tag {
-    background: #1677ff;
+    background: #6088C6;
     color: white;
     padding: 6px 12px;
     border-radius: 20px;
@@ -69,7 +69,7 @@
 
 /* もう一度ガチャる（左・小さめ） */
 .retry-btn {
-    background: linear-gradient(135deg, #ff7a18, #ff4d4f);
+    background: linear-gradient(135deg, #EE817B, #ffb2ae);
     color: white;
     border: none;
     border-radius: 10px;
@@ -80,7 +80,7 @@
 
 /* 詳細を見る（右・大きめ・目立つ） */
 .detail-btn {
-    background: #1677ff;
+    background: #6088C6;
     color: white;
     border: none;
     border-radius: 10px;
@@ -88,5 +88,4 @@
     font-size: 18px;
     font-weight: bold;
     cursor: pointer;
-    box-shadow: 0 4px 12px rgba(22, 119, 255, 0.4);
 }

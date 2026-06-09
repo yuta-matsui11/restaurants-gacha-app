@@ -87,7 +87,7 @@ function Profile() {
         }));
     };
 
-    const handleSave = async(e) => {
+    const handleSave = async (e) => {
         e.preventDefault();
 
         try {
@@ -160,8 +160,8 @@ function Profile() {
                     </button>
 
                     <div style={{ display: "flex", flexDirection: "column", gap: "12px", marginTop: "30px", alignItems: "center" }}>
-                        <Link to="/terms" style={{ color: "#7755ff", marginRight: "15px", textDecoration: "underline" }}>利用規約</Link>
-                        <Link to="/privacy" style={{ color: "#7755ff", textDecoration: "underline" }}>プライバシーポリシー</Link>
+                        <Link to="/terms" style={{ color: "#6088C6", marginRight: "15px", textDecoration: "underline" }}>利用規約</Link>
+                        <Link to="/privacy" style={{ color: "#6088C6", textDecoration: "underline" }}>プライバシーポリシー</Link>
 
                         <button
                             onClick={handleContactClick}
@@ -170,8 +170,8 @@ function Profile() {
                                 padding: "8px 20px",
                                 fontSize: "0.9rem",
                                 backgroundColor: "transparent",
-                                color: "#7755ff",
-                                border: "1px solid #7755ff",
+                                color: "#6088C6",
+                                border: "1px solid #AEC4E5",
                                 borderRadius: "20px",
                                 cursor: "pointer",
                                 fontWeight: "bold"
