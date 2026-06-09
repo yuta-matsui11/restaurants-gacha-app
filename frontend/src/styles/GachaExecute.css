@@ -3,13 +3,16 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: calc(100vh - 80px);
+    height: calc(100vh - 60px);
+
     text-align: center;
     gap: 16px;
-    background: #fff;
     position: relative;
-    overflow: hidden;
+    /* これがスクロールやはみ出しを隠す魔法です */
+    overflow: hidden; 
     background-color: #f7f5f0;
+    box-sizing: border-box;
+    padding-bottom: 20px;
 }
 
 .loading-container::before {
