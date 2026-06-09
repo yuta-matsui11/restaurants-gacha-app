@@ -111,7 +111,7 @@
     padding: 4rem;
     border-radius: 25px;
 
-    background: rgba(0, 0, 0, 0.45);
+    background: rgba(255, 255, 255, 0.35);
     backdrop-filter: blur(10px);
 
     box-shadow: 0 10px 40px rgba(0,0,0,0.4);
@@ -122,7 +122,7 @@ h1.welcome-title {
     font-family:"Fredoka One";
     font-size: 3.5rem;
     font-weight: bold;
-    color: white;
+    color: #f87432;
     margin-bottom: 72px;
     text-shadow: 0 4px 20px rgba(0,0,0,0.6);
 }
@@ -130,7 +130,7 @@ h1.welcome-title {
 .welcome-subtitle {
     font-family:"Fredoka One";
     font-size: 1.3rem;
-    color: white;
+    color: #f87432;
     margin-bottom: 72px;
     opacity: 0.9;
 }
@@ -165,12 +165,12 @@ h1.welcome-title {
 }
 
 .welcome-button.login {
-    background: white;
-    color: #ff6a00;
+    background: rgb(255, 255, 255);
+    color: #e65a5a;
 }
 
 .welcome-button.register {
-    background: linear-gradient(90deg, #ff3c3c, #ff9500);
+    background: linear-gradient(90deg, #e65a5a, #f7a9a9);
     color: white;
-    box-shadow: 0 5px 20px rgba(255, 60, 60, 0.4);
+    box-shadow: 0 5px 20px rgba(255, 0, 0, 0.4);
 }
