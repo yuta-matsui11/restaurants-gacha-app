@@ -13,8 +13,8 @@
     background: white;
     padding: 40px;
     border-radius: 12px;
-    box-shadow:0 0 30px rgba(255,255,255,0.2),
-                0 4px 32px rgba(0,0,0,0.1);
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.2),
+        0 4px 32px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
 
@@ -24,7 +24,7 @@
     text-align: center;
     margin-bottom: 30px;
     color: #5c3b1e;
-    font-family:"Fredoka One";
+    font-family: "Fredoka One";
 }
 
 .login-card form {
@@ -35,7 +35,7 @@
 .login-card label {
     margin-bottom: 6px;
     font-weight: bold;
-    font-family:"Fredoka One";
+    font-family: "Fredoka One";
     color: #555;
 }
 
@@ -45,7 +45,7 @@
 
     border: 1px solid #ccc;
     border-radius: 6px;
-    font-family:"Fredoka One";
+    font-family: "Fredoka One";
 
     font-size: 16px;
 }
@@ -56,7 +56,7 @@
 }
 
 .login-btn {
-    background: #5c3b1e;
+    background: #f18888;
     color: white;
     margin-top: 30px;
     border: none;
@@ -66,11 +66,11 @@
     cursor: pointer;
     font-size: 16px;
     font-weight: bold;
-    font-family:"Fredoka One";
+    font-family: "Fredoka One";
 }
 
 .login-btn:hover {
-    background: #4a2c1e;
+    background: #fd5353;
 }
 
 .register-btn {
@@ -85,17 +85,17 @@
     padding: 12px;
     cursor: pointer;
     font-size: 16px;
-    font-family:"Fredoka One";
+    font-family: "Fredoka One";
 }
 
 .register-btn:hover {
-    background: #EFF6FF;
+    background: #fd5353;
 }
 
 .error-message {
     color: #ff4d4f;
     font-size: 14px;
-    font-family:"Fredoka One";
+    font-family: "Fredoka One";
     margin-top: 4px;
     margin-bottom: 8px;
 }
