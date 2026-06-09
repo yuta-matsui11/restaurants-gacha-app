@@ -3,7 +3,7 @@
   padding: 20px 40px;
   box-sizing: border-box;
   padding-bottom: 100px;
-  font-family:"Fredoka One" ;
+  font-family: "Fredoka One";
   background-image: url('../assets/bg-food.png');
 }
 
@@ -20,7 +20,7 @@ p.favorite-description {
 .favorite-container h1 {
   font-size: 24px;
   margin-bottom: 10px;
-  font-family:"Fredoka One";
+  font-family: "Fredoka One";
 }
 
 .favorite-card {
@@ -48,7 +48,7 @@ p.favorite-description {
 .favorite-info h2 {
   margin-top: 0;
   margin-bottom: 10px;
-  font-family:"Fredoka One";
+  font-family: "Fredoka One";
 }
 
 .info-row {
@@ -75,7 +75,7 @@ p.favorite-description {
 }
 
 .detail-btn {
-  background: #003a8c;
+  background: #6088C6;
   color: white;
   border: none;
   padding: 8px 12px;
@@ -86,8 +86,8 @@ p.favorite-description {
 
 .remove-btn {
   background: white;
-  color: #ff4d4f;
-  border: 1px solid #ff4d4f;
+  color: #EE817B;
+  border: 1px solid #EE817B;
   padding: 8px 12px;
   border-radius: 5px;
   cursor: pointer;

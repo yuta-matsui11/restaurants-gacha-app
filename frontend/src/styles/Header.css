@@ -1,11 +1,9 @@
 header {
-  height: 72px;
+  height: 60px;
 
-  background: linear-gradient(
-    135deg,
-  #ee9494,
-  #f1aaaa
-  );
+  background: linear-gradient(135deg,
+      #EE817B,
+      #EE817B);
 
 
 
@@ -35,7 +33,7 @@ header h1 {
 
   color: #f18888;
 
-  border: 1px solid #74bee1;
+  border: 1px solid #6088C6;
   border-radius: 12px;
 
   padding: 10px 24px;
