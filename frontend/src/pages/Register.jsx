@@ -132,7 +132,7 @@ function Register() {
                     <label>メールアドレス</label><input type="email" placeholder="ito@example.com" value={email} onChange={(e) => setEmail(e.target.value)} />
                     {emailError && <p className="error-message">{emailError}</p>}
 
-                    <label>パスワード</label><input type="password" placeholder="ito110" value={password} onChange={(e) => setPassword(e.target.value)} />
+                    <label>パスワード</label><input type="password" value={password} placeholder="8文字以上で英数字を含めてください" onChange={(e) => setPassword(e.target.value)} />
                     {passwordError && <p className="error-message">{passwordError}</p>}
 
                     <label>パスワード（確認）</label><input type="password" placeholder="もう一度入力してください" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
