@@ -1,10 +1,10 @@
 header {
   height: 60px;
 
-  background: linear-gradient(135deg,
+  /* background: linear-gradient(135deg,
       #EE817B,
-      #EE817B);
-
+      #EE817B); */
+background: var(--header-color);
 
 
   display: flex;
@@ -29,9 +29,9 @@ header h1 {
 }
 
 .header-btn {
-  background: #fafafa;
+  /* background: #fafafa;
 
-  color: #f18888;
+  color: #f18888; */
 
   border: 1px solid #6088C6;
   border-radius: 12px;
@@ -40,7 +40,9 @@ header h1 {
 
   font-weight: 600;
 
-  transition: 0.2s;
+  transition: 0.2s; 
+  background: var(--button-bg);
+  color: var(--button-text);
 }
 
 .header-btn:hover {

@@ -86,8 +86,11 @@
     height: 100px;
     margin-top: 20px;
 
-    background: #ffb2ae;
-    color: white;
+    /* background: #ffb2ae;
+    color: white; */
+
+    background: var(--button-bg);
+    color: var(--button-text);
 
     border: none;
     border-radius: 10px;
