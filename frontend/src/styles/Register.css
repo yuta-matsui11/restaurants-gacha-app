@@ -66,8 +66,8 @@
     /* background: #f18888;
     color: white; */
 
-    background-color: var(--button-bg);
-  color: var(--button-text);
+    background-color: var(--auth-button-bg);
+    color: var(--auth-button-text);
 
     border: none;
     border-radius: 6px;
