@@ -89,8 +89,8 @@
     /* background: #ffb2ae;
     color: white; */
 
-    background: var(--button-bg);
-    color: var(--button-text);
+    background: var(--gacha-button-bg);
+    color: var(--gacha-button-text);
 
     border: none;
     border-radius: 10px;

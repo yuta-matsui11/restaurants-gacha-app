@@ -53,6 +53,26 @@ function App() {
       currentTheme.buttonText
     );
 
+    document.documentElement.style.setProperty(
+      "--auth-button-bg",
+      currentTheme.authButtonBg
+    );
+
+    document.documentElement.style.setProperty(
+      "--auth-button-text",
+      currentTheme.authButtonText
+    );
+
+    document.documentElement.style.setProperty(
+      "--gacha-button-bg",
+      currentTheme.gachaButtonBg
+    );
+
+    document.documentElement.style.setProperty(
+      "--gacha-button-text",
+      currentTheme.gachaButtonText
+    );
+
     localStorage.setItem("theme", theme);
   }, [theme]);
 
