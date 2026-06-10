@@ -16,9 +16,45 @@ import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import Contact from "./pages/Contact.jsx";
 import Welcome from './pages/Welcome.jsx';
+
+//追加
+import { useEffect } from "react";
+import { themes } from "./themes";
+
 function App() {
   //ログイン状態であるかどうか
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  //追加↓
+  const [theme, setTheme] = useState(
+    localStorage.getItem("theme") || "pink"
+  );
+
+  useEffect(() => {
+    const currentTheme = themes[theme];
+
+    document.documentElement.style.setProperty(
+      "--header-color",
+      currentTheme.header
+    );
+
+    document.documentElement.style.setProperty(
+      "--footer-color",
+      currentTheme.footer
+    );
+
+    document.documentElement.style.setProperty(
+      "--button-bg",
+      currentTheme.buttonBg
+    );
+
+    document.documentElement.style.setProperty(
+      "--button-text",
+      currentTheme.buttonText
+    );
+
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
   const handleLogout = () => {
     setIsAuthenticated(false);
@@ -29,7 +65,7 @@ function App() {
   return (
     <Router>
       {location.pathname !== "/" &&
-      <Header isAuthenticated={isAuthenticated} onLogout={handleLogout} />
+        <Header isAuthenticated={isAuthenticated} onLogout={handleLogout} />
       }
       <Routes>
         <Route path="/" element={<Welcome />} />
@@ -44,7 +80,15 @@ function App() {
         <Route path="/favorite" element={isAuthenticated ? <><Favorite /><Footer /></> : <Navigate to="/login" />} />
         <Route path="/gachaexecute" element={isAuthenticated ? <><GachaExecute /></> : <Navigate to="/login" />} />
         <Route path="/restaurantdetail" element={isAuthenticated ? <><RestaurantDetail /><Footer /></> : <Navigate to="/login" />} />
-        <Route path="/profile" element={isAuthenticated ? <><Profile /><Footer /></> : <Navigate to="/login" />} />
+        {/* <Route path="/profile" element={isAuthenticated ? <><Profile /><Footer /></> : <Navigate to="/login" />} /> */}
+        <Route
+          path="/profile"
+          element={
+            isAuthenticated
+              ? <><Profile setTheme={setTheme} /><Footer /></>
+              : <Navigate to="/login" />
+          }
+        />
         <Route path="/terms" element={<Terms />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/contact" element={isAuthenticated ? <><Contact /><Footer /></> : <Navigate to="/login" />} />

@@ -5,8 +5,10 @@
     width: 100%;
     height: 60px;
 
-    background: linear-gradient(135deg,
-            #928484, #928484);
+    /* background: linear-gradient(135deg,
+            #928484, #928484); */
+
+background: var(--footer-color);
 
     display: flex;
     justify-content: space-around;

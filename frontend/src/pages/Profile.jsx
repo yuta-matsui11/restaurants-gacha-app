@@ -21,7 +21,7 @@ const GENRE_LIST = [
     { id: 'G017', name: '韓国料理' }
 ];
 
-function Profile() {
+function Profile({ setTheme }) {
     const [isEditing, setIsediting] = useState(false);
 
     //実際はユーザーデータをバックエンドから取得します。
@@ -132,7 +132,6 @@ function Profile() {
     return (
         <div className="profile-page">
             <h2 className="profile-title">マイページ</h2>
-
             {!isEditing ? (
                 <div className="profile-card">
                     <div className="profile-item">
@@ -179,6 +178,17 @@ function Profile() {
                         >
                             お問い合わせ
                         </button>
+
+                        <div style={{marginTop: "40px", paddingTop: "20px", borderTop: "1px solid #eee", width: "100%", textAlign: "center"}}>
+                            <h3 style={{fontSize: "16px", color: "#666", marginBottom: "15px"}}>🎨 テーマカラー設定</h3>
+                            <div style={{display: "flex", gap: "10px", justifyContent: "center"}}>
+                                <button onClick={() => setTheme("pink")} style={{background: '#e596e2', color: 'white', padding: '8px 16px', borderRadius: '8px', border: 'none', cursor: 'pointer', fontWeight: 'bold'}}>パターン１</button>
+                                <button onClick={() => setTheme("cafe")} style={{background: '#764e1b', color: 'white', padding: '8px 16px', borderRadius: '8px', border: 'none', cursor: 'pointer', fontWeight: 'bold'}}>パターン２</button>
+                                <button onClick={() => setTheme("matcha")} style={{background: '#32a936', color: 'white', padding: '8px 16px', borderRadius: '8px', border: 'none', cursor: 'pointer', fontWeight: 'bold'}}>パターン３</button>
+                                <button onClick={() => setTheme("dark")} style={{background: '#181716', color: 'white', padding: '8px 16px', borderRadius: '8px', border: 'none', cursor: 'pointer', fontWeight: 'bold'}}>パターン４</button>
+                            </div>
+                    </div>
+ 
                     </div>
                 </div>
             ) : (

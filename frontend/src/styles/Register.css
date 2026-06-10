@@ -63,8 +63,11 @@
 .register-submit-btn {
     margin-top: 10px;
 
-    background: #f18888;
-    color: white;
+    /* background: #f18888;
+    color: white; */
+
+    background-color: var(--button-bg);
+  color: var(--button-text);
 
     border: none;
     border-radius: 6px;
