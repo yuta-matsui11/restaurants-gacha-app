@@ -1,6 +1,6 @@
 export const themes = {
     pink: {
-        header: "#EE817B",
+        header: "#f39590",
         footer: "#928484",
         buttonBg: "#fafafa",
         buttonText: "#f18888",
@@ -14,7 +14,7 @@ export const themes = {
 
     cafe: {
         header: "#BFE9DB",
-        footer: "#517D99",
+        footer: "#78a5c1",
         buttonBg: "#F5FAFF",
         buttonText: "#6AC1B7",
 
@@ -26,8 +26,8 @@ export const themes = {
     },
 
     matcha: {
-        header: "#E85A70",
-        footer: "#4EA1D5",
+        header: "#ec7083",
+        footer: "#74aacc",
         buttonBg: "#F4FBF2",
         buttonText: "#454552",
 
@@ -39,15 +39,15 @@ export const themes = {
     },
 
     dark: {
-        header: "#FFF4E0",
+        header: "#fae3b7",
         footer: "#F99292",
-        buttonBg: "#F5F5F5",
+        buttonBg: "#f6f1f1",
         buttonText: "#F99292",
 
         authButtonBg: "#F99292",
         authButtonText: "#FFFFFF",
 
-        gachaButtonBg: "#FFBC61",
+        gachaButtonBg: "#fdbd63",
         gachaButtonText: "#FFFFFF",
     }
 };
