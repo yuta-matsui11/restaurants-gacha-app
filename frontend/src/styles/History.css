@@ -85,6 +85,21 @@
 
 }
 
+.detail-btn:hover {
+  animation: fuwafuwa 2.5s ease-in-out infinite;
+  box-shadow: 0 4px 12px rgba(246, 175, 170, 0.3);
+}
+
+@keyframes fuwafuwa {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-3px) scale(1.03);
+  }
+}
+
 
 .remove-btn {
   background: #EE817B;
