@@ -13,41 +13,41 @@ export const themes = {
     },
 
     cafe: {
-        header: "#8B5E3C",
-        footer: "#6F4E37",
-        buttonBg: "#F5E6D3",
-        buttonText: "#8B5E3C",
+        header: "#BFE9DB",
+        footer: "#517D99",
+        buttonBg: "#F5FAFF",
+        buttonText: "#6AC1B7",
 
-        authButtonBg: "#8B5E3C",
-        authButtonText: "#fafafa",
+        authButtonBg: "#6AC1B7",
+        authButtonText: "#FFFFFF",
 
-        gachaButtonBg: "#8B5E3C",
-        gachaButtonText: "#fafafa",
+        gachaButtonBg: "#6AC1B7",
+        gachaButtonText: "#FFFFFF",
     },
 
     matcha: {
-        header: "#588157",
-        footer: "#3A5A40",
-        buttonBg: "#D8F3DC",
-        buttonText: "#2D6A4F",
+        header: "#E85A70",
+        footer: "#4EA1D5",
+        buttonBg: "#F4FBF2",
+        buttonText: "#454552",
 
-        authButtonBg: "#588157",
-        authButtonText: "#fafafa",
+        authButtonBg: "#E85A70",
+        authButtonText: "#FFFFFF",
 
-        gachaButtonBg: "#588157",
-        gachaButtonText: "#fafafa",
+        gachaButtonBg: "#4EA1D5",
+        gachaButtonText: "#FFFFFF",
     },
 
     dark: {
-        header: "#2B2D42",
-        footer: "#1A1B26",
-        buttonBg: "#4F8EF7",
-        buttonText: "#FFFFFF",
+        header: "#FFF4E0",
+        footer: "#F99292",
+        buttonBg: "#F5F5F5",
+        buttonText: "#F99292",
 
-        authButtonBg: "#2B2D42",
-        authButtonText: "#fafafa",
+        authButtonBg: "#F99292",
+        authButtonText: "#FFFFFF",
 
-        gachaButtonBg: "#2B2D42",
-        gachaButtonText: "#fafafa",
+        gachaButtonBg: "#FFBC61",
+        gachaButtonText: "#FFFFFF",
     }
 };
