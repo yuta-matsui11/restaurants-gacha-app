@@ -202,7 +202,8 @@ function History() {
 
                             <div className="history-buttons">
                                 <button className="detail-btn" onClick={() => handleViewDetail(history.restaurantId)}>詳細を見る</button>
-                                <button className="favorite-btn" onClick={() => handleFavoriteToggle(history)}>{favoriteIds.includes(history.restaurantId) ? "♥お気に入り解除" : "♡お気に入り登録"}</button>
+                                {favoriteIds.includes(history.restaurantId) ?<button className="remove-btn" onClick={() => handleFavoriteToggle(history)}>お気に入り解除</button>
+                                :<button className="favorite-btn" onClick={() => handleFavoriteToggle(history)}>お気に入り登録</button>}
                             </div>
                         </div>
                     )

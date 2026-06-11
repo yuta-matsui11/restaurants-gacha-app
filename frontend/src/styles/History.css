@@ -86,16 +86,32 @@
 }
 
 
+.remove-btn {
+  background: #EE817B;
+  color: white;
+  border: 1px solid #EE817B;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
 .favorite-btn {
   background: white;
-  color: #F6AFAA;
-  border: 1px solid #F6AFAA;
+  color: #EE817B;
+  border: 1px solid #EE817B;
   padding: 8px 12px;
   border-radius: 5px;
   cursor: pointer;
 }
 
 .favorite-btn:hover {
+  animation: fuwafuwa 2.5s ease-in-out infinite;
+
+  box-shadow: 0 4px 12px rgba(246, 175, 170, 0.3);
+}
+
+.remove-btn:hover {
   animation: fuwafuwa 2.5s ease-in-out infinite;
 
   box-shadow: 0 4px 12px rgba(246, 175, 170, 0.3);
