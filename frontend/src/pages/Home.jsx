@@ -2,6 +2,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 import '../styles/Home.css';
 
@@ -26,14 +27,42 @@ const GENRE_LIST = [
     { id: 'G017', name: '韓国料理' }
 ];
 
+
+
 function Home() {
     const navigate = useNavigate();
 
     const [station, setStation] = useState('');
+    const [userStation, setUserStation] = useState('');
+    const [useMyStation, setUseMyStation] = useState(true);
     const [selectGenre, setSelectGenre] = useState("");
 
     const [error, setError] = useState('');
     const [stationError, setStationError] = useState('');
+
+    useEffect(() => {
+        const fetchProfile = async () => {
+            try {
+                const response = await fetch(
+                    "http://localhost:8080/api/users/me",
+                    {
+                        credentials: "include"
+                    }
+                );
+
+                if (!response.ok) {
+                    return;
+                }
+
+                const data = await response.json();
+                setUserStation(data.nearest_station);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        fetchProfile();
+    }, []);
 
     const handleGenreChange = (genreId) => {
         setSelectGenre((prev) => {
@@ -49,15 +78,24 @@ function Home() {
 
     const handleGacha = (e) => {
         e.preventDefault();
+
+        let isValid = true;
+
         setStationError('');
 
-        if (!station) {
+        const searchStation =
+            useMyStation ? userStation : station;
+
+        if (!searchStation) {
             setStationError('駅名を入力してください');
             isValid = false;
         }
+        if (!isValid) {
+            return;
+        }
 
         const searchConditions = {
-            station: station,
+            station: useMyStation ? userStation : station,
             genre: selectGenre
         };
 
@@ -70,13 +108,49 @@ function Home() {
                 <h2>条件入力</h2>
                 <form onSubmit={handleGacha} className="gacha-form">
 
-                    <label className="input-label">駅名 <span className="required">*</span></label>
-                    <input type="text" value={station} onChange={(e) => setStation(e.target.value)} placeholder="例：新宿" className="station-input" />
+                    <label className="input-label">
+                        駅名 <span className="required">*</span>
+                    </label>
+
+                    <label className = "radio-label">
+                        <input
+                            type="radio"
+                            checked={useMyStation}
+                            onChange={() => {
+                                setUseMyStation(true);
+                                setStationError('');
+                            }}
+                        />
+                        最寄り駅
+                        （<span className = "station-highlight">{userStation}</span>）
+                    </label>
+
+                    <label className = "radio-label">
+                        <input
+                            type="radio"
+                            checked={!useMyStation}
+                            onChange={() => {
+                                setUseMyStation(false)
+                                setStationError('');
+                            }}
+                        />
+                        別の駅を指定する
+                    </label>
+
+                    {!useMyStation && (
+                        <input
+                            type="text"
+                            value={station}
+                            onChange={(e) => setStation(e.target.value)}
+                            placeholder="例：新宿"
+                            className="station-input"
+                        />
+                    )}
                     {stationError && <p className="error-message">{stationError}</p>}
 
-                        <label className="genre-title">ジャンル</label>
-                        <p className="genre-note">　※未選択の場合はすべてのジャンルから抽選されます</p>
-                    
+                    <label className="genre-title">ジャンル</label>
+                    <p className="genre-note">　※未選択の場合はすべてのジャンルから抽選されます</p>
+
                     <select
                         value={selectGenre}
                         onChange={(e) => setSelectGenre(e.target.value)}
