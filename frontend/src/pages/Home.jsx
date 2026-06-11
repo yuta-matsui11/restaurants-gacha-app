@@ -35,6 +35,8 @@ function Home() {
     const [station, setStation] = useState('');
     const [userStation, setUserStation] = useState('');
     const [useMyStation, setUseMyStation] = useState(true);
+    const [userGenre, setUserGenre] = useState('');
+    const [useMyGenre, setUseMyGenre] = useState(true);
     const [selectGenre, setSelectGenre] = useState("");
 
     const [error, setError] = useState('');
@@ -56,6 +58,7 @@ function Home() {
 
                 const data = await response.json();
                 setUserStation(data.nearest_station);
+                setUserGenre(data.favorite_genre_id);
             } catch (error) {
                 console.error(error);
             }
@@ -96,7 +99,7 @@ function Home() {
 
         const searchConditions = {
             station: useMyStation ? userStation : station,
-            genre: selectGenre
+            genre:  useMyGenre ? userGenre : selectGenre
         };
 
         navigate('/gachaexecute', { state: searchConditions });
@@ -112,7 +115,7 @@ function Home() {
                         駅名 <span className="required">*</span>
                     </label>
 
-                    <label className = "radio-label">
+                    <label className="radio-label">
                         <input
                             type="radio"
                             checked={useMyStation}
@@ -122,10 +125,10 @@ function Home() {
                             }}
                         />
                         最寄り駅
-                        （<span className = "station-highlight">{userStation}</span>）
+                        （<span className="station-highlight">{userStation}</span>）
                     </label>
 
-                    <label className = "radio-label">
+                    <label className="radio-label">
                         <input
                             type="radio"
                             checked={!useMyStation}
@@ -148,22 +151,52 @@ function Home() {
                     )}
                     {stationError && <p className="error-message">{stationError}</p>}
 
-                    <label className="genre-title">ジャンル</label>
-                    <p className="genre-note">　※未選択の場合はすべてのジャンルから抽選されます</p>
+                    <label className="genre-title">
+                        ジャンル
+                    </label>
 
-                    <select
-                        value={selectGenre}
-                        onChange={(e) => setSelectGenre(e.target.value)}
-                        className="genre-select"
-                    >
-                        <option value="">すべてのジャンル</option>
+                    <label className="radio-label">
+                        <input
+                            type="radio"
+                            checked={useMyGenre}
+                            onChange={() => setUseMyGenre(true)}
+                        />
+                        お気に入りジャンル
+                        （
+                        <span className="station-highlight">
+                            {
+                                GENRE_LIST.find(
+                                    genre => genre.id === userGenre
+                                )?.name || ''
+                            }
+                        </span>
+                        ）
+                    </label>
 
-                        {GENRE_LIST.map((genre) => (
-                            <option key={genre.id} value={genre.id}>
-                                {genre.name}
-                            </option>
-                        ))}
-                    </select>
+                    <label className="radio-label">
+                        <input
+                            type="radio"
+                            checked={!useMyGenre}
+                            onChange={() => setUseMyGenre(false)}
+                        />
+                        別のジャンルを指定する
+                    </label>
+
+                    {!useMyGenre && (
+                        <select
+                            value={selectGenre}
+                            onChange={(e) => setSelectGenre(e.target.value)}
+                            className="genre-select"
+                        >
+                            <option value="">すべてのジャンル</option>
+
+                            {GENRE_LIST.map((genre) => (
+                                <option key={genre.id} value={genre.id}>
+                                    {genre.name}
+                                </option>
+                            ))}
+                        </select>
+                    )}
 
                     <button type="submit" className="gacha-btn">ガチャる！</button>
                 </form>
