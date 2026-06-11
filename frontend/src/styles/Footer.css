@@ -8,7 +8,7 @@
     /* background: linear-gradient(135deg,
             #928484, #928484); */
 
-background: var(--footer-color);
+    background: var(--footer-color);
 
     display: flex;
     justify-content: space-around;
@@ -33,11 +33,13 @@ background: var(--footer-color);
     color: #FCECEA;
 
     transition: all 0.2s ease;
+
 }
 
 .footer-item span {
     font-family: "Fredoka One";
     font-size: 24px;
+    animation: footerFuwafuwa 3s ease-in-out infinite;
 }
 
 .footer-item p {
@@ -51,4 +53,29 @@ background: var(--footer-color);
     font-family: "Fredoka One";
     color: #dcd7c4;
     transform: translateY(-2px);
+}
+
+
+@keyframes footerFuwafuwa {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+.footer-item:nth-child(1) span {
+    animation-delay: 0s;
+}
+
+.footer-item:nth-child(2) span {
+    animation-delay: 0.5s;
+}
+
+.footer-item:nth-child(3) span {
+    animation-delay: 1s;
 }
