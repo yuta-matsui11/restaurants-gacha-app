@@ -12,32 +12,32 @@ function Favorite() {
     const [userId, setUserId] = useState(0);
 
     useEffect(() => {
-                const fetchProfile = async () => {
-                    try {
-                        const response = await fetch(
-                            "http://localhost:8080/api/users/me",
-                            {
-                                credentials: "include"
-                            }
-                        );
-        
-                        if (!response.ok) {
-                            throw new Error("プロフィール取得失敗");
-                        }
-        
-                        const data = await response.json();
-    
-                        setUserId(data.user_id);
-        
-                    } catch (error) {
-                        console.error(error);
+        const fetchProfile = async () => {
+            try {
+                const response = await fetch(
+                    "http://localhost:8080/api/users/me",
+                    {
+                        credentials: "include"
                     }
-                };
-                fetchProfile();
-        }, []);
+                );
+
+                if (!response.ok) {
+                    throw new Error("プロフィール取得失敗");
+                }
+
+                const data = await response.json();
+
+                setUserId(data.user_id);
+
+            } catch (error) {
+                console.error(error);
+            }
+        };
+        fetchProfile();
+    }, []);
 
     useEffect(() => {
-        if(userId === 0)return;
+        if (userId === 0) return;
         const fetchFavorites = async () => {
             try {
                 const response = await axiosClient.get(`/favorites?userId=${userId}`);
@@ -54,20 +54,34 @@ function Favorite() {
     }, [userId]);
 
     if (isLoading)
-        return <div>⏳ お気に入りを読み込み中...</div>;
+        return (<div className="favorite-container">
+            <div className="empty-message">
+                ⏳ お気に入りを読み込み中...
+            </div>
+        </div>);
 
     if (error)
-        return <div>{error}</div>;
+        return (
+            <div className="favorite-container">
+                <div className="empty-message">
+                    {error}
+                </div>
+            </div>
+        );
 
     if (favorites.length === 0)
-        return <div>お気に入りはありません</div>;
+        return (<div className="favorite-container">
+            <div>お気に入りはありません</div>
+        </div>);
 
     const handleViewDetail = (restaurantId) => {
         // 詳細ページへ遷移（例: /restaurant/123）
         navigate(`/restaurantdetail`, { state: { restaurantId } });
     };
     if (isLoading) {
-        return (<div className="favorite-container">読み込み中...</div>);
+        return (<div className="favorite-container">
+        <div className="favorite-container">読み込み中...</div>
+        </div>);
     }
 
     const handleRemoveFavorite = async (restaurantId) => {
