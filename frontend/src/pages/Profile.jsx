@@ -158,9 +158,9 @@ function Profile({ setTheme }) {
                         プロフィールを編集する
                     </button>
 
-                    <div style={{ display: "flex", flexDirection: "column", gap: "12px", marginTop: "30px", alignItems: "center" }}>
-                        <Link to="/terms" style={{ color: "#6088C6", marginRight: "15px", textDecoration: "underline" }}>利用規約</Link>
-                        <Link to="/privacy" style={{ color: "#6088C6", textDecoration: "underline" }}>プライバシーポリシー</Link>
+                    <div style={{ display: "flex", flexDirection: "column", gap: "12px", marginTop: "30px", alignItems: "center"}}>
+                        <Link to="/terms" style={{ color: "#6088C6",textDecoration: "underline"}}>利用規約</Link>
+                        <Link to="/privacy" style={{ color: "#6088C6", textDecoration: "underline"}}>プライバシーポリシー</Link>
 
                         <button
                             onClick={handleContactClick}
