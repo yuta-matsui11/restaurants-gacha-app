@@ -108,9 +108,9 @@ p.favorite-description {
 }
 
 .page-btn {
-  background: white;
-  border: 1px solid #6088C6;
-  color: #6088C6;
+  background: var(--pagetxt-color);
+  border: 1px solid var(--pagebtn-color);
+  color: var(--pagebtn-color);
   padding: 8px 14px;
   border-radius: 5px;
   cursor: pointer;
@@ -131,8 +131,8 @@ p.favorite-description {
 }
 
 .active-page {
-  background: #6088C6;
-  color: white;
+  background: var(--pagebtn-color);
+  color: var(--pagetxt-color);
 }
 
 .active-page:hover:not(:disabled) {

@@ -73,6 +73,16 @@ function App() {
       currentTheme.gachaButtonText
     );
 
+    document.documentElement.style.setProperty(
+      "--pagebtn-color",
+      currentTheme.pageButtonBg
+    );
+
+    document.documentElement.style.setProperty(
+      "--pagetxt-color",
+      currentTheme.pageButtonText
+    );
+
     localStorage.setItem("theme", theme);
   }, [theme]);
 
