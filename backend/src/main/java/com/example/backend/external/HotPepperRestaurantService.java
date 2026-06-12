@@ -37,7 +37,7 @@ public class HotPepperRestaurantService implements RestaurantService {
                 .queryParam("key", apiKey)
                 .queryParam("lat", lat)
                 .queryParam("lng", lng)
-                .queryParam("range", 3) // 1000m固定（1=300m,2=500m,3=1000m,4=2000m,5=3000m）
+                .queryParam("range", 4) // 1000m固定（1=300m,2=500m,3=1000m,4=2000m,5=3000m）
                 .queryParam("count", 100)
                 .queryParam("format", "json");
 
