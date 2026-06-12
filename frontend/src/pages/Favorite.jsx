@@ -11,6 +11,9 @@ function Favorite() {
     const navigate = useNavigate();
     const [userId, setUserId] = useState(0);
 
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 10;
+
     useEffect(() => {
         const fetchProfile = async () => {
             try {
@@ -52,6 +55,10 @@ function Favorite() {
 
         fetchFavorites();
     }, [userId]);
+
+    useEffect(() => {
+            window.scrollTo({top: 0, behavior: "instant"})
+        }, [currentPage]);
 
     if (isLoading)
         return (<div className="favorite-container">
@@ -102,6 +109,15 @@ function Favorite() {
             alert("お気に入り解除に失敗しました");
         }
     };
+
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = favorites.slice(indexOfFirstItem, indexOfLastItem);
+    const totalPages = Math.ceil(favorites.length/itemsPerPage);
+
+    const handlePageChange = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    };
     // const favorites = [
     //     {
     //         id: 1,
@@ -136,7 +152,7 @@ function Favorite() {
                 お気に入り登録したお店の一覧です
             </p>
 
-            {favorites.map((favorite) => (
+            {currentItems.map((favorite) => (
                 <div key={favorite.favoriteId} className="favorite-card">
 
                     <img
@@ -172,6 +188,13 @@ function Favorite() {
 
                 </div>
             ))}
+            {totalPages > 1 &&(
+                    <div className="pagination">
+                        <button className="page-btn" onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>&lt; 前へ</button>
+                        {[...Array(totalPages)].map((_,index) => (<button key={index + 1} className={`page-btn ${currentPage === index + 1 ? 'active-page' : ''}`} onClick={() => handlePageChange(index+1)}>{index + 1}</button>))}
+                        <button className="page-btn" onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>次へ &gt;</button>
+                    </div>
+            )}
         </div>
     );
 }

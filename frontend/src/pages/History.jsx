@@ -46,6 +46,9 @@ function History() {
     const [userId, setUserId] = useState(0);
     const [favoriteIds, setFavoriteIds] = useState([]);
 
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 10;
+
 
     useEffect(() => {
         const fetchProfile = async () => {
@@ -159,10 +162,25 @@ function History() {
         }
     };
 
+    useEffect(() => {
+        window.scrollTo({top: 0, behavior: "instant"})
+    }, [currentPage]);
+
     if (isLoading) return <div style={{ textAlign: 'center', marginTop: '50px' }}>⏳ 履歴を読み込み中...</div>;
     if (error) return <div style={{ textAlign: 'center', marginTop: '50px', color: '#dc3545' }}>{error}</div>;
 
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = histories.slice(indexOfFirstItem, indexOfLastItem);
+    const totalPages = Math.ceil(histories.length/itemsPerPage);
 
+    const handlePageChange = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    };
+
+
+
+ 
     return (
         <div className="history-container">
             <h1 className="history-title">ガチャ履歴</h1>
@@ -172,7 +190,7 @@ function History() {
                 <div style={{ textAlign: 'center', marginTop: '30px', color: '#666' }}><p>ガチャ履歴はありません</p></div>
             )
 
-                : (histories.map((history) => {
+                : (currentItems.map((history) => {
 
                     const { date, time } = formatDateTime(history.gachaAt);
 
@@ -207,8 +225,14 @@ function History() {
                             </div>
                         </div>
                     )
-                })
-
+                }))
+                }
+                {totalPages > 1 &&(
+                    <div className="pagination">
+                        <button className="page-btn" onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>&lt; 前へ</button>
+                        {[...Array(totalPages)].map((_,index) => (<button key={index + 1} className={`page-btn ${currentPage === index + 1 ? 'active-page' : ''}`} onClick={() => handlePageChange(index+1)}>{index + 1}</button>))}
+                        <button className="page-btn" onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>次へ &gt;</button>
+                    </div>
                 )}
         </div>
     );
