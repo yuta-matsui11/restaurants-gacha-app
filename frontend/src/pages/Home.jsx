@@ -189,7 +189,7 @@ function Home() {
 
             {/* 右：グラフエリア */}
             <div className="graph-card">
-                <h2>よく引くジャンル</h2>
+                <h2>選択ジャンル履歴</h2>
                 {genreChartData.length === 0 ? (
                     <p className="no-data">まだガチャ履歴がありません</p>
                 ) : (
@@ -199,6 +199,7 @@ function Home() {
                             data={genreChartData}
                             margin={{ top: 10, right: 30, left: 10, bottom: 10 }}
                             barCategoryGap="10%"
+                            className = "recharts-wrapper"
                         >
                             <CartesianGrid strokeDasharray="3 3" />
                             <XAxis type="number" allowDecimals={false} />

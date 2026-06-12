@@ -174,3 +174,7 @@
         transform: scale(1.02, 0.98);
     }
 }
+
+.recharts-wrapper *:focus {
+    outline: none;
+}
