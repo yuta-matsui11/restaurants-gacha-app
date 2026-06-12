@@ -93,3 +93,46 @@ p.favorite-description {
   border-radius: 5px;
   cursor: pointer;
 }
+
+/*ページネーション用*/
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  flex-wrap: wrap; /* ページ数が増えたら折り返す */
+}
+
+.page-btn {
+  background: white;
+  border: 1px solid #6088C6;
+  color: #6088C6;
+  padding: 8px 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: "Fredoka One";
+  transition: 0.2s;
+  font-weight: bold;
+}
+
+.page-btn:hover:not(:disabled) {
+  background: #eaf1fa;
+}
+
+.page-btn:disabled {
+  border-color: #ccc;
+  color: #ccc;
+  cursor: not-allowed;
+  background: #f9f9f9;
+}
+
+.active-page {
+  background: #6088C6;
+  color: white;
+}
+
+.active-page:hover:not(:disabled) {
+  background: #6088C6;
+}
