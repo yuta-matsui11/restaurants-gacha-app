@@ -6,7 +6,6 @@ import com.example.backend.external.RestaurantInfo;
 import com.example.backend.external.RestaurantService;
 import com.example.backend.repository.GachaHistoryRepository;
 
-import jakarta.validation.constraints.Null;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
