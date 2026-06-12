@@ -20,7 +20,7 @@ import java.util.List;
 @RequiredArgsConstructor
 // ガチャの処理
 public class GachaService {
-    private static final int MAX_HISTORY = 10;
+    private static final int MAX_HISTORY = 100;
 
     private final RestaurantService restaurantService;
     private final HeartRailsStationService heartRailsStationService;
@@ -42,7 +42,7 @@ public class GachaService {
         Collections.shuffle(restaurants);
         RestaurantInfo selected = restaurants.get(0);
 
-        // 4. 履歴保存（10件超えたら最古を削除）
+        // 4. 履歴保存（100件超えたら最古を削除）
         List<GachaHistory> histories = historyRepository.findByUserId(userId);
         if (histories.size() >= MAX_HISTORY) {
             histories.stream()
@@ -64,7 +64,7 @@ public class GachaService {
     }
 
     @Transactional
-    public RestaurantInfo getRestDetailbyId(String restaurantId){
+    public RestaurantInfo getRestDetailbyId(String restaurantId) {
         RestaurantInfo restaurant = restaurantService.getDetail(restaurantId);
 
         return restaurant;
