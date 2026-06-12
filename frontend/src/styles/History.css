@@ -155,7 +155,8 @@
   gap: 8px;
   margin-top: 30px;
   margin-bottom: 20px;
-  flex-wrap: wrap; /* ページ数が増えたら折り返す */
+  flex-wrap: wrap;
+  /* ページ数が増えたら折り返す */
 }
 
 .page-btn {
@@ -188,6 +189,8 @@
 
 .active-page:hover:not(:disabled) {
   background: #6088C6;
+}
+
 @keyframes rippleAnim {
   0% {
     transform: scale(1);
