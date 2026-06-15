@@ -19,7 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 // ガチャの処理
 public class GachaService {
-    private static final int MAX_HISTORY = 100;
+    private static final int MAX_HISTORY = 1000;
 
     private final RestaurantService restaurantService;
     private final HeartRailsStationService heartRailsStationService;
