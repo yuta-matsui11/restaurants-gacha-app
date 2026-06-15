@@ -49,6 +49,8 @@ function History() {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
 
+    const [search, setSearch] = useState('');
+
 
     useEffect(() => {
         const fetchProfile = async () => {
@@ -166,27 +168,48 @@ function History() {
         window.scrollTo({top: 0, behavior: "instant"})
     }, [currentPage]);
 
+    const filteredHistories = histories.filter((history) => {
+        if(search === "") return true;
+
+        const lowerSearch = search.toLowerCase();
+
+        const matchName = history.restaurantName.toLowerCase().includes(lowerSearch);
+        const matchGenre = history.genreName.toLowerCase().includes(lowerSearch);
+        const matchStation = history.stationName.toLowerCase().includes(lowerSearch);
+
+        return matchName || matchGenre || matchStation;
+    })
+
+    const totalPages = Math.ceil(filteredHistories.length / itemsPerPage);
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = filteredHistories.slice(indexOfFirstItem, indexOfLastItem);
+
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [search])
+
+
     if (isLoading) return <div style={{ textAlign: 'center', marginTop: '50px' }}>⏳ 履歴を読み込み中...</div>;
     if (error) return <div style={{ textAlign: 'center', marginTop: '50px', color: '#dc3545' }}>{error}</div>;
 
-    const indexOfLastItem = currentPage * itemsPerPage;
-    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentItems = histories.slice(indexOfFirstItem, indexOfLastItem);
-    const totalPages = Math.ceil(histories.length/itemsPerPage);
 
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
     };
 
-
-
+    
  
     return (
         <div className="history-container">
             <h1 className="history-title">ガチャ履歴</h1>
             <p className="history-description">これまでにガチャで出会ったお店の一覧です</p>
 
-            {histories.length === 0 ? (
+            <div className="search">
+                <input className="search-box" type="text" placeholder="店名、ジャンル、駅名で検索" value={search} onChange={(e) => setSearch(e.target.value)}/>
+            </div>
+
+            {filteredHistories.length === 0 ? (
                 <div style={{ textAlign: 'center', marginTop: '30px', color: '#666' }}><p>ガチャ履歴はありません</p></div>
             )
 

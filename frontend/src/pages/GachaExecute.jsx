@@ -44,10 +44,34 @@ function GachaExecute() {
 
                 const apiPromise = axiosClient.post('/gacha/execute', requestData).then(r => r.data);
 
+                //ガチャポイント追加処理
+                const today = new Date().toLocaleDateString('ja-JP');
+                const dailyStrageKey = `dailyGachaData_${userId}`;
+
+                const dailyData = JSON.parse(localStorage.getItem(dailyStrageKey)) || {date: today, count: 0};
+
+                if(dailyData.date !== today){
+                    dailyData.date = today;
+                    dailyData.count = 0;
+                }
+
+                if(dailyData.count < 3){
+                    dailyData.count += 1;
+                    localStorage.setItem(dailyStrageKey, JSON.stringify(dailyData));
+
+                    const storageKey = `totalGachaPoint_${userId}`;
+                    const currentCount = parseInt(localStorage.getItem(storageKey) || '0', 10);
+                    localStorage.setItem(storageKey, (currentCount + 10).toString());
+
+                    window.dispatchEvent(new Event('gachaPulled'));
+                }
+
+
                 setTimeout(() => setPhase('capsule'), 800);
                 setTimeout(() => setPhase('open'), 1800);
 
                 const apiResponse = await apiPromise;
+
 
                 const formattedRestaurant = {
                     id: apiResponse.id,

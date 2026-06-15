@@ -14,6 +14,8 @@ function Favorite() {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
 
+    const [search, setSearch] = useState('');
+
     useEffect(() => {
         const fetchProfile = async () => {
             try {
@@ -59,6 +61,10 @@ function Favorite() {
     useEffect(() => {
             window.scrollTo({top: 0, behavior: "instant"})
         }, [currentPage]);
+
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [search])
 
     if (isLoading)
         return (<div className="favorite-container">
@@ -110,10 +116,23 @@ function Favorite() {
         }
     };
 
+    const filteredFavorites = favorites.filter((history) => {
+        if(search === "") return true;
+    
+        const lowerSearch = search.toLowerCase();
+    
+        const matchName = history.restaurantName.toLowerCase().includes(lowerSearch);
+        const matchGenre = history.genreName.toLowerCase().includes(lowerSearch);
+        const matchStation = history.stationName.toLowerCase().includes(lowerSearch);
+    
+        return matchName || matchGenre || matchStation;
+    })
+    
+    const totalPages = Math.ceil(filteredFavorites.length / itemsPerPage);
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentItems = favorites.slice(indexOfFirstItem, indexOfLastItem);
-    const totalPages = Math.ceil(favorites.length/itemsPerPage);
+    const currentItems = filteredFavorites.slice(indexOfFirstItem, indexOfLastItem);
+    
 
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
@@ -152,7 +171,11 @@ function Favorite() {
                 お気に入り登録したお店の一覧です
             </p>
 
-            {currentItems.map((favorite) => (
+            <div className="search">
+                <input className="search-box" type="text" placeholder="店名、ジャンル、駅名で検索" value={search} onChange={(e) => setSearch(e.target.value)}/>
+            </div>
+
+            {filteredFavorites.map((favorite) => (
                 <div key={favorite.favoriteId} className="favorite-card">
 
                     <img
