@@ -33,25 +33,50 @@ public class HotPepperRestaurantService implements RestaurantService {
      */
     @Override
     public List<RestaurantInfo> search(double lat, double lng, String genre) {
-        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(apiUrl)
+        UriComponentsBuilder countBuilder = UriComponentsBuilder.fromHttpUrl(apiUrl)
                 .queryParam("key", apiKey)
                 .queryParam("lat", lat)
                 .queryParam("lng", lng)
                 .queryParam("range", 4) // 1000m固定（1=300m,2=500m,3=1000m,4=2000m,5=3000m）
-                .queryParam("count", 100)
+                .queryParam("count", 1)
                 .queryParam("format", "json");
 
         // ジャンルコードが指定されていれば絞り込む
         if (genre != null && !genre.isBlank()) {
-            builder.queryParam("genre", genre);
+            countBuilder.queryParam("genre", genre);
         }
 
-        String url = builder.toUriString();
-        log.info("HotPepper API search: lat={}, lng={}, genre={}", lat, lng, genre);
-
         try {
-            String response = restTemplate.getForObject(url, String.class);
-            return parseShopList(response);
+            String countResponse = restTemplate.getForObject(countBuilder.toUriString(), String.class);
+            JsonNode root = objectMapper.readTree(countResponse);
+
+            int resultsAvailable = root.path("results").path("results_available").asInt(0);
+
+            if(resultsAvailable == 0){
+                return new ArrayList<>();
+            }
+
+            int randomStart = (int) (Math.random() * resultsAvailable) + 1;
+
+            log.info("HotPepper API search: lat={}, lng={}, genre={}, 全ヒット件数={}, ランダム開始位置={}", lat, lng, genre, resultsAvailable, randomStart);
+
+            UriComponentsBuilder fetchBuilder = UriComponentsBuilder.fromHttpUrl(apiUrl)
+                .queryParam("key", apiKey)
+                .queryParam("lat", lat)
+                .queryParam("lng", lng)
+                .queryParam("range", 4) // 1000m固定（1=300m,2=500m,3=1000m,4=2000m,5=3000m）
+                .queryParam("count", 1)
+                .queryParam("start", randomStart)
+                .queryParam("format", "json");
+
+                if(genre != null && !genre.isBlank()){
+                    fetchBuilder.queryParam("genre", genre);
+                }
+
+                String finalResponse = restTemplate.getForObject(fetchBuilder.toUriString(), String.class);
+                return parseShopList(finalResponse);
+
+
         } catch (Exception e) {
             log.error("HotPepper API error", e);
             throw new RuntimeException("飲食店情報の取得に失敗しました");
