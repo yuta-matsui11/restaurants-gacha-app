@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer } from 'recharts';
 import '../styles/Home.css';
+import { themes } from '../themes';
 
 const GENRE_LIST = [
     { id: 'G001', name: '居酒屋' },
@@ -24,9 +25,11 @@ const GENRE_LIST = [
     { id: 'G017', name: '韓国料理' }
 ];
 
-function Home() {
+function Home({theme}) {
     const navigate = useNavigate();
     const location = useLocation();
+
+    const currentTheme = themes[theme] || themes['pink'];
 
     const [station, setStation] = useState('');
     const [userStation, setUserStation] = useState('');
@@ -217,12 +220,12 @@ function Home() {
                                 <XAxis type="number" allowDecimals={false} />
                                 <YAxis type="category"
                                     dataKey="name"
-                                    width={100}
-                                    tick={{ fontSize: 10, textAnchor: 'start' }}
+                                    width={150}
+                                    tick={{ fontSize: 16, textAnchor: 'start' }}
                                     tickLine={false}
-                                    dx={-85} />
+                                    dx={-135} />
                                 <Tooltip />
-                                <Bar dataKey="count" fill="#eda5a2" name="回数" radius={[0, 6, 6, 0]} barSize={16} isAnimationActive={true}
+                                <Bar dataKey="count" fill={currentTheme.graphBar} name="回数" radius={[0, 6, 6, 0]} barSize={28} isAnimationActive={true}
                                     animationDuration={2000}
                                     animationEasing="ease-out" />
                             </BarChart>

@@ -104,7 +104,7 @@ function App() {
         <Route path="/register" element={<Register />} />
 
         {/*ログイン済みならアクセス可能、未ログインの場合はログイン画面に遷移させる*/}
-        <Route path="/home" element={isAuthenticated ? <><Home /><Footer /></> : <Navigate to="/login" />} />
+       <Route path="/home" element={isAuthenticated ? <><Home theme={theme} /><Footer /></> : <Navigate to="/login" />} />
         <Route path="/result" element={isAuthenticated ? <><Result /><Footer /></> : <Navigate to="/login" />} />
         <Route path="/history" element={isAuthenticated ? <><History /><Footer /></> : <Navigate to="/login" />} />
         <Route path="/favorite" element={isAuthenticated ? <><Favorite /><Footer /></> : <Navigate to="/login" />} />
