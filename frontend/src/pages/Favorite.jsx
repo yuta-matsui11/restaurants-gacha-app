@@ -19,20 +19,9 @@ function Favorite() {
     useEffect(() => {
         const fetchProfile = async () => {
             try {
-                const response = await fetch(
-                    "http://localhost:8080/api/users/me",
-                    {
-                        credentials: "include"
-                    }
-                );
+                const response = await axiosClient.get("/users/me");
 
-                if (!response.ok) {
-                    throw new Error("プロフィール取得失敗");
-                }
-
-                const data = await response.json();
-
-                setUserId(data.user_id);
+                setUserId(response.data.user_id);
 
             } catch (error) {
                 console.error(error);

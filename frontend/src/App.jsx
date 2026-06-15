@@ -16,6 +16,7 @@ import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import Contact from "./pages/Contact.jsx";
 import Welcome from './pages/Welcome.jsx';
+import axiosClient from './api/axiosClient.jsx';
 
 //追加
 import { useEffect } from "react";
@@ -25,10 +26,30 @@ function App() {
   //ログイン状態であるかどうか
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+  const [isLoading, setIsLoading] = useState(true);
   //追加↓
   const [theme, setTheme] = useState(
     localStorage.getItem("theme") || "pink"
   );
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      try{
+        const response = await axiosClient.get("/users/me");
+        
+        if(response.status===200){
+          setIsAuthenticated(true);
+        }
+      }
+      catch(error){
+        setIsAuthenticated(false);
+      }
+      finally{
+        setIsLoading(false);
+      }
+    };
+    checkAuth();
+  },[]);
 
   useEffect(() => {
     const currentTheme = themes[theme];
@@ -92,6 +113,11 @@ function App() {
   const handleLogin = () => {
     setIsAuthenticated(true);
   }
+
+  if (isLoading) {
+    return <div style={{ textAlign: "center", marginTop: "20vh" }}>⏳ 読み込み中...</div>;
+  }
+
   return (
     <Router>
       {location.pathname !== "/" &&
