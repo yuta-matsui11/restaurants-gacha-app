@@ -24,7 +24,7 @@ function Header({ isAuthenticated, onLogout }) {
         }
     };
     fetchProfile();
-    }, []);
+    }, [isAuthenticated]);
 
     const updateGachaPoint = () => {
         if (userId === 0) return;
