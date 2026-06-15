@@ -3,6 +3,7 @@ import "../styles/Header.css";
 
 import React, {useState, useEffect} from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import axiosClient from '../api/axiosClient.jsx';
 
 function Header({ isAuthenticated, onLogout }) {
     const navigate = useNavigate();
@@ -13,12 +14,14 @@ function Header({ isAuthenticated, onLogout }) {
 
     useEffect(() => {
     const fetchProfile = async () => {
+        if (!isAuthenticated) {
+                setUserId(0);
+                setTotalGachaPoint(0);
+                return;
+        }
         try {
-            const response = await fetch("http://localhost:8080/api/users/me", { credentials: "include" });
-            if (response.ok) {
-                const data = await response.json();
-                setUserId(data.user_id);
-            }
+            const response = await axiosClient.get("/users/me");
+            setUserId(response.data.user_id);
         } catch (error) {
             console.error(error);
         }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import "../styles/Profile.css";
 import { Link, useNavigate } from "react-router-dom";
+import axiosClient from '../api/axiosClient.jsx';
 
 const GENRE_LIST = [
     { id: 'G001', name: '居酒屋' },
@@ -81,11 +82,9 @@ function Profile({ setTheme }) {
     useEffect(() => {
         const fetchProfile = async () => {
             try {
-                const response = await fetch("http://localhost:8080/api/users/me", {
-                    credentials: "include"
-                });
-                if (!response.ok) throw new Error("プロフィール取得失敗");
-                const data = await response.json();
+                const response = await axiosClient.get("/users/me");
+                const data = response.data;
+
                 const profile = {
                     uname: data.user_name,
                     email: data.email,
@@ -96,7 +95,7 @@ function Profile({ setTheme }) {
                 setEditData(profile);
                 setUserId(data.user_id);
             } catch (error) {
-                console.error(error);
+                console.error("プロフィール取得失敗：",error);
             }
         };
         fetchProfile();
@@ -148,13 +147,10 @@ function Profile({ setTheme }) {
     const handleSave = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch("http://localhost:8080/api/users/me", {
-                method: "PUT",
-                headers: { "Content-Type": "application/json" },
-                credentials: "include",
-                body: JSON.stringify(editData),
-            });
-            if (!response.ok) throw new Error("プロフィールの更新に失敗しました");
+            // バックエンドへ更新リクエスト(PUT)を送信
+            const response = await axiosClient.put("/users/me", editData);
+            
+            // 成功した場合、画面の表示用データを更新して編集モードを終了する
             setUserInfo({ ...editData });
             setIsediting(false);
             alert('プロフィールを更新しました');
