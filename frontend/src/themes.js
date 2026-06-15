@@ -12,7 +12,9 @@ export const themes = {
         gachaButtonText: "#fafafa",
 
         pageButtonBg: "#EE817B",
-        pageButtonText: "#FAFAFA"
+        pageButtonText: "#FAFAFA",
+
+        graphBar: "#fac6c3"
     },
 
     cafe: {
@@ -28,7 +30,9 @@ export const themes = {
         gachaButtonText: "#FFFFFF",
 
         pageButtonBg: "#6AC1B7",
-        pageButtonText: "#FFFFFF"
+        pageButtonText: "#FFFFFF",
+
+        graphBar: "#bad8d4"
     },
 
     matcha: {
@@ -44,7 +48,9 @@ export const themes = {
         gachaButtonText: "#FFFFFF",
 
         pageButtonBg: "#4EA1D5",
-        pageButtonText: "#FFFFFF"
+        pageButtonText: "#FFFFFF",
+
+        graphBar: "#f98f9f"
     },
 
     dark: {
@@ -60,6 +66,8 @@ export const themes = {
         gachaButtonText: "#FFFFFF",
 
         pageButtonBg: "#FDBD63",
-        pageButtonText: "#FFFFFF"
+        pageButtonText: "#FFFFFF",
+
+        graphBar: "#fbd590"
     }
 };
