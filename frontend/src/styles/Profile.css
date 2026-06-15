@@ -4,7 +4,6 @@
   min-height: 100vh;
   padding: 40px 0;
   padding-bottom: 100px;
-  /* 追加 */
 }
 
 .profile-title {
@@ -78,4 +77,83 @@
 .danger {
   background: #6088C6;
   color: white;
+}
+
+/* バッジエリア */
+.badge-area {
+  margin-bottom: 20px;
+  padding: 16px;
+  background: #fafafa;
+  border-radius: 12px;
+  border: 1px solid #eee;
+}
+
+.badge-title {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.badge-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+/* バッジ本体（丸） */
+.badge-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  text-align: center;
+  cursor: default;
+  transition: transform 0.2s;
+  position: relative;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.badge-item:hover {
+  transform: scale(1.1);
+}
+
+/* 金バッジ */
+.badge-item.gold {
+  background: radial-gradient(circle at 35% 35%, #FFE566, #FFD700 50%, #CC9900);
+  border: 3px solid #FFD700;
+}
+
+/* 銀バッジ */
+.badge-item.silver {
+  background: radial-gradient(circle at 35% 35%, #F0F0F0, #C0C0C0 50%, #888888);
+  border: 3px solid #C0C0C0;
+}
+
+/* 銅バッジ */
+.badge-item.bronze {
+  background: radial-gradient(circle at 35% 35%, #FFAA66, #CD7F32 50%, #8B4513);
+  border: 3px solid #CD7F32;
+}
+
+/* バッジ内の絵文字 */
+.badge-emoji {
+  font-size: 26px;
+  line-height: 1;
+}
+
+/* バッジ名 */
+.badge-name {
+  font-size: 8px;
+  font-weight: bold;
+  color: white;
+  margin-top: 2px;
+  text-align: center;
+  line-height: 1.2;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+  padding: 0 4px;
 }
