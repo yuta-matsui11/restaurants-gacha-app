@@ -67,18 +67,29 @@ function Home() {
                 if (!response.ok) return;
                 const data = await response.json();
 
+                // ここから置き換え
                 const countMap = {};
+                const latestDateMap = {};
+
                 data.forEach((item) => {
                     if (item.genreName) {
                         countMap[item.genreName] = (countMap[item.genreName] || 0) + 1;
+                        if (!latestDateMap[item.genreName] || item.gachaAt > latestDateMap[item.genreName]) {
+                            latestDateMap[item.genreName] = item.gachaAt;
+                        }
                     }
                 });
 
                 const chartData = Object.entries(countMap)
                     .map(([name, count]) => ({ name, count }))
-                    .sort((a, b) => b.count - a.count);
-
+                    .sort((a, b) => {
+                        if (b.count !== a.count) return b.count - a.count;
+                        return latestDateMap[b.name] > latestDateMap[a.name] ? 1 : -1;
+                    })
+                    .slice(0, 5);
+                // ここまで置き換え
                 setGenreChartData(chartData);
+
             } catch (error) {
                 console.error(error);
             }
@@ -189,26 +200,36 @@ function Home() {
 
             {/* 右：グラフエリア */}
             <div className="graph-card">
-                <h2>選択ジャンル履歴</h2>
+                <h2>よく行くジャンル TOP5 !</h2>
+
                 {genreChartData.length === 0 ? (
                     <p className="no-data">まだガチャ履歴がありません</p>
                 ) : (
-                    <ResponsiveContainer width="100%" height={genreChartData.length * 40}>
-                        <BarChart
-                            layout="vertical"
-                            data={genreChartData}
-                            margin={{ top: 10, right: 30, left: 10, bottom: 10 }}
-                            barCategoryGap="10%"
-                            className = "recharts-wrapper"
-                        >
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis type="number" allowDecimals={false} />
-                            <YAxis type="category" dataKey="name" width={140} tick={{ fontSize: 11 }} />
-                            <Tooltip />
-                            <Bar dataKey="count" fill="#eda5a2" name="回数" radius={[0, 6, 6, 0]} barSize={16} />
-                        </BarChart>
-                    </ResponsiveContainer>
+                    <div style={{ flex: 1, minHeight: 0 }}>
+                        <ResponsiveContainer width="100%" height="100%">
+                            <BarChart
+                                layout="vertical"
+                                data={genreChartData}
+                                margin={{ top: 10, right: 20, left: 0, bottom: 10 }}
+                                className="recharts-wrapper"
+                            >
+                                <CartesianGrid strokeDasharray="3 3" />
+                                <XAxis type="number" allowDecimals={false} />
+                                <YAxis type="category"
+                                    dataKey="name"
+                                    width={100}
+                                    tick={{ fontSize: 10, textAnchor: 'start' }}
+                                    tickLine={false}
+                                    dx={-85} />
+                                <Tooltip />
+                                <Bar dataKey="count" fill="#eda5a2" name="回数" radius={[0, 6, 6, 0]} barSize={16} isAnimationActive={true}
+                                    animationDuration={2000}
+                                    animationEasing="ease-out" />
+                            </BarChart>
+                        </ResponsiveContainer>
+                    </div>
                 )}
+
             </div>
         </div>
     );
